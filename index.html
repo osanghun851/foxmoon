@@ -340,18 +340,18 @@ background-color: #152F56;
 </body>
 <script>
   const BACKEND_URL = "http://localhost:3000"; // 백엔드 URL
-  document.getElementById("여우").addEventListener("click", () => { window.location.href="./foxhome.html"; });
-        document.getElementById("달").addEventListener("click", () => { window.location.href="./mex.html"; });
-        document.getElementById("box1").addEventListener("click", () => { window.location.href="../forestway/jisisal.html"; });
-        document.getElementById("box2").addEventListener("click", () => { window.location.href="../owlacademy/index.html"; });
-        document.getElementById("box3").addEventListener("click", () => { window.location.href="../raccoondiary/diary.html"; });
-        document.getElementById("box4").addEventListener("click", () => { window.location.href="../goosepost/goosepost.html"; });
+  document.getElementById("여우").addEventListener("click", () => { window.location.href="mainmypage/foxhome.html"; });
+        document.getElementById("달").addEventListener("click", () => { window.location.href="mainmypage/mex.html"; });
+        document.getElementById("box1").addEventListener("click", () => { window.location.href="forestway/jisisal.html"; });
+        document.getElementById("box2").addEventListener("click", () => { window.location.href="owlacademy/index.html"; });
+        document.getElementById("box3").addEventListener("click", () => { window.location.href="raccoondiary/diary.html"; });
+        document.getElementById("box4").addEventListener("click", () => { window.location.href="goosepost/goosepost.html"; });
   // (여우 클릭 시) 여우집으로 이동
   document.getElementById("여우").addEventListener("click", function() {
-    window.location.href = "./foxhome.html";
+    window.location.href = "mainmypage/foxhome.html";
   });
   document.getElementById("달").addEventListener("click", function() {
-    window.location.href = "./mex.html";
+    window.location.href = "mainmypage/mex.html";
   });
   
   // 로그인 버튼 클릭 -> 모달 열기
@@ -365,7 +365,7 @@ background-color: #152F56;
   
   // 회원가입 페이지 이동
   document.querySelector("#signup").addEventListener("click", () => {
-    window.location.href = "./start.html";
+    window.location.href = "mainmypage/start.html";
   });
   
   // 모달 바깥 클릭 시 닫기
