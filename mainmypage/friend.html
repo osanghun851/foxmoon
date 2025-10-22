@@ -5,219 +5,214 @@
   <title>친구 추가</title>
   <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    #background{
+   * { margin:0; padding:0; box-sizing:border-box; }
+#background{
 position: relative;
-height: 100vh; /* 화면 높이에 딱 맞춰서 */
-width: calc(100vh * 9 / 16);
+height: 100dvh; /* 화면 높이에 딱 맞춰서 */
+width: calc(100dvh * 9 / 16);
 margin: 0 auto;
 background-color: #E7D7C1;
-    }
-    #친구관리{
+}
+#친구관리{
 position: absolute;
-left: calc((232/1920)*100vh);
-top: calc((73/1920)*100vh);
-width: calc((616/1920)*100vh);
-height: calc((120/1920)*100vh);
-font-size: calc((80/1920)*100vh);
-border-radius: calc((30/1920)*100vh);
+left: calc((232/1920)*100dvh);
+top: calc((73/1920)*100dvh);
+width: calc((616/1920)*100dvh);
+height: calc((120/1920)*100dvh);
+font-size: calc((80/1920)*100dvh);
+border-radius: calc((30/1920)*100dvh);
 color: #FFFFFF;
 background-color: #A05A2C;
-line-height: 6.5vh;
-    }
-    .textbox{
+line-height: 6.5dvh;
+}
+.textbox{
 font-family: 'Gugi';
 font-style: normal;
 text-align: center;
-    }
-    #친구요청보내기{
+}
+#친구요청보내기{
 box-sizing: border-box;
-
 position: absolute;
-width: calc((800/1920)*100vh);
-height: calc((100/1920)*100vh);
-left: calc((140/1920)*100vh);
-top: calc((369/1920)*100vh);
-
+width: calc((800/1920)*100dvh);
+height: calc((100/1920)*100dvh);
+left: calc((140/1920)*100dvh);
+top: calc((369/1920)*100dvh);
 background: #EFE7DE;
-border: 0.05vh solid #212121;
-box-shadow: 0vh 0.2vh 0.2vh rgba(0, 0, 0, 0.25);
-border-radius: calc((20/1920)*100vh);
-    }
-    input::placeholder {
+border: 0.05dvh solid #212121;
+box-shadow: 0dvh 0.2dvh 0.2dvh rgba(0, 0, 0, 0.25);
+border-radius: calc((20/1920)*100dvh);
+}
+input::placeholder {
 position: absolute;
-left: 1.5vh;
+left: 1.5dvh;
 font-family: 'Gugi';
 font-style: normal;
 font-weight: 400;
-font-size: calc((50/1920)*100vh);
-/* 상자 높이와 동일 */
+font-size: calc((50/1920)*100dvh);
 color: #BEC0C2;
-    }
-    #검색버튼{
+}
+#검색버튼{
 position: absolute;
-width: calc((60/1920)*100vh);
+width: calc((60/1920)*100dvh);
 height: auto;
-left: calc((849/1920)*100vh);
-top: calc((389/1920)*100vh);
-    }
-    #받은친구요청{
+left: calc((849/1920)*100dvh);
+top: calc((389/1920)*100dvh);
+}
+#받은친구요청{
 position: absolute;
-width: calc((278/1920)*100vh);
-height: calc((53/1920)*100vh);
-left: calc((85/1920)*100vh);
-top: calc((601/1920)*100vh);
-border-radius: calc((20/1920)*100vh);
+width: calc((278/1920)*100dvh);
+height: calc((53/1920)*100dvh);
+left: calc((85/1920)*100dvh);
+top: calc((601/1920)*100dvh);
+border-radius: calc((20/1920)*100dvh);
 color: #FFFFFF;
-font-size: calc((32/1920)*100vh);
-line-height: 3vh;
+font-size: calc((32/1920)*100dvh);
+line-height: 3dvh;
 background-color: #A05A2C;
-    }
-    #받은친구요청box{
+}
+#받은친구요청box{
 position: absolute;
-width: calc((910/1920)*100vh);
-height: calc((394/1920)*100vh);
-left: calc((85/1920)*100vh);
-top: calc((700/1920)*100vh);
-border-radius: calc((20/1920)*100vh);
+width: calc((910/1920)*100dvh);
+height: calc((394/1920)*100dvh);
+left: calc((85/1920)*100dvh);
+top: calc((700/1920)*100dvh);
+border-radius: calc((20/1920)*100dvh);
 background-color: #F4F1EC;
 overflow-y: scroll;
-    }
-    #profile1{
+}
+#profile1{
 position: absolute;
-width: calc((100/1920)*100vh);
+width: calc((100/1920)*100dvh);
 height: auto;
-left: calc((38/1920)*100vh);
-top: calc((34/1920)*100vh);
-    }
-    #내친구목록{
+left: calc((38/1920)*100dvh);
+top: calc((34/1920)*100dvh);
+}
+#내친구목록{
 position: absolute;
-width: calc((278/1920)*100vh);
-height: calc((53/1920)*100vh);
-left: calc((85/1920)*100vh);
-top: calc((1181/1920)*100vh);
-border-radius: calc((20/1920)*100vh);
+width: calc((278/1920)*100dvh);
+height: calc((53/1920)*100dvh);
+left: calc((85/1920)*100dvh);
+top: calc((1181/1920)*100dvh);
+border-radius: calc((20/1920)*100dvh);
 color: #FFFFFF;
-font-size: calc((32/1920)*100vh);
-line-height: 3vh;
+font-size: calc((32/1920)*100dvh);
+line-height: 3dvh;
 background-color: #A05A2C;
-    }
-    #내친구목록box{
+}
+#내친구목록box{
 position: absolute;
-width: calc((910/1920)*100vh);
-height: calc((394/1920)*100vh);
-left: calc((85/1920)*100vh);
-top: calc((1280/1920)*100vh);
-border-radius: calc((20/1920)*100vh);
+width: calc((910/1920)*100dvh);
+height: calc((394/1920)*100dvh);
+left: calc((85/1920)*100dvh);
+top: calc((1280/1920)*100dvh);
+border-radius: calc((20/1920)*100dvh);
 background-color: #F4F1EC;
 overflow-y: scroll;
-    }
-    #돌아가기{
+}
+#돌아가기{
 position: absolute;
 width: auto;
-height: 6.5vh;
-left: calc((885/1920)*100vh);
-top: calc((1715/1920)*100vh);
-    }
-    .Modal{
-      display: none;
-      position: absolute;
-      z-index: 999; /* 다른 요소보다 앞쪽에 표시 숫자가 클수록 앞에 나옴*/
-      left:0;
-      top:0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-    #foxmodal-box{
+height: 6.5dvh;
+left: calc((885/1920)*100dvh);
+top: calc((1715/1920)*100dvh);
+}
+.Modal{
+display: none;
+position: absolute;
+z-index: 999;
+left:0;
+top:0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+}
+#foxmodal-box{
 position: fixed;
 top: 50%;
 left: 50%;
-transform: translate(-50%, -50%); /* 가운데 보정 */
-width: calc(100vh * 9 / 16);
-height: 60vh;
+transform: translate(-50%, -50%);
+width: calc(100dvh * 9 / 16);
+height: 60dvh;
 background-color: #E7D7C1;
-    }
-    #background0{
+}
+#background0{
 position: absolute;
-width: calc((1080/1920)*100vh);
+width: calc((1080/1920)*100dvh);
 height: auto;
 z-index: 101;
-    }
-    #line{
+}
+#line{
 position: absolute;
-width: calc((1070/1920)*100vh);
-height: 0vh;
-left: 0vh;
-top: calc((714/1920)*100vh);
-border: 0.14vh solid #D1916C;
-
-    }
-    #여우집모달닫기{
+width: calc((1070/1920)*100dvh);
+height: 0dvh;
+left: 0dvh;
+top: calc((714/1920)*100dvh);
+border: 0.14dvh solid #D1916C;
+}
+#여우집모달닫기{
 position: absolute;
-width: calc((75/1920)*100vh);
+width: calc((75/1920)*100dvh);
 height: auto;
-left:calc((77/1920)*100vh);
-top:calc((92/1920)*100vh);
+left:calc((77/1920)*100dvh);
+top:calc((92/1920)*100dvh);
 z-index: 102;
-    }
-    #box1{
+}
+#box1{
 width: 100%;
-height: calc((722/1920)*100vh);
+height: calc((722/1920)*100dvh);
 position: absolute;
 bottom: 0px;
 background-color: #D1916C;
-    }
-    #box2{
+}
+#box2{
 position: absolute;
-width: calc((976/1920)*100vh);
-height: calc((625/1920)*100vh);
-left: calc((52/1920)*100vh);
-top: calc((50/1920)*100vh);
-
+width: calc((976/1920)*100dvh);
+height: calc((625/1920)*100dvh);
+left: calc((52/1920)*100dvh);
+top: calc((50/1920)*100dvh);
 background-color: #FFFFFF;
-border-radius: calc((42/1920)*100vh);
-    }
-    #벽지{
+border-radius: calc((42/1920)*100dvh);
+}
+#벽지{
 position: absolute;
-top: 0vh;
-left: 0vh;
-width: calc((1080/1920)*100vh);
-height: calc((713/1920)*100vh);
-/*background-image: url(./벽지0T.svg);*/
+top: 0dvh;
+left: 0dvh;
+width: calc((1080/1920)*100dvh);
+height: calc((713/1920)*100dvh);
 z-index: 0;
-    }
-    #카펫{
+}
+#카펫{
 position: absolute;
-top: calc((903/1920)*100vh);
-left: calc((224/1920)*100vh);
-width: calc((631/1920)*100vh);
-height: calc((114/1920)*100vh);
-    }
-    #friendName{
+top: calc((903/1920)*100dvh);
+left: calc((224/1920)*100dvh);
+width: calc((631/1920)*100dvh);
+height: calc((114/1920)*100dvh);
+}
+#friendName{
 position: absolute;
-width: calc((308/1920)*100vh);
-height: calc((146/1920)*100vh);
-left: calc((390/1920)*100vh);
-top: calc((81/1920)*100vh);
+width: calc((308/1920)*100dvh);
+height: calc((146/1920)*100dvh);
+left: calc((390/1920)*100dvh);
+top: calc((81/1920)*100dvh);
 font-family: 'Gugi';
 font-style: normal;
 font-weight: 400;
-font-size: calc((70/1920)*100vh);
+font-size: calc((70/1920)*100dvh);
 display: flex;
-justify-content: center; /* 가로 가운데 정렬 */
-align-items: center;     /* 세로 가운데 정렬 */
+justify-content: center;
+align-items: center;
 color: #FFFFFF;
 z-index: 1000;
-    }
-    #fox{
+}
+#fox{
 position: absolute;
-top: calc((550/1920)*100vh);
-left: calc((369/1920)*100vh);
-width: calc((368/1920)*100vh);
-height: calc((439/1920)*100vh);
+top: calc((550/1920)*100dvh);
+left: calc((369/1920)*100dvh);
+width: calc((368/1920)*100dvh);
+height: calc((439/1920)*100dvh);
 z-index: 101;
-    }
+}
+
   </style>
 </head>
 <body>
@@ -320,54 +315,53 @@ setButton(document.getElementById("검색버튼"),1.2,0.9);
 
     // 받은 요청 가져오기
     async function loadFriendRequests() {
-      const res = await fetch(BACKEND_URL+"/friends/requests",{credentials:"include"});
-      const data = await res.json();
+  const res = await fetch(BACKEND_URL + "/friends/requests", { credentials: "include" });
+  const data = await res.json();
 
-      const requestsDiv = document.getElementById("받은친구요청box");
-      requestsDiv.innerHTML = "";
+  const requestsDiv = document.getElementById("받은친구요청box");
+  requestsDiv.innerHTML = "";
 
-      data.requests.forEach(req => {
-        const div = document.createElement("div");
-        div.className = "request-item";
-        div.innerHTML = `
-          <img src="./profile.svg" style="
-          position: relative;
-          top: 1.5vh;
-          left: 0.5vh;
-          width: calc((100/1920)*100vh);
-          height: calc((100/1920)*100vh);
-          ">
-          ${req.username}
-          <button onclick="acceptRequest('${req.username}')" style="
-width: calc((130/1920)*100vh);
-height: calc((91/1920)*100vh);
-background: rgba(52, 180, 30, 0.56);
-border: 0.05vh solid #212121;
-border-radius: 1vh;
-font-family: 'Gugi';
-font-style: normal;
-font-weight: 400;
-font-size: calc((40/1920)*100vh);
-line-height: calc((40/1920)*100vh);
-color:black;
-">수락</button>
-          <button onclick="rejectRequest('${req.username}')" style="
-width: calc((130/1920)*100vh);
-height: calc((91/1920)*100vh);
-background: rgba(255,27,27,0.56);
-border: 0.05vh solid #212121;
-border-radius: 1vh;
-font-family: 'Gugi';
-font-style: normal;
-font-weight: 400;
-font-size: calc((40/1920)*100vh);
-line-height: calc((40/1920)*100vh);
-color:black;
-">거절</button>
-        `;
-        requestsDiv.appendChild(div);
-      });
-    }
+  data.requests.forEach(req => {
+    const div = document.createElement("div");
+    div.className = "request-item";
+    div.innerHTML = `
+      <img src="./profile.svg" style="
+        position: relative;
+        top: 1.5dvh;
+        left: 0.5dvh;
+        width: calc((100/1920)*100dvh);
+        height: calc((100/1920)*100dvh);
+      ">
+      ${req.username}
+      <button onclick="acceptRequest('${req.username}')" style="
+        width: calc((130/1920)*100dvh);
+        height: calc((91/1920)*100dvh);
+        background: rgba(52, 180, 30, 0.56);
+        border: 0.05dvh solid #212121;
+        border-radius: 1dvh;
+        font-family: 'Gugi';
+        font-weight: 400;
+        font-size: calc((40/1920)*100dvh);
+        line-height: calc((40/1920)*100dvh);
+        color: black;
+      ">수락</button>
+      <button onclick="rejectRequest('${req.username}')" style="
+        width: calc((130/1920)*100dvh);
+        height: calc((91/1920)*100dvh);
+        background: rgba(255,27,27,0.56);
+        border: 0.05dvh solid #212121;
+        border-radius: 1dvh;
+        font-family: 'Gugi';
+        font-weight: 400;
+        font-size: calc((40/1920)*100dvh);
+        line-height: calc((40/1920)*100dvh);
+        color: black;
+      ">거절</button>
+    `;
+    requestsDiv.appendChild(div);
+  });
+}
+
 
     // 요청 수락
     async function acceptRequest(friendName) {
@@ -398,49 +392,50 @@ color:black;
 
     // 내 친구 목록 불러오기
     async function loadFriends() {
-      const res = await fetch(BACKEND_URL+"/friends/list",{credentials:"include"});
-      const data = await res.json();
+  const res = await fetch(BACKEND_URL + "/friends/list", { credentials: "include" });
+  const data = await res.json();
 
-      const friendsUl = document.getElementById("내친구목록box");
-      friendsUl.innerHTML = "";
+  const friendsUl = document.getElementById("내친구목록box");
+  friendsUl.innerHTML = "";
 
-      data.friends.forEach(friend => {
-        const div = document.createElement("div");
-        div.className = "request-item";
-        div.innerHTML = `
-          <img src="./profile.svg" style="
-          position: relative;
-          top: 1.5vh;
-          left: 0.5vh;
-          width: calc((100/1920)*100vh);
-          height: calc((100/1920)*100vh);
-          ">
-          ${friend}
-          <img src="./gift.svg" onclick="giftFriends('${friend}')" style="
-          position: relative;
-          top: 1.5vh;
-          left: 0.5vh;
-          width: calc((100/1920)*100vh);
-          height: calc((100/1920)*100vh);
-          ">
-          <img src="./visit.svg" onclick="visitFriends('${friend}')" style="
-          position: relative;
-          top: 1.5vh;
-          left: 0.5vh;
-          width: calc((100/1920)*100vh);
-          height: calc((100/1920)*100vh);
-          ">
-          <img src="./delete.svg" onclick="deleteFriend('${friend}')" style="
-          position: relative;
-          top: 1.5vh;
-          left: 0.5vh;
-          width: calc((100/1920)*100vh);
-          height: calc((100/1920)*100vh);
-          ">
-        `;
-        friendsUl.appendChild(div);
-      });
-    }
+  data.friends.forEach(friend => {
+    const div = document.createElement("div");
+    div.className = "request-item";
+    div.innerHTML = `
+      <img src="./profile.svg" style="
+        position: relative;
+        top: 1.5dvh;
+        left: 0.5dvh;
+        width: calc((100/1920)*100dvh);
+        height: calc((100/1920)*100dvh);
+      ">
+      ${friend}
+      <img src="./gift.svg" onclick="giftFriends('${friend}')" style="
+        position: relative;
+        top: 1.5dvh;
+        left: 0.5dvh;
+        width: calc((100/1920)*100dvh);
+        height: calc((100/1920)*100dvh);
+      ">
+      <img src="./visit.svg" onclick="visitFriends('${friend}')" style="
+        position: relative;
+        top: 1.5dvh;
+        left: 0.5dvh;
+        width: calc((100/1920)*100dvh);
+        height: calc((100/1920)*100dvh);
+      ">
+      <img src="./delete.svg" onclick="deleteFriend('${friend}')" style="
+        position: relative;
+        top: 1.5dvh;
+        left: 0.5dvh;
+        width: calc((100/1920)*100dvh);
+        height: calc((100/1920)*100dvh);
+      ">
+    `;
+    friendsUl.appendChild(div);
+  });
+}
+
     //선물하기 함수
     async function giftFriends(friendName) {
       const res = await fetch(BACKEND_URL+"/friends/gift", {
@@ -453,30 +448,33 @@ color:black;
       alert(data.message);
     }
     //foxhomeData로드 foxhome.html의 895~918
-  const 가구1Data = {
-    가구10:['11.4vh','11.4vh','6.4vh','10.9vh'],
-    가구11:['9.6vh','9.6vh','8.2vh','12.5vh'],
-    가구12:['8.3vh','6.4vh','32.3vh','17.8vh'],
-    가구13:['5.1vh','6.5vh','32.3vh','17.8vh'],
-    가구14:['17.2vh','15.9vh','37.6vh','26.2vh'],
-    가구15:['5.5vh','14.3vh','25.6vh','10.1vh']
+    const 가구1Data = {
+    가구10:['11.4dvh','11.4dvh','6.4dvh','10.9dvh'],
+    가구11:['9.6dvh','9.6dvh','8.2dvh','12.5dvh'],
+    가구12:['8.3dvh','6.4dvh','32.3dvh','17.8dvh'],
+    가구13:['5.1dvh','6.5dvh','32.3dvh','17.8dvh'],
+    가구14:['17.2dvh','15.9dvh','37.6dvh','26.2dvh'],
+    가구15:['5.5dvh','14.3dvh','25.6dvh','10.1dvh']
 };
+
 const 가구2Data = {
-    가구20:['4vh','6.8vh','40.5vh','20.1vh'],
-    가구21:['4.6vh','6.4vh','41vh','20.5vh'],
-    가구22:['5.5vh','7.9vh','3vh','48vh'],
-    가구23:['5.1vh','7.2vh','3vh','48vh'],
-    가구24:['21.1vh','12.2vh','0vh','30.4vh'],
-    가구25:['3.7vh','9.5vh','46vh','17.18vh']
+    가구20:['4dvh','6.8dvh','40.5dvh','20.1dvh'],
+    가구21:['4.6dvh','6.4dvh','41dvh','20.5dvh'],
+    가구22:['5.5dvh','7.9dvh','3dvh','48dvh'],
+    가구23:['5.1dvh','7.2dvh','3dvh','48dvh'],
+    가구24:['21.1dvh','12.2dvh','0dvh','30.4dvh'],
+    가구25:['3.7dvh','9.5dvh','46dvh','17.18dvh']
 };
-const 악세사리Data ={
-    악세사리0:['4.3vh','3.2vh','21vh','33.6vh','-62.32deg'],
-    악세사리1:['2.3vh','2.3vh','25vh','29vh','0deg'],
-    악세사리2:['3.4vh','1.8vh','21.6vh','35.3vh','0deg'],
-    악세사리3:['10.1vh','8.2vh','20.1vh','33.3vh','-4.84deg'],
-    악세사리4:['9.8vh','9vh','19vh','33.3vh','0deg'],
-    악세사리5:['5.2vh','2.2vh','21.5vh','28.8vh','0deg']
-}
+
+const 악세사리Data = {
+    악세사리0:['4.3dvh','3.2dvh','21dvh','33.6dvh','-62.32deg'],
+    악세사리1:['2.3dvh','2.3dvh','25dvh','29dvh','0deg'],
+    악세사리2:['3.4dvh','1.8dvh','21.6dvh','35.3dvh','0deg'],
+    악세사리3:['10.1dvh','8.2dvh','20.1dvh','33.3dvh','-4.84deg'],
+    악세사리4:['9.8dvh','9dvh','19dvh','33.3dvh','0deg'],
+    악세사리5:['5.2dvh','2.2dvh','21.5dvh','28.8dvh','0deg']
+};
+
     //놀러가기 함수
     async function visitFriends(friendName) {
       try {

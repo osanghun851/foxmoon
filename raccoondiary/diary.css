@@ -11,7 +11,7 @@
     background-color: black;
     margin: 0 auto;
     position: relative;
-    font-size: 2vh;
+    font-size: 2dvh;
     background-image: url('./db.png');
     background-size: cover;
        
@@ -24,7 +24,7 @@
     height: 8%;
 }
 #q {
-    font-size: 3vh !important;
+    font-size: 3dvh !important;
     font-family: 'Harmattan' !important;
     font-weight: 700 !important;
   }
@@ -39,13 +39,13 @@
     height: 11.72%;
 
     background: #A48C60;
-    box-shadow: 0vh 0.52vh 0.21vh rgba(0, 0, 0, 0.25);
-    border-radius: 1.56vh;
-    padding: 1.2vh;
-    font-size: 2.3vh;
+    box-shadow: 0dvh 0.52dvh 0.21dvh rgba(0, 0, 0, 0.25);
+    border-radius: 1.56dvh;
+    padding: 1.2dvh;
+    font-size: 2.3dvh;
     font-family: 'Gugi';
     font-weight: 700;
-    line-height: 3.5vh;
+    line-height: 3.5dvh;
     
 }
 
@@ -72,9 +72,9 @@ box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
     height: 8.57%;
 
     background: #FFFFFF;
-    box-shadow: 0vh 0.52vh 0.21vh rgba(0, 0, 0, 0.25);
-    border-radius: 1.56vh;
-    font-size: 3vh;
+    box-shadow: 0dvh 0.52dvh 0.21dvh rgba(0, 0, 0, 0.25);
+    border-radius: 1.56dvh;
+    font-size: 3dvh;
     line-height: 1.2;
     font-weight: 500;
     text-align: center;
@@ -88,9 +88,9 @@ box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
     height: 73%;
 
     background: #FFFFFF;
-    box-shadow: 0vh 0.52vh 0.21vh rgba(0, 0, 0, 0.25);
-    border-radius: 1.56vh;
-    font-size: 2vh;
+    box-shadow: 0dvh 0.52dvh 0.21dvh rgba(0, 0, 0, 0.25);
+    border-radius: 1.56dvh;
+    font-size: 2dvh;
 
   }
 #submit{
@@ -106,7 +106,7 @@ box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
     top: 89%;
     left: 85.90%;
     width: auto;
-    height: 6.5vh;
+    height: 6.5dvh;
 }
 #past{
     display: flex;
@@ -122,14 +122,14 @@ box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
     height: 2.92%;
 
     background: #A48C60;
-    box-shadow: 0vh 0.52vh 0.21vh rgba(0, 0, 0, 0.25);
-    border-radius: 3.65vh;
+    box-shadow: 0dvh 0.52dvh 0.21dvh rgba(0, 0, 0, 0.25);
+    border-radius: 3.65dvh;
 
     font-family: 'Gugi';
     font-style: normal;
     font-weight: 10;
-    font-size: 1.9vh;
-    line-height: 1.9vh;
+    font-size: 1.9dvh;
+    line-height: 1.9dvh;
     color: #FFFFFF;
 }
 #light{

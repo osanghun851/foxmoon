@@ -14,19 +14,19 @@
 #settingsDiv {
 
   position: absolute;
-width: 48.59vh;       /* 935 / 1920 * 100 */
-height: 81.46vh;      /* 1563 / 1920 * 100 */
+width: 48.59dvh;       /* 935 / 1920 * 100 */
+height: 81.46dvh;      /* 1563 / 1920 * 100 */
 left: 50% !important;     /* (1920/2 - 935/2 - 419.5) / 1920 * 100 */
 top: 47.5% !important; 
 transform: translate(-50%,-50%);      /* 149 / 1920 * 100 */
-border-radius: 1.56vh; /* 30 / 1920 * 100 */
-  inset: 6vh 5%;
+border-radius: 1.56dvh; /* 30 / 1920 * 100 */
+  inset: 6dvh 5%;
   background: #fff;
 text-align: center;
-  box-shadow: 0 1vh 2vh rgba(0,0,0,.12);
+  box-shadow: 0 1dvh 2dvh rgba(0,0,0,.12);
   display: flex;
   flex-direction: column;
-  padding: 2.5vh 9%;   /* ← 내부 여백 확 늘림 */
+  padding: 2.5dvh 9%;   /* ← 내부 여백 확 늘림 */
 }
 .row.three .region-pill {
   margin-right: 8%;  /* 첫 번째 열만 오른쪽 여백 */
@@ -36,7 +36,7 @@ text-align: center;
   display: flex;
   align-items: center;
   gap: 5%;
-  margin: 4vh 0;     /* ← 행 사이 더 벌림 */
+  margin: 4dvh 0;     /* ← 행 사이 더 벌림 */
 }
 
 .row.three {
@@ -52,12 +52,12 @@ text-align: center;
 
 /* 라벨 pill — (첫 행 제외 모든 행 동일 크기) */
 .pill{
-  min-height:5.4vh; border-radius:1.6vh;
+  min-height:5.4dvh; border-radius:1.6dvh;
   padding:0 4%; background:#B2BEB5; color:#111;
-  border:0.15vh solid #2f3b32; font-size:2.1vh;
+  border:0.15dvh solid #2f3b32; font-size:2.1dvh;
   display:flex; align-items:center; justify-content:center; white-space:nowrap;
 }
-.region-pill{ font-size:2vh; }
+.region-pill{ font-size:2dvh; }
 
 /* 나머지 행의 라벨 가로 크기 고정 → 모든 행 동일 느낌 */
 .row:not(.three) .pill{ width:42%; }
@@ -66,54 +66,53 @@ text-align: center;
 .select-wrap{ position:relative; width:100%; }
 .select{
   appearance:none; -webkit-appearance:none; -moz-appearance:none;
-  width:100%; min-height:5.2vh; border-radius:1.2vh;
-  border:0.15vh solid #000; background:#b8c2b9;
-  font-size:1.9vh; padding-left:2%; padding-right:8%;
+  width:100%; min-height:5.2dvh; border-radius:1.2dvh;
+  border:0.15dvh solid #000; background:#b8c2b9;
+  font-size:1.9dvh; padding-left:2%; padding-right:8%;
   text-align: center;
 }
 .select-wrap::after{
   content:"▾"; position:absolute; right:2%; top:50%;
-  transform:translateY(-50%); pointer-events:none; font-size:2vh; line-height:1;
+  transform:translateY(-50%); pointer-events:none; font-size:2dvh; line-height:1;
 }
 
 /* 토글(체크박스) — 정사각, 모든 행 동일 */
 .toggle{
   appearance:none; -webkit-appearance:none;
-  width:4.4vh; height:4.4vh; border-radius:1.2vh;
-  border:0.15vh solid #2f3b32; background:#B2BEB5; cursor:pointer; position:relative;
+  width:4.4dvh; height:4.4dvh; border-radius:1.2dvh;
+  border:0.15dvh solid #2f3b32; background:#B2BEB5; cursor:pointer; position:relative;
 }
 .toggle::after{
   content:"✔"; position:absolute; left:50%; top:50%;
   transform:translate(-50%,-58%) scale(0.9);
-  font-size:2.4vh; color:#2f3b32; opacity:0; transition:opacity .12s ease;
+  font-size:2.4dvh; color:#2f3b32; opacity:0; transition:opacity .12s ease;
 }
 .toggle:checked::after{ opacity:1; }
 
 /* 텍스트 인풋 — 높이/라운드 동일 */
 .input{
-  flex:0.7; width:100%; min-height:5.2vh; border-radius:1.2vh;
-  border:0.15vh solid #2f3b32; background:#B2BEB5;
-  font-size:1.9vh; padding-left:2%;text-align: center;
+  flex:0.7; width:100%; min-height:5.2dvh; border-radius:1.2dvh;
+  border:0.15dvh solid #2f3b32; background:#B2BEB5;
+  font-size:1.9dvh; padding-left:2%;text-align: center;
 }
 
 /* SAVE */
-.save-wrap{ margin-top:auto; display:flex; justify-content:center; padding-top:3vh; }
+.save-wrap{ margin-top:auto; display:flex; justify-content:center; padding-top:3dvh; }
 .save-btn{
-  border:none; background:#D9D9D9; font-size:1.8vh;
-  padding:1vh 6%; border-radius:1.8vh; cursor:pointer;
+  border:none; background:#D9D9D9; font-size:1.8dvh;
+  padding:1dvh 6%; border-radius:1.8dvh; cursor:pointer;
 }
 
 /* FAB 뒤로가기 */
 .fab-back{
-  position:absolute; right:5%; bottom:2.5vh;
-  width:7.5vh; height:7.5vh; border-radius:50%;
+  position:absolute; right:5%; bottom:2.5dvh;
+  width:7.5dvh; height:7.5dvh; border-radius:50%;
   background : url('assets/back.png') center/80% no-repeat;
 }
 .hidden {
   display: none;/* 클릭 안되게 */
 }
 /* interval 입력 숨김(삭제 예정) */
-
 
   </style>
 </head>

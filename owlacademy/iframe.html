@@ -6,7 +6,7 @@
   <title>영상 시청</title>
   <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
   <style>
-    html, body {
+html, body {
       margin: 0; padding: 0;
       height: 100dvh; width: 100vw;
       display: flex; justify-content: center; align-items: center;
@@ -17,8 +17,8 @@
     .video-page {
       position: relative;
       width: 100%;
-      max-width: calc(100vh * 9 / 16);
-      height: 100vh;
+      max-width: calc(100dvh * 9 / 16);
+      height: 100dvh;
       overflow: hidden;
       background: linear-gradient(
         to bottom,
@@ -37,17 +37,17 @@
       left: 0; right: 0; top: 0;
       height: 20%;
       display: flex; align-items: center; justify-content: flex-start;
-      padding: 2.2vh 2vh 0 1.5vh;
+      padding: 2.2dvh 2dvh 0 1.5dvh;
       box-sizing: border-box;
     }
 
     .video-header {
       background: #2c3e50;
       color: #fff;
-      border-radius: 1vh;
-      padding: 0.8vh 2vh;
-      font-size: 2.3vh;
-      box-shadow: 0 0.8vh 1.4vh rgba(0,0,0,.2);
+      border-radius: 1dvh;
+      padding: 0.8dvh 2dvh;
+      font-size: 2.3dvh;
+      box-shadow: 0 0.8dvh 1.4dvh rgba(0,0,0,.2);
     }
 
     /* 하늘색 영역 */
@@ -64,7 +64,7 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 15.5vh;
+      height: 15.5dvh;
       padding: 0;
       overflow: visible;
     }
@@ -72,23 +72,23 @@
     .owl-img {
       position: absolute;
       right: 0;
-      top: -6.5vh;
-      height: 15vh;
+      top: -6.5dvh;
+      height: 15dvh;
       z-index: 2;
       pointer-events: none;
     }
 
     .speech {
       position: absolute;
-      left: 3.6vh;
-      top: 1.6vh;
+      left: 3.6dvh;
+      top: 1.6dvh;
       width: auto;
-      height: 7vh;
+      height: 7dvh;
       background: url('assets/talk.png') no-repeat left center / 100% 100%;
       display: flex; align-items: center;
-      padding: 0 2vh;
+      padding: 0 2dvh;
       color: #333;
-      font-size: 1.8vh;
+      font-size: 1.8dvh;
       box-sizing: border-box;
       white-space: nowrap;
     }
@@ -99,7 +99,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: translateY(-3.2vh);
+      transform: translateY(-3.2dvh);
     }
 
     .video-card {
@@ -108,7 +108,7 @@
       background: #fff;
       border-radius: 0;
       overflow: hidden;
-      box-shadow: 0 0.6vh 1.4vh rgba(0,0,0,.2);
+      box-shadow: 0 0.6dvh 1.4dvh rgba(0,0,0,.2);
     }
 
     .video-card::before {
@@ -132,25 +132,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 0 2.4vh 0;
+      padding: 0 0 2.4dvh 0;
     }
 
     .complete-btn {
       background: #eceff3;
       color: #25313c;
       border: none;
-      border-radius: 0.8vh;
-      padding: 0.8vh 1.6vh;
-      font-size: 1.7vh;
+      border-radius: 0.8dvh;
+      padding: 0.8dvh 1.6dvh;
+      font-size: 1.7dvh;
       cursor: pointer;
       font-family: 'Gugi', sans-serif;
-      box-shadow: 0 0.4vh 1vh rgba(0,0,0,.18);
+      box-shadow: 0 0.4dvh 1dvh rgba(0,0,0,.18);
     }
 
     .back-btn {
       position: absolute;
-      right: 5vh;
-      bottom: 2.4vh;
+      right: 5dvh;
+      bottom: 2.4dvh;
       background: none;
       border: none;
       padding: 0;
@@ -158,10 +158,11 @@
     }
 
     .back-btn img {
-      width: 4vh;
-      height: 4vh;
+      width: 4dvh;
+      height: 4dvh;
       display: block;
     }
+
   </style>
 </head>
 <body>

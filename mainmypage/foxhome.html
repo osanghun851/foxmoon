@@ -6,336 +6,265 @@
     <title>여우집</title>
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-    #mainBackground{
+* { margin:0; padding:0; box-sizing:border-box; }
+#mainBackground{
 position: relative;
-height: 100vh; /* 화면 높이에 딱 맞춰서 */
-width: calc(100vh * 9 / 16); /* 9:16 비율에 맞춘 너비 */
-
+height: 100dvh;
+width: calc(100dvh * 9 / 16);
+background-color: #152F56;
 background-image: url(./foxhousebackground.svg);
 background-size: cover;
-background-position: center;   /* 가운데 정렬 */
-background-repeat: no-repeat;  /* 반복 없이 한 번만 보여줌 */
-margin: 0 auto; /* 가운데 정렬 */
-    }
-    #button{
-height: 6.5vh;
+background-position: center;
+background-repeat: no-repeat;
+margin: 0 auto;
+}
+
+#button{
+height: 6.5dvh;
 width: auto;
-
 position: absolute;
-top: calc((80/1920)*100vh);
-left: calc((58/1920)*100vh);
-        }
-    #마이페이지{
-/* Rectangle 13 */
-position: absolute;
-width: calc((330/1920)*100vh);
-height: calc((95/1920)*100vh);
-left: calc((698/1920)*100vh);
-top: calc((91/1920)*100vh);
+top: calc((80/1920)*100dvh);
+left: calc((58/1920)*100dvh);
+}
 
+#마이페이지{
+position: absolute;
+width: calc((330/1920)*100dvh);
+height: calc((95/1920)*100dvh);
+left: calc((698/1920)*100dvh);
+top: calc((91/1920)*100dvh);
 background: #A05A2C;
-box-shadow: 0vh 0.5vh 0.2vh rgba(0, 0, 0, 0.25);
-border-radius: calc((20/1920)*100vh);
-/* 마이페이지 */
+box-shadow: 0dvh 0.5dvh 0.2dvh rgba(0, 0, 0, 0.25);
+border-radius: calc((20/1920)*100dvh);
 font-family: 'Gugi';
 font-style: normal;
 font-weight: 400;
-font-size: calc((52/1920)*100vh);
+font-size: calc((52/1920)*100dvh);
 display: flex;
-justify-content: center; /* 가로 가운데 정렬 */
-align-items: center;     /* 세로 가운데 정렬 */
+justify-content: center;
+align-items: center;
 color: #FFFFFF;
-    }
-    #store{
+}
+
+#store{
 position: absolute;
-width: calc((333/1920)*100vh);
+width: calc((333/1920)*100dvh);
 height: auto;
-left: calc((690/1920)*100vh);
-top: calc((464/1920)*100vh);
-    }
-    #store:hover{
-opacity: 0.9;
-    }
-    #home{
+left: calc((690/1920)*100dvh);
+top: calc((464/1920)*100dvh);
+}
+#store:hover{ opacity: 0.9; }
+
+#home{
 position: absolute;
-width: calc((547/1920)*100vh);
+width: calc((547/1920)*100dvh);
 height: auto;
-left: calc((26/1920)*100vh);
-top: calc((818/1920)*100vh);
-    }
-    #home:hover{
-opacity: 0.9;
-    }
-    .Modal{
-      display: none;
-      position: absolute;
-      z-index: 999; /* 다른 요소보다 앞쪽에 표시 숫자가 클수록 앞에 나옴*/
-      left:0;
-      top:0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-    #modal-box{
-      position: absolute;
-      width: calc(100vh * 9 / 16);
-      height: 100vh;
-      background-color: #E7D7C1;
-      margin: 0 auto; /* 가운데 정렬 */
-    }
-    #열매상점{
-/* Rectangle 13 */
+left: calc((26/1920)*100dvh);
+top: calc((818/1920)*100dvh);
+}
+#home:hover{ opacity: 0.9; }
 
+.Modal{
+display: none;
 position: absolute;
-width: calc((632/1920)*100vh);
-height: calc((137/1920)*100vh);
-left: calc((224/1920)*100vh);
-top: calc((120/1920)*100vh);
-
-background: #A05A2C;
-box-shadow: 0vh 0.5vh 0.2vh rgba(0, 0, 0, 0.25);
-border-radius: calc((20/1920)*100vh);
-/*열매상점*/
-font-family: 'Gugi';
-font-style: normal;
-font-weight: 400;
-font-size: 4vh;
-display: flex;
-justify-content: center; /* 가로 가운데 정렬 */
-align-items: center;     /* 세로 가운데 정렬 */
-color: #FFFFFF;
-    }
-    #상점배경{
-/* Rectangle 56 */
-
-position: absolute;
-width: calc((977/1920)*100vh);
-height: calc((1310/1920)*100vh);
-left: calc((52/1920)*100vh);
-top: calc((516/1920)*100vh);
-
-background: #D1916C;
-box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.25);
-    }
-    #상점내부{
-/* Rectangle 61 */
-
-position: absolute;
-width: calc((912/1920)*100vh);
-height: calc((1079/1920)*100vh);
-left: calc((84/1920)*100vh);
-top: calc((601/1920)*100vh);
-
-background: #FFFFFF;
-border-radius: calc((42/1920)*100vh);
-    }
-    #상점모달닫기{
-position: absolute;
-width: 6.5vh;
-height: auto;
-left: calc((900/1920)*100vh);
-top: calc((1703/1920)*100vh);
-    }
-    .상점카테고리선택{
-/* Rectangle 57 */
-position: absolute;
-width: calc((153/1920)*100vh);
-height: calc((92/1920)*100vh);
-box-shadow: 0.2vh 0vh 0vh rgba(0, 0, 0, 0.25);
-font-family: 'Gugi';
-font-style: normal;
-font-weight: 400;
-font-size: 3vh;
-display: flex;
-justify-content: center; /* 가로 가운데 정렬 */
-align-items: center;     /* 세로 가운데 정렬 */
-    }
-    #상점카테고리선택1{
-left: calc((52/1920)*100vh);
-top: calc((424/1920)*100vh);
-background: #D1916C;
-color: #FFFFFF;
-    }
-    #상점카테고리선택2{
-left: calc((241/1920)*100vh);
-top: calc((424/1920)*100vh);
-background: #FFFFFF;
-color:#D1916C;
-    }
-    #상점카테고리선택3{
-left: calc((430/1920)*100vh);
-top: calc((424/1920)*100vh);
-background: #FFFFFF;
-color:#D1916C;
-    }
-    #상점카테고리선택4{
-left: calc((619/1920)*100vh);
-top: calc((424/1920)*100vh);
-background: #FFFFFF;
-color:#D1916C;
-    }
-    #상점카테고리선택5{
-left: calc((808/1920)*100vh);
-top: calc((424/1920)*100vh);
-background: #FFFFFF; 
-color:#D1916C;
-font-size: 2vh;
-    }
-    #이용방법버튼{
-width: calc((150/1920)*100vh);
-height: auto;
-position: absolute;
-left: calc((890/1920)*100vh);
-top: calc((1700/1920)*100vh);
-    }
-    #box{
-width: calc((333/1920)*100vh);
-height: calc((69/1920)*100vh);
-position: absolute;
-left: calc((663/1920)*100vh);
-top: calc((306/1920)*100vh);
-background: #A05A2C;
-box-shadow: 0px 0.35vh 0.2vh rgba(0, 0, 0, 0.25);
-border-radius:  calc((20/1920)*100vh);
-font-family: 'Gugi';
-font-style: normal;
-font-weight: 400;
-font-size: 2.5vh;
-display: flex;
-justify-content: center; /* 가로 가운데 정렬 */
-align-items: center;     /* 세로 가운데 정렬 */
-color: #FFFFFF;
-    }
-    #foxmodal-box{
-      position: absolute;
-      width: calc(100vh * 9 / 16);
-      height: 100vh;
-      background-color: #E7D7C1;
-      margin: 0 auto; /* 가운데 정렬 */
-    }
-    #background0{
-position: absolute;
-width: calc((1080/1920)*100vh);
-height: auto;
-z-index: 101;
-    }
-    #line{
-position: absolute;
-width: calc((1070/1920)*100vh);
-height: 0vh;
-left: 0vh;
-top: calc((714/1920)*100vh);
-border: 0.14vh solid #D1916C;
-
-    }
-    #여우집모달닫기{
-position: absolute;
-width: 6.5vh;
-height: auto;
-left:calc((20/1920)*100vh);
-top:calc((90/1920)*100vh);
-z-index: 102;
-    }
-    #box1{
+z-index: 999;
+left:0; top:0;
 width: 100%;
-height: calc((722/1920)*100vh);
-position: absolute;
-bottom: 0px;
-background-color: #D1916C;
-    }
-    #box2{
-position: absolute;
-width: calc((976/1920)*100vh);
-height: calc((625/1920)*100vh);
-left: calc((52/1920)*100vh);
-top: calc((50/1920)*100vh);
+height: 100%;
+background-color: rgba(0,0,0,0.7);
+}
 
-background-color: #FFFFFF;
-border-radius: calc((42/1920)*100vh);
-    }
-        .꾸미기카테고리선택{
-/* Rectangle 57 */
+#modal-box{
 position: absolute;
-width: calc((153/1920)*100vh);
-height: calc((92/1920)*100vh);
-box-shadow: 0.2vh 0vh 0vh rgba(0, 0, 0, 0.25);
+width: calc(100dvh * 9 / 16);
+height: 100dvh;
+background-color: #E7D7C1;
+margin: 0 auto;
+}
+
+#열매상점{
+position: absolute;
+width: calc((632/1920)*100dvh);
+height: calc((137/1920)*100dvh);
+left: calc((224/1920)*100dvh);
+top: calc((120/1920)*100dvh);
+background: #A05A2C;
+box-shadow: 0dvh 0.5dvh 0.2dvh rgba(0,0,0,0.25);
+border-radius: calc((20/1920)*100dvh);
 font-family: 'Gugi';
 font-style: normal;
 font-weight: 400;
-font-size: 3vh;
+font-size: 4dvh;
 display: flex;
-justify-content: center; /* 가로 가운데 정렬 */
-align-items: center;     /* 세로 가운데 정렬 */
-    }
-    #꾸미기카테고리선택1{
-top: calc((1118/1920)*100vh);
+justify-content: center;
+align-items: center;
+color: #FFFFFF;
+}
+
+#상점배경{
+position: absolute;
+width: calc((977/1920)*100dvh);
+height: calc((1310/1920)*100dvh);
+left: calc((52/1920)*100dvh);
+top: calc((516/1920)*100dvh);
 background: #D1916C;
-color:#FFFFFF;
-    }
-    #꾸미기카테고리선택2{
-left: calc((189/1920)*100vh);
-top: calc((1118/1920)*100vh);
+box-shadow: 0px 10px 4px rgba(0,0,0,0.25);
+}
+
+#상점내부{
+position: absolute;
+width: calc((912/1920)*100dvh);
+height: calc((1079/1920)*100dvh);
+left: calc((84/1920)*100dvh);
+top: calc((601/1920)*100dvh);
 background: #FFFFFF;
-color:#D1916C;
-    }
-    #꾸미기카테고리선택3{
-left: calc((378/1920)*100vh);
-top: calc((1118/1920)*100vh);
-background: #FFFFFF;
-color:#D1916C;
-    }
-    #꾸미기카테고리선택4{
-left: calc((567/1920)*100vh);
-top: calc((1118/1920)*100vh);
-background: #FFFFFF;
-color:#D1916C;
-    }
-    #꾸미기카테고리선택5{
-left: calc((756/1920)*100vh);
-top: calc((1118/1920)*100vh);
-background: #FFFFFF;
-color:#D1916C;
-font-size: 2vh;
-    }
-    #친구0{
+border-radius: calc((42/1920)*100dvh);
+}
+
+#상점모달닫기{
 position: absolute;
-left: calc((142/1920)*100vh);
-top: calc((504/1920)*100vh);
-width: calc((220/1920)*100vh);
-height: calc((202/1920)*100vh);
-    }
-    #친구1{
+width: 6.5dvh;
+height: auto;
+left: calc((900/1920)*100dvh);
+top: calc((1703/1920)*100dvh);
+}
+
+.상점카테고리선택{
 position: absolute;
-left: calc((361/1920)*100vh);
-top: calc((472/1920)*100vh);
-width: calc((220/1920)*100vh);
-height: calc((146/1920)*100vh);
-    } 
-    #벽지{
+width: calc((153/1920)*100dvh);
+height: calc((92/1920)*100dvh);
+box-shadow: 0.2dvh 0dvh 0dvh rgba(0, 0, 0, 0.25);
+font-family: 'Gugi';
+font-weight: 400;
+font-size: 3dvh;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#상점카테고리선택1{ left: calc((52/1920)*100dvh); top: calc((424/1920)*100dvh); background: #D1916C; color:#FFF; }
+#상점카테고리선택2{ left: calc((241/1920)*100dvh); top: calc((424/1920)*100dvh); background: #FFF; color:#D1916C; }
+#상점카테고리선택3{ left: calc((430/1920)*100dvh); top: calc((424/1920)*100dvh); background: #FFF; color:#D1916C; }
+#상점카테고리선택4{ left: calc((619/1920)*100dvh); top: calc((424/1920)*100dvh); background: #FFF; color:#D1916C; }
+#상점카테고리선택5{ left: calc((808/1920)*100dvh); top: calc((424/1920)*100dvh); background: #FFF; color:#D1916C; font-size: 2dvh; }
+
+#이용방법버튼{
+width: calc((150/1920)*100dvh);
+height: auto;
 position: absolute;
-top: 0vh;
-left: 0vh;
-width: calc((1080/1920)*100vh);
-height: calc((713/1920)*100vh);
-/*background-image: url(./벽지0T.svg);*/
-z-index: 0;
-    }
-    #카펫{
+left: calc((890/1920)*100dvh);
+top: calc((1700/1920)*100dvh);
+}
+
+#box{
+width: calc((333/1920)*100dvh);
+height: calc((69/1920)*100dvh);
 position: absolute;
-top: calc((903/1920)*100vh);
-left: calc((224/1920)*100vh);
-width: calc((631/1920)*100vh);
-height: calc((114/1920)*100vh);
-    }
-    #fox{
+left: calc((663/1920)*100dvh);
+top: calc((306/1920)*100dvh);
+background: #A05A2C;
+box-shadow: 0px 0.35dvh 0.2dvh rgba(0,0,0,0.25);
+border-radius: calc((20/1920)*100dvh);
+font-family: 'Gugi';
+font-size: 2.5dvh;
+display: flex; justify-content:center; align-items:center;
+color:#FFF;
+}
+
+#foxmodal-box{
 position: absolute;
-top: calc((550/1920)*100vh);
-left: calc((369/1920)*100vh);
-width: calc((368/1920)*100vh);
-height: calc((439/1920)*100vh);
+width: calc(100dvh * 9 / 16);
+height: 100dvh;
+background-color: #E7D7C1;
+margin: 0 auto;
+}
+
+#background0{
+position: absolute;
+width: calc((1080/1920)*100dvh);
+height: auto;
 z-index: 101;
-    }
+}
+
+#line{
+position: absolute;
+width: calc((1070/1920)*100dvh);
+height: 0dvh;
+left: 0dvh;
+top: calc((714/1920)*100dvh);
+border: 0.14dvh solid #D1916C;
+}
+
+#여우집모달닫기{
+position: absolute;
+width: 6.5dvh;
+height: auto;
+left: calc((20/1920)*100dvh);
+top: calc((90/1920)*100dvh);
+z-index: 102;
+}
+
+#box1{
+width: 100%;
+height: calc((722/1920)*100dvh);
+position: absolute;
+bottom: 0;
+background-color: #D1916C;
+}
+
+#box2{
+position: absolute;
+width: calc((976/1920)*100dvh);
+height: calc((625/1920)*100dvh);
+left: calc((52/1920)*100dvh);
+top: calc((50/1920)*100dvh);
+background-color: #FFFFFF;
+border-radius: calc((42/1920)*100dvh);
+}
+
+.꾸미기카테고리선택{
+position: absolute;
+width: calc((153/1920)*100dvh);
+height: calc((92/1920)*100dvh);
+box-shadow: 0.2dvh 0dvh 0dvh rgba(0,0,0,0.25);
+font-family: 'Gugi';
+font-size: 3dvh;
+display: flex; justify-content:center; align-items:center;
+}
+
+#꾸미기카테고리선택1{ top: calc((1118/1920)*100dvh); background:#D1916C; color:#FFF; }
+#꾸미기카테고리선택2{ left: calc((189/1920)*100dvh); top: calc((1118/1920)*100dvh); background:#FFF; color:#D1916C; }
+#꾸미기카테고리선택3{ left: calc((378/1920)*100dvh); top: calc((1118/1920)*100dvh); background:#FFF; color:#D1916C; }
+#꾸미기카테고리선택4{ left: calc((567/1920)*100dvh); top: calc((1118/1920)*100dvh); background:#FFF; color:#D1916C; }
+#꾸미기카테고리선택5{ left: calc((756/1920)*100dvh); top: calc((1118/1920)*100dvh); background:#FFF; color:#D1916C; font-size: 2dvh; }
+
+#친구0{ position:absolute; left:calc((142/1920)*100dvh); top:calc((504/1920)*100dvh); width:calc((220/1920)*100dvh); height:calc((202/1920)*100dvh); }
+#친구1{ position:absolute; left:calc((361/1920)*100dvh); top:calc((472/1920)*100dvh); width:calc((220/1920)*100dvh); height:calc((146/1920)*100dvh); }
+
+#벽지{
+position: absolute;
+top: 0dvh;
+left: 0dvh;
+width: calc((1080/1920)*100dvh);
+height: calc((713/1920)*100dvh);
+z-index: 0;
+}
+#카펫{
+position: absolute;
+top: calc((903/1920)*100dvh);
+left: calc((224/1920)*100dvh);
+width: calc((631/1920)*100dvh);
+height: calc((114/1920)*100dvh);
+}
+#fox{
+position: absolute;
+top: calc((550/1920)*100dvh);
+left: calc((369/1920)*100dvh);
+width: calc((368/1920)*100dvh);
+height: calc((439/1920)*100dvh);
+z-index: 101;
+}
+
     </style>
 </head>
 <body>
@@ -534,49 +463,50 @@ img.dataset.price=price;
 const store=document.getElementById("상점내부");
 const box2=document.getElementById("box2");
 const clothList = {
-    여우옷0:['ex.png','15.8vh','12.8vh','4.8vh','4vh',10],
-    여우옷1:['ex.png','15.8vh','12.8vh','27vh','4vh',10]
+    여우옷0:['ex.png','15.8dvh','12.8dvh','4.8dvh','4dvh',10],
+    여우옷1:['ex.png','15.8dvh','12.8dvh','27dvh','4dvh',10]
 };
 const 벽지list={
-    벽지0:['벽지0.svg','15.8vh','12.8vh','4.8vh','4vh',20],
-    벽지1:['벽지1.svg','15.8vh','12.8vh','27vh','4vh',20],
-    벽지2:['벽지2.svg','15.8vh','12.8vh','4.8vh','21.7vh',20],
-    벽지3:['벽지3.svg','15.8vh','12.8vh','27vh','21.7vh',30],
-    벽지4:['벽지4.svg','15.8vh','12.8vh','4.8vh','39.4vh',30],
-    벽지5:['벽지5.svg','15.8vh','12.8vh','27vh','39.4vh',30]
+    벽지0:['벽지0.svg','15.8dvh','12.8dvh','4.8dvh','4dvh',20],
+    벽지1:['벽지1.svg','15.8dvh','12.8dvh','27dvh','4dvh',20],
+    벽지2:['벽지2.svg','15.8dvh','12.8dvh','4.8dvh','21.7dvh',20],
+    벽지3:['벽지3.svg','15.8dvh','12.8dvh','27dvh','21.7dvh',30],
+    벽지4:['벽지4.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',30],
+    벽지5:['벽지5.svg','15.8dvh','12.8dvh','27dvh','39.4dvh',30]
 };
 const 카펫list={
-    카펫0:['카펫0.svg','15.8vh','12.8vh','4.8vh','4vh',30],
-    카펫1:['카펫1.svg','15.8vh','12.8vh','27vh','4vh',30],
-    카펫2:['카펫2.svg','15.8vh','12.8vh','4.8vh','21.7vh',30],
-    카펫3:['카펫3.svg','15.8vh','12.8vh','27vh','21.7vh',40],
-    카펫4:['카펫4.svg','15.8vh','12.8vh','4.8vh','39.4vh',40],
-    카펫5:['카펫5.svg','15.8vh','12.8vh','27vh','39.4vh',40]
+    카펫0:['카펫0.svg','15.8dvh','12.8dvh','4.8dvh','4dvh',30],
+    카펫1:['카펫1.svg','15.8dvh','12.8dvh','27dvh','4dvh',30],
+    카펫2:['카펫2.svg','15.8dvh','12.8dvh','4.8dvh','21.7dvh',30],
+    카펫3:['카펫3.svg','15.8dvh','12.8dvh','27dvh','21.7dvh',40],
+    카펫4:['카펫4.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',40],
+    카펫5:['카펫5.svg','15.8dvh','12.8dvh','27dvh','39.4dvh',40]
 };
 const 가구1list={
-    가구10:['가구10.svg','15.8vh','12.8vh','4.8vh','4vh',50],
-    가구11:['가구11.svg','15.8vh','12.8vh','27vh','4vh',50],
-    가구12:['가구12.svg','15.8vh','12.8vh','4.8vh','21.7vh',50],
-    가구13:['가구13.svg','15.8vh','12.8vh','27vh','21.7vh',50],
-    가구14:['가구14.svg','15.8vh','12.8vh','4.8vh','39.4vh',80],
-    가구15:['가구15.svg','15.8vh','12.8vh','27vh','39.4vh',80]
+    가구10:['가구10.svg','15.8dvh','12.8dvh','4.8dvh','4dvh',50],
+    가구11:['가구11.svg','15.8dvh','12.8dvh','27dvh','4dvh',50],
+    가구12:['가구12.svg','15.8dvh','12.8dvh','4.8dvh','21.7dvh',50],
+    가구13:['가구13.svg','15.8dvh','12.8dvh','27dvh','21.7dvh',50],
+    가구14:['가구14.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',80],
+    가구15:['가구15.svg','15.8dvh','12.8dvh','27dvh','39.4dvh',80]
 };
 const 가구2list={
-    가구20:['가구20.svg','15.8vh','12.8vh','4.8vh','4vh',30],
-    가구21:['가구21.svg','15.8vh','12.8vh','27vh','4vh',30],
-    가구22:['가구22.svg','15.8vh','12.8vh','4.8vh','21.7vh',30],
-    가구23:['가구23.svg','15.8vh','12.8vh','27vh','21.7vh',30],
-    가구24:['가구24.svg','15.8vh','12.8vh','4.8vh','39.4vh',60],
-    가구25:['가구25.svg','15.8vh','12.8vh','27vh','39.4vh',60]
+    가구20:['가구20.svg','15.8dvh','12.8dvh','4.8dvh','4dvh',30],
+    가구21:['가구21.svg','15.8dvh','12.8dvh','27dvh','4dvh',30],
+    가구22:['가구22.svg','15.8dvh','12.8dvh','4.8dvh','21.7dvh',30],
+    가구23:['가구23.svg','15.8dvh','12.8dvh','27dvh','21.7dvh',30],
+    가구24:['가구24.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',60],
+    가구25:['가구25.svg','15.8dvh','12.8dvh','27dvh','39.4dvh',60]
 };
 const 악세사리list={
-    악세사리0:['악세사리0.svg','15.8vh','12.8vh','4.8vh','4vh',30],
-    악세사리1:['악세사리1.svg','15.8vh','12.8vh','27vh','4vh',30],
-    악세사리2:['악세사리2.svg','15.8vh','12.8vh','4.8vh','21.7vh',40],
-    악세사리3:['악세사리3.svg','15.8vh','12.8vh','27vh','21.7vh',50],
-    악세사리4:['악세사리4.svg','15.8vh','12.8vh','4.8vh','39.4vh',70],
-    악세사리5:['악세사리5.svg','15.8vh','12.8vh','27vh','39.4vh',70]
+    악세사리0:['악세사리0.svg','15.8dvh','12.8dvh','4.8dvh','4dvh',30],
+    악세사리1:['악세사리1.svg','15.8dvh','12.8dvh','27dvh','4dvh',30],
+    악세사리2:['악세사리2.svg','15.8dvh','12.8dvh','4.8dvh','21.7dvh',40],
+    악세사리3:['악세사리3.svg','15.8dvh','12.8dvh','27dvh','21.7dvh',50],
+    악세사리4:['악세사리4.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',70],
+    악세사리5:['악세사리5.svg','15.8dvh','12.8dvh','27dvh','39.4dvh',70]
 };
+
 const storelist = [벽지list,카펫list,가구1list,가구2list,악세사리list];
 let userhave = {
     여우옷0:['ex.png'],
@@ -585,8 +515,8 @@ let userhave = {
 //상점아이템위치
 //여우집아이템위치
 const fposition=[
-["4vh","4vh"],["20vh","4vh"],["36.1vh","4vh"],
-["4vh","18.3vh"],["20vh","18.3vh"],["36.1vh","18.3vh"]
+["4dvh","4dvh"],["20dvh","4dvh"],["36.1dvh","4dvh"],
+["4dvh","18.3dvh"],["20dvh","18.3dvh"],["36.1dvh","18.3dvh"]
 ];
 const foxHomeItemLoding = function(list){
     box2.innerHTML="";
@@ -859,31 +789,34 @@ function setupPurchaseHandler(selector = ".buyItem", apiUrl = BACKEND_URL+"/api/
         });
     });
 }
-
 const 가구1Data = {
-    가구10:['11.4vh','11.4vh','6.4vh','10.9vh'],
-    가구11:['9.6vh','9.6vh','8.2vh','12.5vh'],
-    가구12:['8.3vh','6.4vh','32.3vh','17.8vh'],
-    가구13:['5.1vh','6.5vh','32.3vh','17.8vh'],
-    가구14:['17.2vh','15.9vh','37.6vh','26.2vh'],
-    가구15:['5.5vh','14.3vh','25.6vh','10.1vh']
+    가구10:['11.4dvh','11.4dvh','6.4dvh','10.9dvh'],
+    가구11:['9.6dvh','9.6dvh','8.2dvh','12.5dvh'],
+    가구12:['8.3dvh','6.4dvh','32.3dvh','17.8dvh'],
+    가구13:['5.1dvh','6.5dvh','32.3dvh','17.8dvh'],
+    가구14:['17.2dvh','15.9dvh','37.6dvh','26.2dvh'],
+    가구15:['5.5dvh','14.3dvh','25.6dvh','10.1dvh']
 };
+
 const 가구2Data = {
-    가구20:['4vh','6.8vh','40.5vh','20.1vh'],
-    가구21:['4.6vh','6.4vh','41vh','20.5vh'],
-    가구22:['4.4vh','6.3vh','41vh','20.5vh'],
-    가구23:['4.1vh','5.5vh','47vh','21vh'],
-    가구24:['21.1vh','12.2vh','0vh','30.4vh'],
-    가구25:['3.7vh','9.5vh','46vh','17.18vh']
+    가구20:['4dvh','6.8dvh','40.5dvh','20.1dvh'],
+    가구21:['4.6dvh','6.4dvh','41dvh','20.5dvh'],
+    가구22:['4.4dvh','6.3dvh','41dvh','20.5dvh'],
+    가구23:['4.1dvh','5.5dvh','47dvh','21dvh'],
+    가구24:['21.1dvh','12.2dvh','0dvh','30.4dvh'],
+    가구25:['3.7dvh','9.5dvh','46dvh','17.18dvh']
 };
-const 악세사리Data ={
-    악세사리0:['4.3vh','3.2vh','21vh','33.6vh','-62.32deg'],
-    악세사리1:['2.3vh','2.3vh','25vh','29vh','0deg'],
-    악세사리2:['3.4vh','1.8vh','21.6vh','35.3vh','0deg'],
-    악세사리3:['10.1vh','8.2vh','20.1vh','33.3vh','-4.84deg'],
-    악세사리4:['9.8vh','9vh','19vh','33.3vh','0deg'],
-    악세사리5:['5.2vh','2.2vh','21.5vh','28.8vh','0deg']
-}
+
+const 악세사리Data = {
+    악세사리0:['4.3dvh','3.2dvh','21dvh','33.6dvh','-62.32deg'],
+    악세사리1:['2.3dvh','2.3dvh','25dvh','29dvh','0deg'],
+    악세사리2:['3.4dvh','1.8dvh','21.6dvh','35.3dvh','0deg'],
+    악세사리3:['10.1dvh','8.2dvh','20.1dvh','33.3dvh','-4.84deg'],
+    악세사리4:['9.8dvh','9dvh','19dvh','33.3dvh','0deg'],
+    악세사리5:['5.2dvh','2.2dvh','21.5dvh','28.8dvh','0deg']
+};
+
+
 async function loadUserData() {
     try {
         const res = await fetch(BACKEND_URL+"/api/user/me",{credentials:"include"});
