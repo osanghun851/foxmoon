@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>설정</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+ <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family: 'Gugi', sans-serif;}
+#background{
+  height:100vh; aspect-ratio:9/16;
+  background:#aeb8b0; margin:0 auto; position:relative;
+}
+#settingsDiv {
+
+  position: absolute;
+width: 48.59vh;       /* 935 / 1920 * 100 */
+height: 81.46vh;      /* 1563 / 1920 * 100 */
+left: 50% !important;     /* (1920/2 - 935/2 - 419.5) / 1920 * 100 */
+top: 47.5% !important; 
+transform: translate(-50%,-50%);      /* 149 / 1920 * 100 */
+border-radius: 1.56vh; /* 30 / 1920 * 100 */
+  inset: 6vh 5%;
+  background: #fff;
+text-align: center;
+  box-shadow: 0 1vh 2vh rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column;
+  padding: 2.5vh 9%;   /* ← 내부 여백 확 늘림 */
+}
+.row.three .region-pill {
+  margin-right: 8%;  /* 첫 번째 열만 오른쪽 여백 */
+}
+/* 행 간격 — padding 늘린 만큼 margin은 조금 줄여서 균형 */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  margin: 4vh 0;     /* ← 행 사이 더 벌림 */
+}
+
+.row.three {
+  gap: 6%;
+  
+}
+.row:not(.three) > *:last-child{ margin-left:auto; } /* 오른쪽 끝 정렬 */
+
+/* 첫 번째 행(지역)만 별도 */
+
+.row.three .region-pill { width: 20%; }
+.row.three .select-wrap { flex: 0 0 30%; }
+
+/* 라벨 pill — (첫 행 제외 모든 행 동일 크기) */
+.pill{
+  min-height:5.4vh; border-radius:1.6vh;
+  padding:0 4%; background:#B2BEB5; color:#111;
+  border:0.15vh solid #2f3b32; font-size:2.1vh;
+  display:flex; align-items:center; justify-content:center; white-space:nowrap;
+}
+.region-pill{ font-size:2vh; }
+
+/* 나머지 행의 라벨 가로 크기 고정 → 모든 행 동일 느낌 */
+.row:not(.three) .pill{ width:42%; }
+
+/* 셀렉트 */
+.select-wrap{ position:relative; width:100%; }
+.select{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  width:100%; min-height:5.2vh; border-radius:1.2vh;
+  border:0.15vh solid #000; background:#b8c2b9;
+  font-size:1.9vh; padding-left:2%; padding-right:8%;
+  text-align: center;
+}
+.select-wrap::after{
+  content:"▾"; position:absolute; right:2%; top:50%;
+  transform:translateY(-50%); pointer-events:none; font-size:2vh; line-height:1;
+}
+
+/* 토글(체크박스) — 정사각, 모든 행 동일 */
+.toggle{
+  appearance:none; -webkit-appearance:none;
+  width:4.4vh; height:4.4vh; border-radius:1.2vh;
+  border:0.15vh solid #2f3b32; background:#B2BEB5; cursor:pointer; position:relative;
+}
+.toggle::after{
+  content:"✔"; position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-58%) scale(0.9);
+  font-size:2.4vh; color:#2f3b32; opacity:0; transition:opacity .12s ease;
+}
+.toggle:checked::after{ opacity:1; }
+
+/* 텍스트 인풋 — 높이/라운드 동일 */
+.input{
+  flex:0.7; width:100%; min-height:5.2vh; border-radius:1.2vh;
+  border:0.15vh solid #2f3b32; background:#B2BEB5;
+  font-size:1.9vh; padding-left:2%;text-align: center;
+}
+
+/* SAVE */
+.save-wrap{ margin-top:auto; display:flex; justify-content:center; padding-top:3vh; }
+.save-btn{
+  border:none; background:#D9D9D9; font-size:1.8vh;
+  padding:1vh 6%; border-radius:1.8vh; cursor:pointer;
+}
+
+/* FAB 뒤로가기 */
+.fab-back{
+  position:absolute; right:5%; bottom:2.5vh;
+  width:7.5vh; height:7.5vh; border-radius:50%;
+  background : url('assets/back.png') center/80% no-repeat;
+}
+.hidden {
+  display: none;/* 클릭 안되게 */
+}
+/* interval 입력 숨김(삭제 예정) */
+
+
+  </style>
+</head>
+<body>
+  <div id="background">
+    <section id="settingsDiv">
+      <div class="content">
+        
+
+        <!--  알림 설정들 -->
+        <div class="row">
+          <label class="pill" for="job-alert">일자리 알림</label>
+          <input type="checkbox" class="toggle" id="job">
+        </div>
+
+        <div class="row three hidden" id="jobOptions">
+          <div class="pill region-pill">분류</div>
+
+          <div class="select-wrap">
+            <select class="select" id="eduSelect" required>
+              <option value="">전체</option>
+  <option value="10">고졸</option>
+  <option value="20">대졸(2~3)</option>
+  <option value="30">대졸</option>
+  <option value="40">석사</option>
+  <option value="50">박사</option>
+            </select>
+          </div>
+
+          <div class="select-wrap">
+            <select class="select" id="coSelect" required>
+              <option value="">전체</option>
+  <option value="10|40">사기업</option>
+  <option value="20">공기업</option>
+  <option value="30">공공기관</option>
+             </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="pill" for="house-alert">집찾기 알림</label>
+          <input type="checkbox" class="toggle" id="home">
+        </div>
+
+        <div class="row three hidden" id="homeOptions">
+          <div class="pill region-pill">지역</div>
+
+          <div class="select-wrap">
+            <select class="select" id="region" required>
+              <option value="" selected disabled>시/도</option>
+              
+            </select>
+          </div>
+
+          <div class="select-wrap">
+            <select class="select" id="district" required>
+              <option value="" selected disabled>시/군/구</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="pill" for="news-alert">뉴스 알림</label>
+          <input type="checkbox" class="toggle" id="news">
+        </div>
+
+        <div class="row hidden" id="newsOptions">
+          <label class="pill" for="news-keyword">뉴스 키워드</label>
+          <input type="text" class="input" id="newskeyword" placeholder="예) 기술">
+        </div>
+
+        <div class="row">
+          <label class="pill" for="emailrecive">이메일 수신 동의</label>
+          <input type="checkbox" class="toggle" id="emailrecive">
+        </div>
+        
+      </div>
+
+      <div class="save-wrap">
+        <button class="save-btn" id="saveBtn">SAVE</button>
+      </div>
+    </section>
+    
+   
+    <a class="fab-back" href="goosepost.html" aria-label="뒤로가기"></a>
+  </div>
+  <script>
+    
+    const regionMap = {
+      "서울특별시": [
+        "종로구", "중구", "용산구", "성동구", "광진구", "동대문구", "중랑구",
+        "성북구", "강북구", "도봉구", "노원구", "은평구", "서대문구", "마포구",
+        "양천구", "강서구", "구로구", "금천구", "영등포구", "동작구", "관악구",
+        "서초구", "강남구", "송파구", "강동구"
+      ],
+      "부산광역시": [
+        "중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구",
+        "강서구", "해운대구", "사하구", "금정구", "연제구", "수영구", "사상구", "기장군"
+      ],
+      "인천광역시": [
+        "중구", "동구", "미추홀구", "연수구", "남동구", "부평구", "계양구", "서구",
+        "강화군", "옹진군"
+      ],
+      "대구광역시": ["중구", "동구", "서구", "남구", "북구", "수성구", "달서구", "달성군", "군위군"],
+      "광주광역시": ["동구", "서구", "남구", "북구", "광산구"],
+      "대전광역시": ["동구", "중구", "서구", "유성구", "대덕구"],
+      "울산광역시": ["중구", "남구", "동구", "북구", "울주군"],
+      "세종시": ["세종시"],
+      "경기도": [
+        "가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시",
+        "김포시", "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시",
+        "안산시", "안성시", "안양시", "양주시", "양평군", "여주시", "연천군",
+        "오산시", "용인시", "의왕시", "의정부시", "이천시", "파주시", "평택시",
+        "포천시", "하남시", "화성시"
+      ],
+      "강원도": [
+        "원주시", "춘천시", "강릉시", "동해시", "속초시", "삼척시",
+        "홍천군", "태백시", "철원군", "횡성군", "평창군", "영월군", "정선군",
+        "인제군", "고성군", "양양군", "화천군", "양구군"
+      ],
+      "충청북도": ["청주시", "충주시", "제천시", "보은군", "옥천군", "영동군", "증평군", "진천군", "괴산군", "음성군", "단양군"],
+      "충청남도": ["천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시", "금산군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군"],
+      "경상북도": ["포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시", "문경시", "경산시", "의성군", "청송군", "영양군", "영덕군", "청도군", "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"],
+      "경상남도": ["창원시", "김해시", "진주시", "양산시", "거제시", "통영시", "사천시", "밀양시", "함안군", "거창군", "창녕군", "고성군", "하동군", "합천군", "남해군", "함양군", "산청군", "의령군"],
+      "전라북도": ["전주시", "익산시", "군산시", "정읍시", "완주군", "김제시", "남원시", "고창군", "부안군", "임실군", "순창군", "진안군", "장수군", "무주군"],
+      "전라남도": ["여수시", "순천시", "목포시", "광양시", "나주시", "무안군", "해남군", "고흥군", "화순군", "영암군", "영광군", "완도군", "담양군", "장성군", "보성군", "신안군", "장흥군", "강진군", "함평군", "진도군", "곡성군", "구례군"],
+      "제주도": ["제주시", "서귀포시"]
+    };
+  
+    const saveBtn = document.getElementById("saveBtn");
+    const msgDiv = document.getElementById("message");
+    const regionSelect = document.getElementById("region");
+    const districtSelect = document.getElementById("district");
+    const jobCheckbox = document.getElementById("job");
+const homeCheckbox = document.getElementById("home");
+const newsCheckbox = document.getElementById("news");
+
+const jobOptions = document.getElementById("jobOptions");
+const homeOptions = document.getElementById("homeOptions");
+const newsOptions = document.getElementById("newsOptions");
+
+jobCheckbox.addEventListener("change", () => {
+  jobOptions.classList.toggle("hidden", !jobCheckbox.checked);
+});
+
+homeCheckbox.addEventListener("change", () => {
+  homeOptions.classList.toggle("hidden", !homeCheckbox.checked);
+});
+
+newsCheckbox.addEventListener("change", () => {
+  newsOptions.classList.toggle("hidden", !newsCheckbox.checked);
+});
+    // ✅ 지역 목록 채우기
+    document.addEventListener("DOMContentLoaded", () => {
+    for (const region in regionMap) {
+      const opt = document.createElement("option");
+      opt.value = region;
+      opt.textContent = region;
+      regionSelect.appendChild(opt);
+    }
+  });
+  
+    // ✅ 지역 선택 시 구/군 갱신
+    regionSelect.addEventListener("change", () => {
+    districtSelect.innerHTML = "";
+    const selectedRegion = regionSelect.value;
+    if (regionMap[selectedRegion]) {
+      regionMap[selectedRegion].forEach(district => {
+        const opt = document.createElement("option");
+        opt.value = district;
+        opt.textContent = district;
+        districtSelect.appendChild(opt);
+      });
+    }
+  });
+  
+    // ✅ 저장 버튼 클릭 시 동작
+    saveBtn.addEventListener("click", async () => {
+    
+    const region = document.getElementById("region").value;
+    const district = document.getElementById("district")?.value || "";
+    
+    const work = document.getElementById("job")?.checked || false;
+    const home = document.getElementById("home")?.checked || false;
+    const news = document.getElementById("news")?.checked || false;
+    const newskeyword = document.getElementById("newskeyword")?.value.trim() || "";
+    const emailrecive = document.getElementById("emailrecive")?.checked ?? true;
+    const workEdu = document.getElementById("eduSelect")?.value || "";
+    const workCo  = document.getElementById("coSelect")?.value || "";
+    
+    
+
+    try {
+      const res = await fetch("http://localhost:3000/api/goosettings", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    region,
+    district,
+    
+    work,
+    home,
+    news,
+    newskeyword,
+    emailrecive,
+    workEdu,
+    workCo
+  }),
+  credentials: "include" // ← 반드시 추가
+});
+
+      
+    } catch (err) {
+      console.error(err);
+    }
+    location.href="./goosepost.html"
+  });
+  </script>
+  
+</body>
+</html>

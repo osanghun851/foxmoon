@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>친구 추가</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+  <style>
+    #background{
+position: relative;
+height: 100vh; /* 화면 높이에 딱 맞춰서 */
+width: calc(100vh * 9 / 16);
+margin: 0 auto;
+background-color: #E7D7C1;
+    }
+    #친구관리{
+position: absolute;
+left: calc((232/1920)*100vh);
+top: calc((73/1920)*100vh);
+width: calc((616/1920)*100vh);
+height: calc((120/1920)*100vh);
+font-size: calc((80/1920)*100vh);
+border-radius: calc((30/1920)*100vh);
+color: #FFFFFF;
+background-color: #A05A2C;
+line-height: 6.5vh;
+    }
+    .textbox{
+font-family: 'Gugi';
+font-style: normal;
+text-align: center;
+    }
+    #친구요청보내기{
+box-sizing: border-box;
+
+position: absolute;
+width: calc((800/1920)*100vh);
+height: calc((100/1920)*100vh);
+left: calc((140/1920)*100vh);
+top: calc((369/1920)*100vh);
+
+background: #EFE7DE;
+border: 0.05vh solid #212121;
+box-shadow: 0vh 0.2vh 0.2vh rgba(0, 0, 0, 0.25);
+border-radius: calc((20/1920)*100vh);
+    }
+    input::placeholder {
+position: absolute;
+left: 1.5vh;
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((50/1920)*100vh);
+/* 상자 높이와 동일 */
+color: #BEC0C2;
+    }
+    #검색버튼{
+position: absolute;
+width: calc((60/1920)*100vh);
+height: auto;
+left: calc((849/1920)*100vh);
+top: calc((389/1920)*100vh);
+    }
+    #받은친구요청{
+position: absolute;
+width: calc((278/1920)*100vh);
+height: calc((53/1920)*100vh);
+left: calc((85/1920)*100vh);
+top: calc((601/1920)*100vh);
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+font-size: calc((32/1920)*100vh);
+line-height: 3vh;
+background-color: #A05A2C;
+    }
+    #받은친구요청box{
+position: absolute;
+width: calc((910/1920)*100vh);
+height: calc((394/1920)*100vh);
+left: calc((85/1920)*100vh);
+top: calc((700/1920)*100vh);
+border-radius: calc((20/1920)*100vh);
+background-color: #F4F1EC;
+overflow-y: scroll;
+    }
+    #profile1{
+position: absolute;
+width: calc((100/1920)*100vh);
+height: auto;
+left: calc((38/1920)*100vh);
+top: calc((34/1920)*100vh);
+    }
+    #내친구목록{
+position: absolute;
+width: calc((278/1920)*100vh);
+height: calc((53/1920)*100vh);
+left: calc((85/1920)*100vh);
+top: calc((1181/1920)*100vh);
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+font-size: calc((32/1920)*100vh);
+line-height: 3vh;
+background-color: #A05A2C;
+    }
+    #내친구목록box{
+position: absolute;
+width: calc((910/1920)*100vh);
+height: calc((394/1920)*100vh);
+left: calc((85/1920)*100vh);
+top: calc((1280/1920)*100vh);
+border-radius: calc((20/1920)*100vh);
+background-color: #F4F1EC;
+overflow-y: scroll;
+    }
+    #돌아가기{
+position: absolute;
+width: auto;
+height: 6.5vh;
+left: calc((885/1920)*100vh);
+top: calc((1715/1920)*100vh);
+    }
+    .Modal{
+      display: none;
+      position: absolute;
+      z-index: 999; /* 다른 요소보다 앞쪽에 표시 숫자가 클수록 앞에 나옴*/
+      left:0;
+      top:0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    #foxmodal-box{
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%); /* 가운데 보정 */
+width: calc(100vh * 9 / 16);
+height: 60vh;
+background-color: #E7D7C1;
+    }
+    #background0{
+position: absolute;
+width: calc((1080/1920)*100vh);
+height: auto;
+z-index: 101;
+    }
+    #line{
+position: absolute;
+width: calc((1070/1920)*100vh);
+height: 0vh;
+left: 0vh;
+top: calc((714/1920)*100vh);
+border: 0.14vh solid #D1916C;
+
+    }
+    #여우집모달닫기{
+position: absolute;
+width: calc((75/1920)*100vh);
+height: auto;
+left:calc((77/1920)*100vh);
+top:calc((92/1920)*100vh);
+z-index: 102;
+    }
+    #box1{
+width: 100%;
+height: calc((722/1920)*100vh);
+position: absolute;
+bottom: 0px;
+background-color: #D1916C;
+    }
+    #box2{
+position: absolute;
+width: calc((976/1920)*100vh);
+height: calc((625/1920)*100vh);
+left: calc((52/1920)*100vh);
+top: calc((50/1920)*100vh);
+
+background-color: #FFFFFF;
+border-radius: calc((42/1920)*100vh);
+    }
+    #벽지{
+position: absolute;
+top: 0vh;
+left: 0vh;
+width: calc((1080/1920)*100vh);
+height: calc((713/1920)*100vh);
+/*background-image: url(./벽지0T.svg);*/
+z-index: 0;
+    }
+    #카펫{
+position: absolute;
+top: calc((903/1920)*100vh);
+left: calc((224/1920)*100vh);
+width: calc((631/1920)*100vh);
+height: calc((114/1920)*100vh);
+    }
+    #friendName{
+position: absolute;
+width: calc((308/1920)*100vh);
+height: calc((146/1920)*100vh);
+left: calc((390/1920)*100vh);
+top: calc((81/1920)*100vh);
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((70/1920)*100vh);
+display: flex;
+justify-content: center; /* 가로 가운데 정렬 */
+align-items: center;     /* 세로 가운데 정렬 */
+color: #FFFFFF;
+z-index: 1000;
+    }
+    #fox{
+position: absolute;
+top: calc((550/1920)*100vh);
+left: calc((369/1920)*100vh);
+width: calc((368/1920)*100vh);
+height: calc((439/1920)*100vh);
+z-index: 101;
+    }
+  </style>
+</head>
+<body>
+  <div id="background">
+    <div id="친구관리" class="textbox">친구 관리</div>
+    <input id="친구요청보내기" type="text" placeholder="친구 요청 보내기">
+    <img src="./검색버튼.svg" id="검색버튼">
+    <div id="받은친구요청" class="textbox">받은 친구 요청</div>
+    <div id="받은친구요청box">
+      <img src="./profile.svg" id="profile1">
+    </div>
+    <div id="내친구목록" class="textbox">내 친구 목록</div>
+    <div id="내친구목록box"></div>
+    <img src="./button.svg" id="돌아가기">
+  </div>
+  <!--여우집 모달 창-->
+        <div id="foxhouse" class="Modal">
+            <div id="foxmodal-box">
+                <img src="foxhousebackground1.svg" id="background0">
+                <img src="fox.svg" id="fox">
+                <div id="line"></div>
+                <div id="friendName"></div>
+                <img src="foxhousebutton.svg" id="여우집모달닫기" class="button">
+                <img id="벽지" data-itemName="undefined">
+                <img src="카펫T.svg" id="카펫" data-itemName="undefined">
+                <img id="가구11" data-itemName="undefined">
+                <img id="가구12" data-itemName="undefined">
+                <img id="가구13" data-itemName="undefined">
+                <img id="가구14" data-itemName="undefined">
+                <img id="가구21" data-itemName="undefined">
+                <img id="가구22" data-itemName="undefined">
+                <img id="가구23" data-itemName="undefined">
+                <img id="가구24" data-itemName="undefined">
+                <img id="악세사리1" data-itemName="undefined">
+                <img id="악세사리2" data-itemName="undefined">
+                <img id="악세사리3" data-itemName="undefined">
+                <img id="악세사리4" data-itemName="undefined">
+            </div>
+        </div>
+  <script>
+    const BACKEND_URL="http://localhost:3000"
+//button효과 설정
+const setButton=function(btn,brightness=1.2,scale=0.95){
+    
+    //초기설정
+    Object.assign(btn.style, {
+      cursor: "pointer",
+      transition: "all 0.2s ease"
+    });
+
+      //hover효과
+    btn.addEventListener("mouseenter",function(){
+        btn.style.filter=`brightness(${brightness})`;
+    });
+    btn.addEventListener("mouseleave",function(){
+        btn.style.filter="brightness(1)";
+    });
+
+    //active효과
+    btn.addEventListener("mousedown",function(){
+        btn.style.transform= `scale(${scale})`;
+    });
+    btn.addEventListener("mouseup",function(){
+        btn.style.transform= "scale(1)";
+    });
+}
+setButton(document.getElementById("돌아가기"),1.2,0.9);
+document.getElementById("돌아가기").addEventListener('click',() =>{
+  window.location.href = "./foxhome.html";
+});
+setButton(document.getElementById("검색버튼"),1.2,0.9);
+    // 친구 요청 보내기
+    async function sendFriendRequest() {
+  const friendName = document.getElementById("친구요청보내기").value;
+  if (!friendName) {
+    return alert("친구 이름을 입력하세요.");
+  }
+
+  try {
+    const res = await fetch(BACKEND_URL+"/friends/request", {
+      method: "POST",
+      credentials:"include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ friendName })
+    });
+
+    // 서버 응답 상태 확인
+    if (!res.ok) {
+      const errorText = await res.text(); // 서버에서 JSON이 아닐 수도 있음
+      throw new Error(errorText || "서버 요청 실패");
+    }
+
+    const data = await res.json();
+    alert(data.message || "친구 요청이 성공적으로 전송되었습니다.");
+  } catch (err) {
+    console.error("친구 요청 중 오류:", err);
+    alert("친구 요청 중 오류가 발생했습니다: " + err.message);
+  }
+}
+
+    // 받은 요청 가져오기
+    async function loadFriendRequests() {
+      const res = await fetch(BACKEND_URL+"/friends/requests",{credentials:"include"});
+      const data = await res.json();
+
+      const requestsDiv = document.getElementById("받은친구요청box");
+      requestsDiv.innerHTML = "";
+
+      data.requests.forEach(req => {
+        const div = document.createElement("div");
+        div.className = "request-item";
+        div.innerHTML = `
+          <img src="./profile.svg" style="
+          position: relative;
+          top: 1.5vh;
+          left: 0.5vh;
+          width: calc((100/1920)*100vh);
+          height: calc((100/1920)*100vh);
+          ">
+          ${req.username}
+          <button onclick="acceptRequest('${req.username}')" style="
+width: calc((130/1920)*100vh);
+height: calc((91/1920)*100vh);
+background: rgba(52, 180, 30, 0.56);
+border: 0.05vh solid #212121;
+border-radius: 1vh;
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((40/1920)*100vh);
+line-height: calc((40/1920)*100vh);
+color:black;
+">수락</button>
+          <button onclick="rejectRequest('${req.username}')" style="
+width: calc((130/1920)*100vh);
+height: calc((91/1920)*100vh);
+background: rgba(255,27,27,0.56);
+border: 0.05vh solid #212121;
+border-radius: 1vh;
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((40/1920)*100vh);
+line-height: calc((40/1920)*100vh);
+color:black;
+">거절</button>
+        `;
+        requestsDiv.appendChild(div);
+      });
+    }
+
+    // 요청 수락
+    async function acceptRequest(friendName) {
+      const res = await fetch(BACKEND_URL+"/friends/accept", {
+        method: "POST",
+        credentials:"include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ friendName })
+      });
+      const data = await res.json();
+      alert(data.message);
+      loadFriendRequests();
+      loadFriends();
+    }
+
+    // 요청 거절
+    async function rejectRequest(friendName) {
+      const res = await fetch(BACKEND_URL+"/friends/reject", {
+        method: "POST",
+        credentials:"include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ friendName })
+      });
+      const data = await res.json();
+      alert(data.message);
+      loadFriendRequests();
+    }
+
+    // 내 친구 목록 불러오기
+    async function loadFriends() {
+      const res = await fetch(BACKEND_URL+"/friends/list",{credentials:"include"});
+      const data = await res.json();
+
+      const friendsUl = document.getElementById("내친구목록box");
+      friendsUl.innerHTML = "";
+
+      data.friends.forEach(friend => {
+        const div = document.createElement("div");
+        div.className = "request-item";
+        div.innerHTML = `
+          <img src="./profile.svg" style="
+          position: relative;
+          top: 1.5vh;
+          left: 0.5vh;
+          width: calc((100/1920)*100vh);
+          height: calc((100/1920)*100vh);
+          ">
+          ${friend}
+          <img src="./gift.svg" onclick="giftFriends('${friend}')" style="
+          position: relative;
+          top: 1.5vh;
+          left: 0.5vh;
+          width: calc((100/1920)*100vh);
+          height: calc((100/1920)*100vh);
+          ">
+          <img src="./visit.svg" onclick="visitFriends('${friend}')" style="
+          position: relative;
+          top: 1.5vh;
+          left: 0.5vh;
+          width: calc((100/1920)*100vh);
+          height: calc((100/1920)*100vh);
+          ">
+          <img src="./delete.svg" onclick="deleteFriend('${friend}')" style="
+          position: relative;
+          top: 1.5vh;
+          left: 0.5vh;
+          width: calc((100/1920)*100vh);
+          height: calc((100/1920)*100vh);
+          ">
+        `;
+        friendsUl.appendChild(div);
+      });
+    }
+    //선물하기 함수
+    async function giftFriends(friendName) {
+      const res = await fetch(BACKEND_URL+"/friends/gift", {
+        method: "POST",
+        credentials:"include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ friendName })
+      });
+      const data = await res.json();
+      alert(data.message);
+    }
+    //foxhomeData로드 foxhome.html의 895~918
+  const 가구1Data = {
+    가구10:['11.4vh','11.4vh','6.4vh','10.9vh'],
+    가구11:['9.6vh','9.6vh','8.2vh','12.5vh'],
+    가구12:['8.3vh','6.4vh','32.3vh','17.8vh'],
+    가구13:['5.1vh','6.5vh','32.3vh','17.8vh'],
+    가구14:['17.2vh','15.9vh','37.6vh','26.2vh'],
+    가구15:['5.5vh','14.3vh','25.6vh','10.1vh']
+};
+const 가구2Data = {
+    가구20:['4vh','6.8vh','40.5vh','20.1vh'],
+    가구21:['4.6vh','6.4vh','41vh','20.5vh'],
+    가구22:['5.5vh','7.9vh','3vh','48vh'],
+    가구23:['5.1vh','7.2vh','3vh','48vh'],
+    가구24:['21.1vh','12.2vh','0vh','30.4vh'],
+    가구25:['3.7vh','9.5vh','46vh','17.18vh']
+};
+const 악세사리Data ={
+    악세사리0:['4.3vh','3.2vh','21vh','33.6vh','-62.32deg'],
+    악세사리1:['2.3vh','2.3vh','25vh','29vh','0deg'],
+    악세사리2:['3.4vh','1.8vh','21.6vh','35.3vh','0deg'],
+    악세사리3:['10.1vh','8.2vh','20.1vh','33.3vh','-4.84deg'],
+    악세사리4:['9.8vh','9vh','19vh','33.3vh','0deg'],
+    악세사리5:['5.2vh','2.2vh','21.5vh','28.8vh','0deg']
+}
+    //놀러가기 함수
+    async function visitFriends(friendName) {
+      try {
+    const response = await fetch(BACKEND_URL+"/friends/foxhomeData", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // 세션 쿠키 유지
+      body: JSON.stringify({ friendName })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "서버 오류");
+    }
+
+    const data = await response.json();
+    alert(data.username+"의 집을 방문합니다!");
+    console.log(data.foxhomeData);   // foxhomeData
+    //foxhomeData로드 foxhome.html의 941~1083
+        if (data.foxhomeData["벽지"] !== "undefined"){
+        document.getElementById("벽지").src = `./${data.foxhomeData["벽지"]}T.svg`;
+        document.getElementById("벽지").dataset.itemName = data.foxhomeData["벽지"];
+        }
+        //console.log(document.getElementById("벽지").dataset.itemName);
+        document.getElementById("카펫").src = `./${data.foxhomeData["카펫"]}T.svg`;
+        document.getElementById("카펫").dataset.itemName = data.foxhomeData["카펫"];
+        //console.log(document.getElementById("카펫").dataset.itemName);
+        if(data.foxhomeData["가구1"].split(",")[0] !== 'undefined'){
+        document.getElementById("가구11").src = `./${data.foxhomeData["가구1"].split(",")[0]}T.svg`;
+        document.getElementById("가구11").dataset.itemName = data.foxhomeData["가구1"].split(",")[0];
+        document.getElementById("가구11").style.cssText = `
+        position: absolute;
+        width: ${가구1Data[data.foxhomeData["가구1"].split(",")[0]][0]};
+        height: ${가구1Data[data.foxhomeData["가구1"].split(",")[0]][1]};
+        left: ${가구1Data[data.foxhomeData["가구1"].split(",")[0]][2]};
+        top: ${가구1Data[data.foxhomeData["가구1"].split(",")[0]][3]};
+        z-index:100;
+        `;};
+        if (data.foxhomeData["가구1"].split(",")[1] !== 'undefined'){
+        document.getElementById("가구12").src = `./${data.foxhomeData["가구1"].split(",")[1]}T.svg`;
+        document.getElementById("가구12").dataset.itemName = data.foxhomeData["가구1"].split(",")[1];
+        document.getElementById("가구12").style.cssText = `
+        position: absolute;
+        width: ${가구1Data[data.foxhomeData["가구1"].split(",")[1]][0]};
+        height: ${가구1Data[data.foxhomeData["가구1"].split(",")[1]][1]};
+        left: ${가구1Data[data.foxhomeData["가구1"].split(",")[1]][2]};
+        top: ${가구1Data[data.foxhomeData["가구1"].split(",")[1]][3]};
+        z-index:100;
+        `;};
+        if (data.foxhomeData["가구1"].split(",")[2] !== 'undefined'){
+        document.getElementById("가구13").src = `./${data.foxhomeData["가구1"].split(",")[2]}T.svg`;
+        document.getElementById("가구13").dataset.itemName = data.foxhomeData["가구1"].split(",")[2];
+        document.getElementById("가구13").style.cssText = `
+        position: absolute;
+        width: ${가구1Data["가구14"][0]};
+        height: ${가구1Data["가구14"][1]};
+        left: ${가구1Data["가구14"][2]};
+        top: ${가구1Data["가구14"][3]};
+        z-index:99;
+        `;};
+        if (data.foxhomeData["가구1"].split(",")[3] == '가구15'){
+        document.getElementById("가구14").src = `./${"가구15"}T.svg`;
+        document.getElementById("가구14").dataset.itemName = "가구15";
+        document.getElementById("가구14").style.cssText = `
+        position: absolute;
+        width: ${가구1Data["가구15"][0]};
+        height: ${가구1Data["가구15"][1]};
+        left: ${가구1Data["가구15"][2]};
+        top: ${가구1Data["가구15"][3]};
+        z-index:100;
+        `;};
+        if(data.foxhomeData["가구2"].split(",")[0] !== 'undefined'){
+        document.getElementById("가구21").src = `./${data.foxhomeData["가구2"].split(",")[0]}T.svg`;
+        document.getElementById("가구21").dataset.itemName = data.foxhomeData["가구2"].split(",")[0];
+        document.getElementById("가구21").style.cssText = `
+        position: absolute;
+        width: ${가구2Data[data.foxhomeData["가구2"].split(",")[0]][0]};
+        height: ${가구2Data[data.foxhomeData["가구2"].split(",")[0]][1]};
+        left: ${가구2Data[data.foxhomeData["가구2"].split(",")[0]][2]};
+        top: ${가구2Data[data.foxhomeData["가구2"].split(",")[0]][3]};
+        z-index:100;
+        `;};
+        if (data.foxhomeData["가구2"].split(",")[1] !== 'undefined'){
+        document.getElementById("가구22").src = `./${data.foxhomeData["가구2"].split(",")[1]}T.svg`;
+        document.getElementById("가구22").dataset.itemName = data.foxhomeData["가구2"].split(",")[1];
+        document.getElementById("가구22").style.cssText = `
+        position: absolute;
+        width: ${가구2Data[data.foxhomeData["가구2"].split(",")[1]][0]};
+        height: ${가구2Data[data.foxhomeData["가구2"].split(",")[1]][1]};
+        left: ${가구2Data[data.foxhomeData["가구2"].split(",")[1]][2]};
+        top: ${가구2Data[data.foxhomeData["가구2"].split(",")[1]][3]};
+        z-index:100;
+        `;};
+        if (data.foxhomeData["가구2"].split(",")[2] !== 'undefined'){
+        document.getElementById("가구23").src = `./${data.foxhomeData["가구2"].split(",")[2]}T.svg`;
+        document.getElementById("가구23").dataset.itemName = data.foxhomeData["가구2"].split(",")[2];
+        document.getElementById("가구23").style.cssText = `
+        position: absolute;
+        width: ${가구2Data[data.foxhomeData["가구2"].split(",")[2]][0]};
+        height: ${가구2Data[data.foxhomeData["가구2"].split(",")[2]][1]};
+        left: ${가구2Data[data.foxhomeData["가구2"].split(",")[2]][2]};
+        top: ${가구2Data[data.foxhomeData["가구2"].split(",")[2]][3]};
+        z-index:100;
+        `;};
+        if (data.foxhomeData["가구2"].split(",")[3] == '가구25'){
+        document.getElementById("가구24").src = `./${"가구25"}T.svg`;
+        document.getElementById("가구24").dataset.itemName = "가구25";
+        document.getElementById("가구24").style.cssText = `
+        position: absolute;
+        width: ${가구2Data["가구25"][0]};
+        height: ${가구2Data["가구25"][1]};
+        left: ${가구2Data["가구25"][2]};
+        top: ${가구2Data["가구25"][3]};
+        z-index:100;
+        `;};
+        if(data.foxhomeData["악세사리"].split(",")[0] !== 'undefined'){
+        document.getElementById("악세사리1").src = `./${data.foxhomeData["악세사리"].split(",")[0]}T.svg`;
+        document.getElementById("악세사리1").dataset.itemName = data.foxhomeData["악세사리"].split(",")[0];
+        document.getElementById("악세사리1").style.cssText = `
+        position: absolute;
+        width: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[0]][0]};
+        height: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[0]][1]};
+        left: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[0]][2]};
+        top: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[0]][3]};
+        transform:rotate(${악세사리Data[data.foxhomeData["악세사리"].split(",")[0]][4]});
+        z-index:102;
+        `;};
+        if (data.foxhomeData["악세사리"].split(",")[1] !== 'undefined'){
+        document.getElementById("악세사리2").src = `./${data.foxhomeData["악세사리"].split(",")[1]}T.svg`;
+        document.getElementById("악세사리2").dataset.itemName = data.foxhomeData["악세사리"].split(",")[1];
+        document.getElementById("악세사리2").style.cssText = `
+        position: absolute;
+        width: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[1]][0]};
+        height: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[1]][1]};
+        left: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[1]][2]};
+        top: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[1]][3]};
+        z-index:102;
+        `;};
+        if (data.foxhomeData["악세사리"].split(",")[2] !== 'undefined'){
+        document.getElementById("악세사리3").src = `./${data.foxhomeData["악세사리"].split(",")[2]}T.svg`;
+        document.getElementById("악세사리3").dataset.itemName = data.foxhomeData["악세사리"].split(",")[2];
+        document.getElementById("악세사리3").style.cssText = `
+        position: absolute;
+        width: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[2]][0]};
+        height: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[2]][1]};
+        left: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[2]][2]};
+        top: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[2]][3]};
+        transform:rotate(${악세사리Data[data.foxhomeData["악세사리"].split(",")[2]][4]});
+        z-index:102;
+        `;};
+        if (data.foxhomeData["악세사리"].split(",")[3] !== 'undefined'){
+        document.getElementById("악세사리4").src = `./${data.foxhomeData["악세사리"].split(",")[3]}T.svg`;
+        document.getElementById("악세사리4").dataset.itemName = data.foxhomeData["악세사리"].split(",")[3];
+        document.getElementById("악세사리4").style.cssText = `
+        position: absolute;
+        width: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[3]][0]};
+        height: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[3]][1]};
+        left: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[3]][2]};
+        top: ${악세사리Data[data.foxhomeData["악세사리"].split(",")[3]][3]};
+        z-index:102;
+        `;};
+  } catch (err) {
+    console.error("친구 데이터 가져오기 실패:", err.message);
+    console.error(err);
+  }
+const foxhousemodal = document.getElementById('foxhouse');
+const closeBtn1 = document.querySelector('#여우집모달닫기');
+document.getElementById('friendName').innerText=friendName;
+foxhousemodal.style.display = 'block';
+closeBtn1.onclick = async function() {
+  foxhousemodal.style.display = "none";
+}
+    }
+    //친구삭제 함수
+    async function deleteFriend(friendName) {
+      const res = await fetch(BACKEND_URL+"/friends/delete", {
+        method: "DELETE",
+        credentials:"include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ friendName })
+      });
+      const data = await res.json();
+      alert(data.message);
+      loadFriends();
+    }
+
+    // 페이지 로드 시 실행
+    loadFriendRequests();
+    loadFriends();
+    document.getElementById("검색버튼").addEventListener("click",()=>{
+      sendFriendRequest();
+    });
+  </script>
+</body>
+</html>

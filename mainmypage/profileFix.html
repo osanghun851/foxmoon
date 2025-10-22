@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>회원정보 입력</title>
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+
+  :root{
+    --labelW: 14vh;   /* 라벨 영역 고정 너비 */
+    --gapX: 1.2vh;    /* 입력칸 간격 (모든 행 동일) */
+  }
+
+  /* 바깥: 흰색 / 안쪽: 9:16 캔버스 */
+  html,body{
+    margin:0; padding:0;
+    height:100vh; width:100vw;
+    display:flex; justify-content:center; align-items:center;
+    background:#fff;
+    font-family:'Gugi', sans-serif;
+  }
+  .canvas{
+    position:relative;
+    width:100%;
+    max-width:calc(100vh * 9 / 16); /* 9:16 유지 */
+    height:100vh;
+    background: radial-gradient(120vh 120vh at 30% 0%, #D1916C, #A05A2C 70%);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    align-items:center;
+  }
+
+  /* 상단 타이틀 */
+  .title{
+    text-align:center; color:#fff; margin-top:4vh;
+    font-size:3.8vh; letter-spacing:.06em;
+  }
+  .subtitle{
+    text-align:center; color:#e7eef8cc; margin-top:.8vh; font-size:1.6vh;
+  }
+
+  /* 안쪽 카드 → 세로 중앙 배치 */
+  .card{
+    margin-top:auto; margin-bottom:auto; /* 화면 세로 중앙 */
+    width:calc(100% - 6vh);
+    background:#fff; border-radius:4.2vh;
+    padding:4vh 4vh 4vh 3.2vh;
+    box-shadow:0 1vh 2vh rgba(0,0,0,.08) inset;
+    display:flex; flex-direction:column;
+    height:75vh;
+  }
+
+  /* 한 줄 레이아웃 기본 */
+  .row{
+    display:grid;
+    gap:var(--gapX); align-items:center;
+    margin-bottom:2.2vh;
+  }
+
+  /* 라벨 */
+  .label-col{ width:var(--labelW); }
+  .label-pill{
+    background:#D1916C; color:#fff; text-align:center;
+    border-radius:1.4vh; min-height:4.2vh;
+    font-size:1.9vh; padding:.7vh .9vh;
+    display:flex; align-items:center; justify-content:center;
+    width:100%;
+  }
+
+  /* 입력/선택 공통 */
+  input[type="text"], input[type="password"], select{
+    width:100%; height:4.6vh;
+    font-size:2.0vh;
+    color:#222; padding:0 1.4vh;
+    border:.26vh solid #9fa6b2; background:#fff; outline:none;
+    border-radius:0;
+  }
+
+  /* select 화살표 */
+  select{
+    -webkit-appearance:none; appearance:none;
+    padding-right:5vh;
+    background-image: linear-gradient(45deg, transparent 50%, #333 50%),
+                      linear-gradient(135deg, #333 50%, transparent 50%),
+                      linear-gradient(to right, transparent, transparent);
+    background-position: calc(100% - 2.3vh) 1.7vh, calc(100% - 1.5vh) 1.7vh, 0 0;
+    background-size: .9vh .9vh, .9vh .9vh, 100% 100%;
+    background-repeat:no-repeat;
+  }
+
+  .at{ font-size:2.2vh; color:#888; text-align:center; }
+
+  /* 버튼 */
+  .btn, .btn-join{ font-family:'Gugi', sans-serif; }
+  .btn{
+    height:4.6vh; padding:0 1.6vh;
+    font-size:1.6vh;
+    border:.26vh solid #222; background:#fff; color:#222;
+    border-radius:0; cursor:pointer; white-space:nowrap;
+  }
+  .submit-wrap{ display:flex; justify-content:center; margin-top:3vh; }
+  #취소{ background-color: rgba(242, 78, 78, 0.627); color: #222;}
+  .btn-join{
+    width:80%; height:5.5vh;
+    font-size:2.4vh; color:#222; background:#91ff6fb5; padding: 1vh;
+    border:none; border-radius:2.2vh; cursor:pointer; box-shadow:0 .7vh 0 #4a4a4a;
+  }
+  .btn-join:active{ transform:translateY(.7vh); box-shadow:none; }
+
+  /* ===== 그리드 ===== */
+  .row.name-row{
+    grid-template-columns: var(--labelW) 1fr;
+  }
+  .row.single{
+    grid-template-columns: var(--labelW) 1fr;
+  }
+  .row.addr-row{
+    grid-template-columns: var(--labelW) 1fr 1fr;
+  }
+  .row.email-row{
+    grid-template-columns: var(--labelW) 2fr auto 2fr; /* 균등 간격 */
+  }
+  .row.profile-row{
+    grid-template-columns: var(--labelW) 1fr 1fr 1fr;
+    justify-items: center;
+  }
+  .profileImg{
+    width: calc((100/1920)*100vh);
+    height: auto;
+  }
+  .row.profile-row:nth-child(1) {
+	grid-column: 1 / 4;
+    grid-row: 1 / 8;
+}
+  #userProfile{
+    width: calc((200/1920)*100vh);
+    height: auto;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="title">회원정보 수정</div>
+    <div class="subtitle">수정 후 저장버튼을 눌러주세요.</div>
+
+    <form class="card" id="joinForm">
+      <!-- 이름 -->
+      <div class="row name-row">
+        <div class="label-pill label-col">이름</div>
+        <input type="text" id="name" placeholder="이름" >
+      </div>
+
+      <!-- 생년월일 -->
+      <div class="row single">
+        <div class="label-pill label-col">생년월일</div>
+        <input type="text" id="birth" placeholder="YYYYMMDD"
+               maxlength="8" inputmode="numeric" pattern="[0-9]{8}"
+               title="YYYYMMDD 형식(예: 20040507)으로 입력하세요." >
+      </div>
+
+      <!-- 주소지 -->
+      <div class="row addr-row">
+        <div class="label-pill label-col">주소지</div>
+        <select id="sido" required>
+          <option value="">시/도 선택</option>
+          <option>서울특별시</option><option>부산광역시</option>
+          <option>대구광역시</option><option>인천광역시</option>
+          <option>광주광역시</option><option>대전광역시</option>
+          <option>울산광역시</option><option>세종특별자치시</option>
+          <option>경기도</option><option>강원특별자치도</option>
+          <option>충청북도</option><option>충청남도</option>
+          <option>전라북도</option><option>전라남도</option>
+          <option>경상북도</option><option>경상남도</option>
+          <option>제주특별자치도</option>
+        </select>
+        <select id="sigungu" required>
+          <option value="">구/군 선택</option>
+        </select>
+      </div>
+
+      <!-- 이메일 -->
+      <div class="row email-row">
+        <div class="label-pill label-col">이메일</div>
+        <input type="text" id="emailId" placeholder="example" autocomplete="off">
+        <div class="at">@</div>
+        <select id="emailDomain" required>
+          <option value="">도메인 선택</option>
+          <option>gmail.com</option>
+          <option>naver.com</option>
+          <option>daum.net</option>
+          <option>hanmail.net</option>
+          <option>kakao.com</option>
+          <option>outlook.com</option>
+          <option>icloud.com</option>
+          <option>yahoo.com</option>
+          <option>khu.ac.kr</option>
+        </select>
+      </div>
+
+      <!-- 프로필-->
+      <div class="row profile-row">
+        <img id="userProfile" src="profile.svg" data-name="profile.svg">
+        <img id="profile1" class="profileImg" src="profile1.svg" data-seleted="F" data-name="profile1.svg">
+        <img id="profile2" class="profileImg" src="profile2.svg" data-seleted="F" data-name="profile2.svg">
+        <img id="profile3" class="profileImg" src="profile3.svg" data-seleted="F" data-name="profile3.svg">
+        <br>
+        <img id="profile4" class="profileImg" src="profile4.svg" data-seleted="F" data-name="profile4.svg">
+        <img id="profile5" class="profileImg" src="profile5.svg" data-seleted="F" data-name="profile5.svg">
+        <img id="profile6" class="profileImg" src="profile6.svg" data-seleted="F" data-name="profile6.svg">
+      </div>
+      <!-- 가입 버튼 -->
+      <div class="submit-wrap">
+        <button class="btn-join" id="취소" type="button">취소</button>
+        <button type="submit" class="btn-join">저장</button>
+      </div>
+    </form>
+  </div>
+
+<script>
+  const BACKEND_URL="http://localhost:3000"
+  /* ===== 시/군/구 데이터 ===== */
+  const REGION_MAP = {
+    '서울특별시': ['강남구','강동구','강북구','강서구','관악구','광진구','구로구','금천구','노원구','도봉구','동대문구','동작구','마포구','서대문구','서초구','성동구','성북구','송파구','양천구','영등포구','용산구','은평구','종로구','중구','중랑구'],
+    '부산광역시': ['해운대구','수영구','연제구','동래구','부산진구','남구','금정구','사하구','사상구','북구','영도구','중구','서구','강서구','기장군'],
+    '대구광역시': ['수성구','달서구','동구','북구','중구','서구','남구','달성군','군위군'],
+    '인천광역시': ['연수구','남동구','부평구','미추홀구','계양구','서구','중구','동구','강화군','옹진군'],
+    '광주광역시': ['서구','북구','동구','남구','광산구'],
+    '대전광역시': ['서구','유성구','중구','동구','대덕구'],
+    '울산광역시': ['남구','중구','동구','북구','울주군'],
+    '세종특별자치시': ['세종시'],
+    '경기도': ['수원시','성남시','용인시','안양시','부천시','광명시','과천시','평택시','의정부시','구리시','남양주시','하남시','고양시','파주시','김포시','의왕시','시흥시','군포시','안산시','오산시','화성시','광주시','양주시','포천시','이천시','여주시','양평군','가평군','연천군'],
+    '강원특별자치도': ['춘천시','원주시','강릉시','동해시','속초시','삼척시','홍천군','횡성군','영월군','평창군','정선군','철원군','화천군','양구군','인제군','고성군','양양군'],
+    '충청북도': ['청주시','충주시','제천시','보은군','옥천군','영동군','증평군','진천군','괴산군','음성군','단양군'],
+    '충청남도': ['천안시','공주시','보령시','아산시','서산시','논산시','계룡시','당진시','금산군','부여군','서천군','청양군','홍성군','예산군','태안군'],
+    '전라북도': ['전주시','군산시','익산시','정읍시','남원시','김제시','완주군','진안군','무주군','장수군','임실군','순창군','고창군','부안군'],
+    '전라남도': ['목포시','여수시','순천시','나주시','광양시','담양군','곡성군','구례군','고흥군','보성군','화순군','장흥군','강진군','해남군','영암군','무안군','함평군','영광군','장성군','완도군','진도군','신안군'],
+    '경상북도': ['포항시','경주시','김천시','안동시','구미시','영주시','영천시','상주시','문경시','경산시','군위군','의성군','청송군','영양군','영덕군','청도군','고령군','성주군','칠곡군','예천군','봉화군','울진군','울릉군'],
+    '경상남도': ['창원시','김해시','진주시','양산시','거제시','통영시','사천시','밀양시','의령군','함안군','창녕군','고성군','남해군','하동군','산청군','함양군','거창군','합천군'],
+    '제주특별자치도': ['제주시','서귀포시']
+  };
+
+async function myPageLoad() {
+    try {
+            const res = await fetch(BACKEND_URL+"/api/user/mypage-load",{credentials:"include"});
+            const data = await res.json();
+            if(data.error) {
+                alert(data.error);
+                return;
+            }
+            document.getElementById("name").placeholder = data.user.Rname;
+            document.getElementById("birth").placeholder = data.user.birth;
+            document.getElementById('sido').innerHTML = `<option value="${data.user.address.split("/")[0]}">${data.user.address.split("/")[0]}</option>
+          <option>서울특별시</option><option>부산광역시</option>
+          <option>대구광역시</option><option>인천광역시</option>
+          <option>광주광역시</option><option>대전광역시</option>
+          <option>울산광역시</option><option>세종특별자치시</option>
+          <option>경기도</option><option>강원특별자치도</option>
+          <option>충청북도</option><option>충청남도</option>
+          <option>전라북도</option><option>전라남도</option>
+          <option>경상북도</option><option>경상남도</option>
+          <option>제주특별자치도</option>`
+            document.getElementById('sigungu').innerHTML = `<option value="${data.user.address.split("/")[1]}">${data.user.address.split("/")[1]}</option>` +
+      REGION_MAP[data.user.address.split("/")[0]].map(g => `<option>${g}</option>`).join('');
+            document.getElementById("emailId").placeholder = data.user.email.split("@")[0];
+            document.getElementById("emailDomain").innerHTML = `<option value="${data.user.email.split("@")[1]}">${data.user.email.split("@")[1]}</option>
+          <option>gmail.com</option>
+          <option>naver.com</option>
+          <option>daum.net</option>
+          <option>hanmail.net</option>
+          <option>kakao.com</option>
+          <option>outlook.com</option>
+          <option>icloud.com</option>
+          <option>yahoo.com</option>
+          <option>khu.ac.kr</option>`;
+            document.getElementById("userProfile").src = `./${data.user.profile}`;
+            document.getElementById("userProfile").dataset.name = data.user.profile;
+            } catch(err) {
+            console.error(err);
+        }
+}
+myPageLoad();
+
+  const sido = document.getElementById('sido');
+  const sigungu = document.getElementById('sigungu');
+  sido.addEventListener('change', () => {
+    const list = REGION_MAP[sido.value] || [];
+    sigungu.innerHTML = '<option value="">구/군 선택</option>' +
+      list.map(g => `<option>${g}</option>`).join('');
+  });
+  let timer;
+  document.querySelectorAll(".profileImg").forEach((img) =>{
+    img.addEventListener("click", () => {
+        //img.style.filter="brightness(1.2)"
+        if(img.dataset.seleted=="T"){
+            document.getElementById("userProfile").src="./profile.svg";
+            document.getElementById("userProfile").dataset.name="profile.svg"
+            img.style.filter="brightness(1)";
+            img.dataset.seleted="F";
+        }else{
+            document.getElementById("userProfile").src=`./${img.dataset.name}`;
+            document.getElementById("userProfile").dataset.name=img.dataset.name
+            document.querySelectorAll(".profileImg").forEach((item)=>{
+                if(item.dataset.seleted=="T"){
+                    item.style.filter="brightness(1)";
+                    item.dataset.seleted="F";
+                }
+            });
+            img.style.filter="brightness(0.8)";
+            img.dataset.seleted="T";
+        }
+
+    });
+  });
+  document.getElementById('취소').addEventListener("click",async()=>{
+    window.location.href="./mypage.html";
+  })
+
+  /* 제출 검증 */
+  document.getElementById('joinForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    let Rname;
+    if(!document.getElementById("name").value.trim()){
+      Rname = document.getElementById("name").placeholder;
+    }
+    else{
+    Rname = document.getElementById("name").value.trim();
+    }
+   //console.log(Rname);
+
+    const sido = document.getElementById('sido').value;
+    const sigungu = document.getElementById('sigungu').value;
+    const address = sido+'/'+sigungu;
+   //console.log(address);
+
+    let birth;
+    if(!document.getElementById('birth').value.trim()){
+      birth = document.getElementById("birth").placeholder;
+    }
+    else{
+    if(!/^[0-9]{8}$/.test(document.getElementById('birth').value.trim())){
+      alert('생년월일은 숫자 8자리(YYYYMMDD)로 입력하세요.');
+      e.preventDefault(); return;
+    }
+    birth = document.getElementById("birth").value.trim();
+    }
+    //console.log(birth);
+
+    let emailId;
+    let emailDomain;
+    if (!document.getElementById('emailId').value.trim()){
+      emailId = document.getElementById('emailId').placeholder
+
+    }
+    else{
+    emailId = document.getElementById('emailId').value.trim();
+    }
+    emailDomain = document.getElementById('emailDomain').value;
+    const email = `${emailId}@${emailDomain}`;
+    //console.log(email);
+    //console.log(document.getElementById("userProfile").dataset.name);
+    const profile = document.getElementById("userProfile").dataset.name;
+    //const profile = document.getElementById("userProfile").src
+    try{
+      const response = await fetch(BACKEND_URL+"/api/user/fix", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Rname, birth, address, email, profile }),
+      credentials: "include" // 세션 쿠키 포함
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      // 서버에서 보낸 에러 메시지 보여주기
+      alert("회원정보 수정 실패: " + data.error);
+      return;
+    }
+    alert(data.message);
+    //console.log(data);
+    window.location.href = "./mypage.html";
+    e.preventDefault(); // 데모용
+    }catch (err){
+      console.log(err);
+      return;
+    }
+
+  });
+</script>
+</body>
+</html>

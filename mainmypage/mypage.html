@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <!--폰트 링크-->
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+    <style>
+#background{
+position: relative;
+height: 100vh; /* 화면 높이에 딱 맞춰서 */
+width: calc(100vh * 9 / 16); /* 9:16 비율에 맞춘 너비 */
+background-color: white;
+margin: 0 auto; /* 가운데 정렬 */
+}
+#회원정보{
+height: calc((137/1920)*100vh);
+width: calc((665/1920)*100vh);
+position: absolute;
+left: calc((208/1920)*100vh);
+top: calc((120/1920)*100vh);
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((80/1920)*100vh);
+display: flex;
+justify-content: center; /* 가로 가운데 정렬 */
+align-items: center;     /* 세로 가운데 정렬 */
+color: #FFFFFF;
+border-radius: calc((20/1920)*100vh);
+background: #A05A2C;
+box-shadow: 0px 0.5vh 0.2vh rgba(0, 0, 0, 0.25);
+}
+#outbox{
+position: absolute;
+background-color: #A05A2C;
+/* Rectangle 24 */
+width: calc((821/1920)*100vh);
+height: calc((1139/1920)*100vh);
+left: calc((130/1920)*100vh);
+top: calc((390/1920)*100vh);
+box-shadow: 0px 0.5vh 0.2vh rgba(0, 0, 0, 0.25);
+border-radius: calc((30/1920)*100vh);
+}
+#innerbox{
+position: absolute;
+width: calc((699/1920)*100vh);
+height: calc((943/1920)*100vh);
+left: calc((61/1920)*100vh);
+top: calc((98/1920)*100vh);
+
+background: #FFFFFF;
+border-radius: calc((30/1920)*100vh);
+}
+.ball{
+position: absolute;
+width: calc((38/1920)*100vh);
+height: calc((38/1920)*100vh);
+background: #F4E8C1;
+border-radius: 50%;
+}
+#ball1{
+left: calc((24/1920)*100vh);
+top: calc((24/1920)*100vh);
+}
+#ball2{
+right: calc((24/1920)*100vh);
+top: calc((24/1920)*100vh);
+}
+#ball3{
+left: calc((24/1920)*100vh);
+bottom: calc((24/1920)*100vh);
+}
+#ball4{
+right: calc((24/1920)*100vh);
+bottom: calc((24/1920)*100vh);
+}
+#button{
+position: absolute;
+width:auto;
+height: 6.5vh;
+left: calc((835/1920)*100vh);
+top: calc((1630/1920)*100vh);
+cursor: pointer;
+transition: all 0.2s ease;
+}
+.button:hover{
+filter: brightness(1.2);
+}
+.button:active{
+transform: scale(0.9);
+}
+.text{
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((40/1920)*100vh);
+line-height: calc((70/1920)*100vh);
+}
+#이름{
+text-align: center;
+position: absolute;
+width: calc((134/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((20/1920)*100vh);
+top: calc((20/1920)*100vh);
+
+background-color: #A05A2C;
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+}
+#회원이름{
+position: absolute;
+text-align: center;
+width: calc((550/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((150/1920)*100vh);
+top: calc((20/1920)*100vh);
+color: black;
+}
+#생년월일{
+text-align: center;
+position: absolute;
+width: calc((199/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((20/1920)*100vh);
+top: calc((106/1920)*100vh);
+background-color: #A05A2C;
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+z-index: 1000;
+}
+#회원생일{
+position: absolute;
+text-align: center;
+width: calc((550/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((150/1920)*100vh);
+top: calc((106/1920)*100vh);
+color: black;
+}
+#주소지{
+text-align: center;
+position: absolute;
+width: calc((170/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((20/1920)*100vh);
+top: calc((192/1920)*100vh);
+background-color: #A05A2C;
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+z-index: 1000;
+}
+#회원주소{
+position: absolute;
+text-align: center;
+width: calc((550/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((150/1920)*100vh);
+top: calc((192/1920)*100vh);
+color: black;
+}
+#이메일{
+text-align: center;
+position: absolute;
+width: calc((170/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((20/1920)*100vh);
+top: calc((278/1920)*100vh);
+background-color: #A05A2C;
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+z-index: 1000;
+}
+#회원이메일{
+position: absolute;
+text-align: center;
+width: calc((550/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((150/1920)*100vh);
+top: calc((278/1920)*100vh);
+color: black;
+}
+#아이디{
+text-align: center;
+position: absolute;
+width: calc((170/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((20/1920)*100vh);
+top: calc((364/1920)*100vh);
+background-color: #A05A2C;
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+z-index: 1000;
+}
+#회원아이디{
+position: absolute;
+text-align: center;
+width: calc((550/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((150/1920)*100vh);
+top: calc((364/1920)*100vh);
+color: black;
+}
+#열매{
+text-align: center;
+position: absolute;
+width: calc((134/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((20/1920)*100vh);
+top: calc((450/1920)*100vh);
+background-color: #A05A2C;
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+z-index: 1000;
+}
+#회원열매{
+position: absolute;
+text-align: center;
+width: calc((550/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((150/1920)*100vh);
+top: calc((450/1920)*100vh);
+color: black;
+}
+#프로필{
+text-align: center;
+position: absolute;
+width: calc((170/1920)*100vh);
+height: calc((66/1920)*100vh);
+left: calc((20/1920)*100vh);
+top: calc((570/1920)*100vh);
+background-color: #A05A2C;
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+z-index: 1000;
+}
+#프로필사진{
+position: absolute;
+width: calc((100/1920)*100vh);
+height: calc((100/1920)*100vh);
+left: calc((380/1920)*100vh);
+top: calc((550/1920)*100vh);
+}
+#회원정보수정{
+text-align: center;
+position: absolute;
+cursor: pointer;
+width: calc((300/1920)*100vh);
+height: calc((66/1920)*100vh);
+right: calc((20/1920)*100vh);
+bottom: calc((20/1920)*100vh);
+background-color: #A05A2C;
+border-radius: calc((20/1920)*100vh);
+color: #FFFFFF;
+z-index: 1000;
+user-select: none;
+}
+    </style>
+</head>
+<body>
+    <div id="background">
+        <div id="회원정보">회원 정보</div>
+        <div id="outbox">
+            <div class="ball" id="ball1"></div>
+            <div class="ball" id="ball2"></div>
+            <div class="ball" id="ball3"></div>
+            <div class="ball" id="ball4"></div>
+            <div id="innerbox">
+                <div id="이름" class="text">이름</div>
+                <div id="회원이름" class="text"></div>
+                <div id="생년월일" class="text">생년월일</div>
+                <div id="회원생일" class="text"></div>
+                <div id="주소지" class="text">주소지</div>
+                <div id="회원주소" class="text"></div>
+                <div id="이메일" class="text">이메일</div>
+                <div id="회원이메일" class="text"></div>
+                <div id="아이디" class="text">아이디</div>
+                <div id="회원아이디" class="text"></div>
+                <div id="열매" class="text">열매</div>
+                <div id="회원열매" class="text"></div>
+                <div id="프로필" class="text">프로필</div>
+                <img id="프로필사진" src="./profile.svg">
+                <div id="회원정보수정" class="text button" onclick="herfTofix()">회원정보수정</div>
+            </div>
+        </div>
+        <img src="./button.svg" id="button" class="button">
+    </div>
+</body>
+<script>
+    const BACKEND_URL="http://localhost:3000"
+document.getElementById("button").addEventListener("click",()=>{
+    window.location.href="./foxhome.html"
+})
+function herfTofix() {
+    window.location.href="./profileFix.html"
+}
+async function myPageLoad() {
+    try {
+            const res = await fetch(BACKEND_URL+"/api/user/mypage-load",{credentials:"include"});
+            const data = await res.json();
+            if(data.error) {
+                alert(data.error);
+                return;
+            }
+            document.getElementById("회원이름").innerText = data.user.Rname;
+            document.getElementById("회원생일").innerText = data.user.birth;
+            document.getElementById("회원주소").innerText = data.user.address;
+            document.getElementById("회원이메일").innerText = data.user.email;
+            document.getElementById("회원아이디").innerText = data.user.username;
+            document.getElementById("회원열매").innerText = `${data.user.coin}개`;
+            document.getElementById("프로필사진").src = data.user.profile
+  ? `./${data.user.profile}`
+  : "./profile.svg";
+            } catch(err) {
+            console.error(err);
+        }
+}
+myPageLoad();
+</script>
+</html>

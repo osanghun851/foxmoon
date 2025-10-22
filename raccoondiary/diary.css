@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    
+  }
+
+#box {
+    height: 100vh;
+    aspect-ratio: 9 / 16;      
+    background-color: black;
+    margin: 0 auto;
+    position: relative;
+    font-size: 2vh;
+    background-image: url('./db.png');
+    background-size: cover;
+       
+  }
+#raccoonp{
+    position: absolute;
+    left: 10.74%;
+    top: 5.63%;
+    width: auto;
+    height: 8%;
+}
+#q {
+    font-size: 3vh !important;
+    font-family: 'Harmattan' !important;
+    font-weight: 700 !important;
+  }
+#question{
+    /* Rectangle 14 */
+
+    box-sizing: border-box;
+    position: absolute;
+    left: 35%;
+    top: 5.63%;
+    width: 57.96%;
+    height: 11.72%;
+
+    background: #A48C60;
+    box-shadow: 0vh 0.52vh 0.21vh rgba(0, 0, 0, 0.25);
+    border-radius: 1.56vh;
+    padding: 1.2vh;
+    font-size: 2.3vh;
+    font-family: 'Gugi';
+    font-weight: 700;
+    line-height: 3.5vh;
+    
+}
+
+
+#fdiary{
+    /* Rectangle 15 */
+
+position: absolute;
+width: 82.87%;
+height: 71.14%;
+left: 50%;
+top: 21.51%;
+transform: translate(-50%, 0%);
+
+background: #F7D275;
+box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.25);
+}
+#tdiary {
+    position: absolute;
+    top: 3.15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92.15%;
+    height: 8.57%;
+
+    background: #FFFFFF;
+    box-shadow: 0vh 0.52vh 0.21vh rgba(0, 0, 0, 0.25);
+    border-radius: 1.56vh;
+    font-size: 3vh;
+    line-height: 1.2;
+    font-weight: 500;
+    text-align: center;
+}
+#cdiary {
+    position: absolute;
+    top: 14.63%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92.15%;
+    height: 73%;
+
+    background: #FFFFFF;
+    box-shadow: 0vh 0.52vh 0.21vh rgba(0, 0, 0, 0.25);
+    border-radius: 1.56vh;
+    font-size: 2vh;
+
+  }
+#submit{
+    position: absolute;
+    top: 90.47%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: 6.5%;
+}
+#movmain{
+    position: absolute;
+    top: 89%;
+    left: 85.90%;
+    width: auto;
+    height: 6.5vh;
+}
+#past{
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center;     /* 세로 중앙 정렬 */
+    text-align: center;      /* 텍스트 중앙 정렬(가로) */
+    
+    /* 기존 스타일 유지 */
+    position: absolute;
+    left: 8.52%;
+    top: 14.43%;
+    width: 21.02%;
+    height: 2.92%;
+
+    background: #A48C60;
+    box-shadow: 0vh 0.52vh 0.21vh rgba(0, 0, 0, 0.25);
+    border-radius: 3.65vh;
+
+    font-family: 'Gugi';
+    font-style: normal;
+    font-weight: 10;
+    font-size: 1.9vh;
+    line-height: 1.9vh;
+    color: #FFFFFF;
+}
+#light{
+    position: absolute;
+    left: 0%;
+    top: 8.89%;
+    width: 10%;
+    height: 28%;
+}

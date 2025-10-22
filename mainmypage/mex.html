@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>여우의 달 이용방법</title>
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+#background { height:100vh; 
+    aspect-ratio:9/16; 
+    background: #ECECEC;
+    margin:0 auto; 
+    position:relative; 
+    font-size:2vh; }
+
+#t { 
+  position:absolute;
+  width:34.635vh; 
+  height:7.135vh; 
+  left:10.781vh; 
+  top:5.031vh; 
+  background: #152F56;
+  box-shadow:0vh 0.521vh 0.208vh rgba(0,0,0,0.25); 
+  border-radius:1.042vh; 
+}
+#tw { 
+  transform: translateY(20%); 
+  font-family:'Gugi'; 
+  font-style:normal; 
+  font-weight:400; 
+  font-size:4vh; 
+  line-height:5.208vh; 
+  text-align:center; 
+  color:white; 
+}
+
+#p { 
+  position:absolute; 
+  width:49vh; 
+  height:70vh; 
+  left:50%; 
+  top:16vh; 
+  transform:translateX(-50%);
+
+  box-shadow:0vh 0.521vh 0.208vh rgba(0,0,0,0.25); 
+  border-radius:1.563vh; 
+  background-image:url('p.png'); 
+  background-size:cover; 
+  background-position:center; 
+  background-repeat:no-repeat;
+  overflow:hidden;
+}
+
+#wp { 
+/* Rectangle 71 */
+position: absolute;
+width: 45vh;       /* 699 ÷ 1920 × 100 */
+height: 60vh;      /* 943 ÷ 1920 × 100 */
+left : 50%;
+top : 49%;
+transform: translate(-50%,-50%);       /* 488 ÷ 1920 × 100 */
+
+background: #FFFFFF;
+border-radius: 1.563vh; /* 30 ÷ 1920 × 100 */
+}
+.slide {
+  position:absolute; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%;
+  display:none; 
+}
+.slide.active { display:flex; }
+
+#right, #left, #movmain { position:absolute; cursor:pointer; }
+#right { width:4.844vh; 
+    height:4.271vh; 
+    left:33vh; 
+    top:88vh; }
+#left { width:4.896vh; 
+    height:4.271vh; 
+    left:19vh; 
+    top:88vh; }
+#movmain { width:auto; 
+    height:6.5vh; 
+    left:46.5vh; 
+    top:87vh; }
+
+</style>
+</head>
+<body>
+<div id="background">
+    <div id="t">
+        <h1 id="tw">이용 방법</h1>
+    </div>
+    <div id="p">
+        <div id="wp">
+            <img class="slide active" src="./mexpage1.png">
+            <img class="slide" src="./mexpage2.png">
+            <img class="slide" src="./mexpage3.png">
+            <img class="slide" src="./mexpage4.png">
+            <img class="slide" src="./mexpage5.png">
+            <img class="slide" src="./mexpage6.png">
+        </div>
+    </div>
+    <img id="right" src="./right.png" alt="다음">
+    <img id="left" src="./left.png" alt="이전">
+    <img id="movmain" src="./movmain.png" alt="메인">
+</div>
+
+<script>
+const slides = document.querySelectorAll('#wp .slide');
+let current = 0;
+
+document.getElementById('right').onclick = () => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+}
+
+document.getElementById('left').onclick = () => {
+    slides[current].classList.remove('active');
+    current = (current - 1 + slides.length) % slides.length;
+    slides[current].classList.add('active');
+}
+document.getElementById('movmain').onclick = () => {
+    window.location.href = 'index.html';
+};
+</script>
+</body>
+</html>
+

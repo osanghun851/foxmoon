@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여우의 달</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+
+    <style>
+      * {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+      #mainBackground{
+          /* Slide 16:9 - 18 */
+          height: 100vh;
+aspect-ratio: 9 / 16;
+margin: 0 auto;
+position: relative;
+background-image: url("./mainBackground.png"); /* 이미지 경로 또는 URL */
+background-size: cover;
+background-position: center;   /* 가운데 정렬 */
+background-repeat: no-repeat;  /* 반복 없이 한 번만 보여줌 */
+margin: 0 auto; /* 가운데 정렬 */
+      }
+      #여우의달{
+/* 여우의 달 */
+position: absolute;
+left: 25%;
+top: 10.31%;
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((120/1920)*100vh);
+line-height: calc((150/1920)*100vh);
+
+color: #FFFFFF;
+      }
+      #여우{
+position: absolute;
+width: calc((251/1920)*100vh);
+height: auto;
+left: calc((445/1920)*100vh);
+top: calc((436/1920)*100vh);
+
+cursor:pointer;
+transition: all 0.2s ease;
+      }
+  #여우:hover path {
+    filter: drop-shadow(0 0 0.5vh #150b01); /* 빛나는 효과 */
+  }
+
+  #여우:active {
+    transform: scale(0.95); /* 클릭 시 살짝 눌림 */
+  }
+
+      #달{
+position: absolute;
+width: calc((148/1920)*100vh);
+height: auto;
+left: calc((809/1920)*100vh);
+top: calc((188/1920)*100vh);   
+cursor:pointer;
+transition: all 0.2s ease;
+      }
+  #달:hover path {
+    filter: drop-shadow(0 0 0.2vh #150b01); /* 빛나는 효과 */
+  }
+
+  #달:active {
+    transform: scale(0.9); /* 클릭 시 살짝 눌림 */
+  }
+      .ball{
+          /* Ellipse 3 */
+
+position: absolute;
+width: 4.2vh;
+height: 4.2vh;
+left:6%;
+top:20%;
+background-image: url("ball1.png");/*이미지넣기*/
+background-position: center;
+box-shadow: 0 0.8vh 0.3vh rgba(0, 0, 0, 0.25);
+transform: rotate(-28.99deg);
+border-radius: 50%; 
+      }
+      .text{       
+position: absolute;
+transform:translateY(-50%);
+top:57.5%;
+left:27%;
+width: 24vh;
+height: 5.9vh;
+
+font-size: 3.9vh;
+line-height: 4.9vh;
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+opacity: 1!important;
+color: #f7f5f5;
+      }
+      .Wbox{
+/* Rectangle 67 */
+position: absolute;
+box-sizing: border-box;
+width: 67.6%;
+height: calc((143/1920)*100vh);
+background: rgba(217, 217, 217, 0.2);
+
+box-shadow: 0vh 0.35vh 0.2vh #1E1E1E;
+border-radius: 2.6vh;
+      }
+      #box1{
+left: 16.2%;
+top: calc((900/1920)*100vh);
+      }
+      #box2{
+left: 16.2%;
+top: calc((1111/1920)*100vh);
+      }
+      #box3{
+left: 16.2%;
+top: calc((1308/1920)*100vh);
+      }
+      #box4{
+left: 16.2%;
+top: calc((1505/1920)*100vh);
+      }
+/* 기본 숨김 */
+      .modal {
+display: none; 
+position: fixed; 
+z-index: 1000; 
+left: 0; 
+top: 0;
+width: 100%; 
+height: 100%; 
+background: rgba(0, 0, 0, 0.5);
+      }
+
+/* 모달 창 */
+      .modal-content {
+background: #152F56;
+position:relative;
+margin: 15% auto;
+width: calc((1006/1920)*100vh);
+height: calc((928/1920)*100vh);
+      }
+      #modalbox{
+position: absolute;
+top: calc((39/1920)*100vh);
+left: calc((38/1920)*100vh);
+background-color: #FFFFFF;
+width: calc((929/1920)*100vh);
+height: calc((851/1920)*100vh);
+border-radius: calc((120/1920)*100vh);
+      }
+      #달1{
+position: absolute;
+top: calc((118/1920)*100vh);
+left: calc((194/1920)*100vh);
+width: calc((110/1920)*100vh);
+height: auto;
+      }
+      #여우의달1{
+position: absolute;
+top: calc((118/1920)*100vh);
+left: calc((333/1920)*100vh);
+width: calc((399/1920)*100vh);
+height: calc((125/1920)*100vh);
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((100/1920)*100vh);
+line-height: calc((125/1920)*100vh);
+color: #000000;
+      }
+      #username{
+position: absolute;
+top: calc((315/1920)*100vh);
+left: calc((67/1920)*100vh);
+box-sizing: border-box;
+position: absolute;
+width: calc((584/1920)*100vh);
+height: calc((105/1920)*100vh);
+border: 0.3vh solid #C5C1C1;
+      }
+      #password{
+position: absolute;
+top: calc((473/1920)*100vh);
+left: calc((67/1920)*100vh);
+box-sizing: border-box;
+position: absolute;
+width: calc((584/1920)*100vh);
+height: calc((105/1920)*100vh);
+border: 0.3vh solid #C5C1C1;
+      }
+      #loginbutton{
+all: unset;
+position: absolute;
+top: calc((315/1920)*100vh);
+right: calc((66/1920)*100vh);
+width: calc((181/1920)*100vh);
+height: calc((263/1920)*100vh);
+background: #C5C1C1;
+cursor: pointer;
+text-align: center;
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((45/1920)*100vh);
+color: rgba(0, 0, 0, 0.7);
+      }
+      #signup{
+position: absolute;
+bottom: calc((68/1920)*100vh);
+right: calc((324/1920)*100vh);
+width: calc((280/1920)*100vh);
+height: calc((107/1920)*100vh);
+border-radius: calc((50/1920)*100vh);
+
+background: rgba(217, 217, 217, 0.46);
+border: 0.05vh solid #FFF9F9;
+box-shadow: 0px 0.4vh 0.2vh #1E1E1E;
+text-align: center;
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((45/1920)*100vh);
+line-height: 6vh;
+color: rgba(17, 17, 17, 0.9);
+cursor: pointer;
+      }
+      #loginBtn{
+cursor: pointer;
+position: absolute;
+width: 21vh;
+height: 1.9vh;
+left: 50%;
+transform: translateX(-50%);
+top: 90.77vh;
+background-image:url('lobtn.png'); 
+background-color: #152F56;
+  background-size:cover; 
+  background-position:center; 
+  background-repeat:no-repeat;
+ 
+  border: none;        /* 테두리 제거 */
+
+  box-shadow: none;    /* 그림자 제거 */
+  appearance: none;    /* 브라우저 기본 버튼 스타일 제거 */
+  -webkit-appearance: none; /* 사파리/크롬용 */
+  -moz-appearance: none;
+      }
+  </style>
+</head>
+<body>
+    <div id="mainBackground">
+<!--여우 이미지 svg코드-->
+<svg id="여우" width="285" height="438" viewBox="0 0 285 438" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_dn_22_91)">
+<path d="M127.932 145.057L175.519 28.7316L188.679 75.533L150.705 152.439L181.456 195.63L170.255 311.568L127.932 145.057Z" fill="white" stroke="black" stroke-width="7"/>
+<path d="M265 353.602L175.921 386.339L186.453 359.632L167.145 353.602L186.453 338.526L167.145 312.25L265 353.602Z" fill="white" stroke="black" stroke-width="7"/>
+<path d="M111.855 46.9062L73.2395 9V78.3511L19.2657 70.1668L82.8934 149.856L14 282.959L37.6958 374.709L164.512 307.942L125.897 143.826L174.166 23.6456L111.855 46.9062Z" fill="url(#paint0_linear_22_91)" stroke="black" stroke-width="7"/>
+<path d="M162.757 311.388L40.3287 375.57L130.285 404L173.288 387.201L182.942 361.786L162.757 352.31L182.942 338.526L162.757 311.388Z" fill="url(#paint1_linear_22_91)" stroke="black" stroke-width="7"/>
+<path d="M116.108 75.6705L113.898 63.3684L123.838 61.648L126.047 73.9501L116.108 75.6705Z" fill="#111111" stroke="#111111" stroke-width="5"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_22_91" x1="94.083" y1="9" x2="94.083" y2="374.709" gradientUnits="userSpaceOnUse">
+<stop offset="0.552885" stop-color="#FF775D"/>
+<stop offset="1" stop-color="#994738"/>
+</linearGradient>
+<linearGradient id="paint1_linear_22_91" x1="172.411" y1="348.002" x2="66.7131" y2="388.492" gradientUnits="userSpaceOnUse">
+<stop offset="0.177885" stop-color="#FF785B"/>
+<stop offset="1" stop-color="#994837"/>
+</linearGradient>
+</defs>
+</svg>
+
+<!--달 이미지 svg코드-->
+<svg id="달" width="160" height="169" viewBox="0 0 160 169" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_dfn_22_90)">
+<path d="M154 85.6667C152.704 99.6923 147.44 113.059 138.825 124.202C130.209 135.345 118.598 143.804 105.35 148.59C92.1027 153.375 77.7662 154.288 64.0184 151.223C50.2705 148.157 37.6801 141.24 27.7202 131.28C17.7603 121.32 10.8429 108.729 7.77749 94.9817C4.71206 81.2339 5.62535 66.8973 10.4105 53.6496C15.1957 40.402 23.6548 28.791 34.798 20.1755C45.9412 11.56 59.3077 6.29615 73.3333 5C65.1217 16.1093 61.1703 29.797 62.1976 43.5735C63.225 57.3499 69.1629 70.3001 78.9314 80.0686C88.6999 89.8371 101.65 95.775 115.427 96.8024C129.203 97.8297 142.891 93.8783 154 85.6667Z" fill="url(#paint0_radial_22_90)"/>
+<path d="M154 85.6667C152.704 99.6923 147.44 113.059 138.825 124.202C130.209 135.345 118.598 143.804 105.35 148.59C92.1027 153.375 77.7662 154.288 64.0184 151.223C50.2705 148.157 37.6801 141.24 27.7202 131.28C17.7603 121.32 10.8429 108.729 7.77749 94.9817C4.71206 81.2339 5.62535 66.8973 10.4105 53.6496C15.1957 40.402 23.6548 28.791 34.798 20.1755C45.9412 11.56 59.3077 6.29615 73.3333 5C65.1217 16.1093 61.1703 29.797 62.1976 43.5735C63.225 57.3499 69.1629 70.3001 78.9314 80.0686C88.6999 89.8371 101.65 95.775 115.427 96.8024C129.203 97.8297 142.891 93.8783 154 85.6667Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_22_90" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(36.5 113) rotate(18.8903) scale(124.521 124.521)">
+<stop offset="0.670957" stop-color="#F0B92C"/>
+<stop offset="1" stop-color="#8A6A19"/>
+</radialGradient>
+</defs>
+</svg>
+<div id="여우의달">여우의 달</div>
+<div class="Wbox" id="box1">
+<div class="text" id="숲으로가는길">숲으로 가는 길</div>
+<div class="ball" id="ball1"></div>
+</div>
+<div class="Wbox" id="box2">
+<div class="text" id="부엉이배움터">부엉이 배움터</div>
+<div class="ball" id="ball2"></div>
+</div>
+<div class="Wbox" id="box3">
+<div class="text" id="너구리일기장">너구리 일기장</div>
+<div class="ball" id="ball3"></div></div>
+
+<div class="Wbox" id="box4">
+<div class="text" id="기러기알림">기러기 알림</div>
+<div class="ball" id="ball4"></div></div>
+        <button id="loginBtn"></button>
+    </div>
+      <!-- 모달 -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+        <div id="modalbox">
+                <svg id="달1" width="160" height="169" viewBox="0 0 160 169" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_dfn_22_90)">
+<path d="M154 85.6667C152.704 99.6923 147.44 113.059 138.825 124.202C130.209 135.345 118.598 143.804 105.35 148.59C92.1027 153.375 77.7662 154.288 64.0184 151.223C50.2705 148.157 37.6801 141.24 27.7202 131.28C17.7603 121.32 10.8429 108.729 7.77749 94.9817C4.71206 81.2339 5.62535 66.8973 10.4105 53.6496C15.1957 40.402 23.6548 28.791 34.798 20.1755C45.9412 11.56 59.3077 6.29615 73.3333 5C65.1217 16.1093 61.1703 29.797 62.1976 43.5735C63.225 57.3499 69.1629 70.3001 78.9314 80.0686C88.6999 89.8371 101.65 95.775 115.427 96.8024C129.203 97.8297 142.891 93.8783 154 85.6667Z" fill="url(#paint0_radial_22_90)"/>
+<path d="M154 85.6667C152.704 99.6923 147.44 113.059 138.825 124.202C130.209 135.345 118.598 143.804 105.35 148.59C92.1027 153.375 77.7662 154.288 64.0184 151.223C50.2705 148.157 37.6801 141.24 27.7202 131.28C17.7603 121.32 10.8429 108.729 7.77749 94.9817C4.71206 81.2339 5.62535 66.8973 10.4105 53.6496C15.1957 40.402 23.6548 28.791 34.798 20.1755C45.9412 11.56 59.3077 6.29615 73.3333 5C65.1217 16.1093 61.1703 29.797 62.1976 43.5735C63.225 57.3499 69.1629 70.3001 78.9314 80.0686C88.6999 89.8371 101.65 95.775 115.427 96.8024C129.203 97.8297 142.891 93.8783 154 85.6667Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_22_90" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(36.5 113) rotate(18.8903) scale(124.521 124.521)">
+<stop offset="0.670957" stop-color="#F0B92C"/>
+<stop offset="1" stop-color="#8A6A19"/>
+</radialGradient>
+</defs>
+</svg>
+                <div id="여우의달1">여우의 달</div>
+                <form id="registerForm">
+                        <input type="text" id="username" placeholder="아이디" required><br>
+                        <input type="password" id="password" placeholder="비밀번호" required><br>
+                        <button type="submit" id="loginbutton">로그인</button>
+                </form>
+                <div id="signup">회원가입</div>
+                <div id="result"></div>
+        </div>
+    </div>
+  </div>
+</body>
+<script>
+  const BACKEND_URL = "http://localhost:3000"; // 백엔드 URL
+  document.getElementById("여우").addEventListener("click", () => { window.location.href="./foxhome.html"; });
+        document.getElementById("달").addEventListener("click", () => { window.location.href="./mex.html"; });
+        document.getElementById("box1").addEventListener("click", () => { window.location.href="../forestway/jisisal.html"; });
+        document.getElementById("box2").addEventListener("click", () => { window.location.href="../owlacademy/index.html"; });
+        document.getElementById("box3").addEventListener("click", () => { window.location.href="../raccoondiary/diary.html"; });
+        document.getElementById("box4").addEventListener("click", () => { window.location.href="../goosepost/goosepost.html"; });
+  // (여우 클릭 시) 여우집으로 이동
+  document.getElementById("여우").addEventListener("click", function() {
+    window.location.href = "./foxhome.html";
+  });
+  document.getElementById("달").addEventListener("click", function() {
+    window.location.href = "./mex.html";
+  });
+  
+  // 로그인 버튼 클릭 -> 모달 열기
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    if (document.getElementById("loginBtn").innerText != "로그아웃") {
+      document.getElementById("loginModal").style.display = "block";
+    } else {
+      logout();
+    }
+  });
+  
+  // 회원가입 페이지 이동
+  document.querySelector("#signup").addEventListener("click", () => {
+    window.location.href = "./start.html";
+  });
+  
+  // 모달 바깥 클릭 시 닫기
+  window.addEventListener("click", (event) => {
+    if (event.target === document.getElementById("loginModal")) {
+      document.getElementById("loginModal").style.display = "none";
+    }
+  });
+  
+  const form = document.getElementById("registerForm");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // 페이지 새로고침 방지
+    document.getElementById("loginModal").style.display = "none";
+    login();
+  });
+  
+  // --- 로그인 상태 확인 ---
+  async function checkProfile() {
+    try {
+      const response = await fetch(`${BACKEND_URL}/profile`, {
+        method: "GET",
+        credentials: "include" // 세션 쿠키 포함
+      });
+      const data = await response.json();
+      alert(response.ok ? `현재 로그인 사용자: ${data.username}` : `로그인 필요`);
+    } catch (err) {
+      alert("서버 요청 실패: " + err.message);
+    }
+  }
+  
+  // --- 로그인 ---
+  async function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+  
+    try {
+      const response = await fetch(`${BACKEND_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+        credentials: "include" // 세션 쿠키 포함
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        
+        alert(`로그인 성공! ${data.username}`);
+      } else {
+        alert(`로그인 실패: ${data.error}`);
+      }
+    } catch (err) {
+      alert("서버 요청 실패: " + err.message);
+    }
+  }
+  
+  // --- 로그아웃 ---
+  async function logout() {
+    try {
+      const response = await fetch(`${BACKEND_URL}/logout`, {
+        method: "POST",
+        credentials: "include"
+      });
+      const data = await response.json();
+      alert(data.message);
+      
+    } catch (err) {
+      alert("서버 요청 실패: " + err.message);
+    }
+  }
+  </script>
+  
+</html>

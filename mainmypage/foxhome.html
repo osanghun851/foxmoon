@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여우집</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+    <style>
+    #mainBackground{
+position: relative;
+height: 100vh; /* 화면 높이에 딱 맞춰서 */
+width: calc(100vh * 9 / 16); /* 9:16 비율에 맞춘 너비 */
+
+background-image: url(./foxhousebackground.svg);
+background-size: cover;
+background-position: center;   /* 가운데 정렬 */
+background-repeat: no-repeat;  /* 반복 없이 한 번만 보여줌 */
+margin: 0 auto; /* 가운데 정렬 */
+    }
+    #button{
+height: 6.5vh;
+width: auto;
+
+position: absolute;
+top: calc((80/1920)*100vh);
+left: calc((58/1920)*100vh);
+        }
+    #마이페이지{
+/* Rectangle 13 */
+position: absolute;
+width: calc((330/1920)*100vh);
+height: calc((95/1920)*100vh);
+left: calc((698/1920)*100vh);
+top: calc((91/1920)*100vh);
+
+background: #A05A2C;
+box-shadow: 0vh 0.5vh 0.2vh rgba(0, 0, 0, 0.25);
+border-radius: calc((20/1920)*100vh);
+/* 마이페이지 */
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: calc((52/1920)*100vh);
+display: flex;
+justify-content: center; /* 가로 가운데 정렬 */
+align-items: center;     /* 세로 가운데 정렬 */
+color: #FFFFFF;
+    }
+    #store{
+position: absolute;
+width: calc((333/1920)*100vh);
+height: auto;
+left: calc((690/1920)*100vh);
+top: calc((464/1920)*100vh);
+    }
+    #store:hover{
+opacity: 0.9;
+    }
+    #home{
+position: absolute;
+width: calc((547/1920)*100vh);
+height: auto;
+left: calc((26/1920)*100vh);
+top: calc((818/1920)*100vh);
+    }
+    #home:hover{
+opacity: 0.9;
+    }
+    .Modal{
+      display: none;
+      position: absolute;
+      z-index: 999; /* 다른 요소보다 앞쪽에 표시 숫자가 클수록 앞에 나옴*/
+      left:0;
+      top:0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    #modal-box{
+      position: absolute;
+      width: calc(100vh * 9 / 16);
+      height: 100vh;
+      background-color: #E7D7C1;
+      margin: 0 auto; /* 가운데 정렬 */
+    }
+    #열매상점{
+/* Rectangle 13 */
+
+position: absolute;
+width: calc((632/1920)*100vh);
+height: calc((137/1920)*100vh);
+left: calc((224/1920)*100vh);
+top: calc((120/1920)*100vh);
+
+background: #A05A2C;
+box-shadow: 0vh 0.5vh 0.2vh rgba(0, 0, 0, 0.25);
+border-radius: calc((20/1920)*100vh);
+/*열매상점*/
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: 4vh;
+display: flex;
+justify-content: center; /* 가로 가운데 정렬 */
+align-items: center;     /* 세로 가운데 정렬 */
+color: #FFFFFF;
+    }
+    #상점배경{
+/* Rectangle 56 */
+
+position: absolute;
+width: calc((977/1920)*100vh);
+height: calc((1310/1920)*100vh);
+left: calc((52/1920)*100vh);
+top: calc((516/1920)*100vh);
+
+background: #D1916C;
+box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.25);
+    }
+    #상점내부{
+/* Rectangle 61 */
+
+position: absolute;
+width: calc((912/1920)*100vh);
+height: calc((1079/1920)*100vh);
+left: calc((84/1920)*100vh);
+top: calc((601/1920)*100vh);
+
+background: #FFFFFF;
+border-radius: calc((42/1920)*100vh);
+    }
+    #상점모달닫기{
+position: absolute;
+width: 6.5vh;
+height: auto;
+left: calc((900/1920)*100vh);
+top: calc((1703/1920)*100vh);
+    }
+    .상점카테고리선택{
+/* Rectangle 57 */
+position: absolute;
+width: calc((153/1920)*100vh);
+height: calc((92/1920)*100vh);
+box-shadow: 0.2vh 0vh 0vh rgba(0, 0, 0, 0.25);
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: 3vh;
+display: flex;
+justify-content: center; /* 가로 가운데 정렬 */
+align-items: center;     /* 세로 가운데 정렬 */
+    }
+    #상점카테고리선택1{
+left: calc((52/1920)*100vh);
+top: calc((424/1920)*100vh);
+background: #D1916C;
+color: #FFFFFF;
+    }
+    #상점카테고리선택2{
+left: calc((241/1920)*100vh);
+top: calc((424/1920)*100vh);
+background: #FFFFFF;
+color:#D1916C;
+    }
+    #상점카테고리선택3{
+left: calc((430/1920)*100vh);
+top: calc((424/1920)*100vh);
+background: #FFFFFF;
+color:#D1916C;
+    }
+    #상점카테고리선택4{
+left: calc((619/1920)*100vh);
+top: calc((424/1920)*100vh);
+background: #FFFFFF;
+color:#D1916C;
+    }
+    #상점카테고리선택5{
+left: calc((808/1920)*100vh);
+top: calc((424/1920)*100vh);
+background: #FFFFFF; 
+color:#D1916C;
+font-size: 2vh;
+    }
+    #이용방법버튼{
+width: calc((150/1920)*100vh);
+height: auto;
+position: absolute;
+left: calc((890/1920)*100vh);
+top: calc((1700/1920)*100vh);
+    }
+    #box{
+width: calc((333/1920)*100vh);
+height: calc((69/1920)*100vh);
+position: absolute;
+left: calc((663/1920)*100vh);
+top: calc((306/1920)*100vh);
+background: #A05A2C;
+box-shadow: 0px 0.35vh 0.2vh rgba(0, 0, 0, 0.25);
+border-radius:  calc((20/1920)*100vh);
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: 2.5vh;
+display: flex;
+justify-content: center; /* 가로 가운데 정렬 */
+align-items: center;     /* 세로 가운데 정렬 */
+color: #FFFFFF;
+    }
+    #foxmodal-box{
+      position: absolute;
+      width: calc(100vh * 9 / 16);
+      height: 100vh;
+      background-color: #E7D7C1;
+      margin: 0 auto; /* 가운데 정렬 */
+    }
+    #background0{
+position: absolute;
+width: calc((1080/1920)*100vh);
+height: auto;
+z-index: 101;
+    }
+    #line{
+position: absolute;
+width: calc((1070/1920)*100vh);
+height: 0vh;
+left: 0vh;
+top: calc((714/1920)*100vh);
+border: 0.14vh solid #D1916C;
+
+    }
+    #여우집모달닫기{
+position: absolute;
+width: 6.5vh;
+height: auto;
+left:calc((20/1920)*100vh);
+top:calc((90/1920)*100vh);
+z-index: 102;
+    }
+    #box1{
+width: 100%;
+height: calc((722/1920)*100vh);
+position: absolute;
+bottom: 0px;
+background-color: #D1916C;
+    }
+    #box2{
+position: absolute;
+width: calc((976/1920)*100vh);
+height: calc((625/1920)*100vh);
+left: calc((52/1920)*100vh);
+top: calc((50/1920)*100vh);
+
+background-color: #FFFFFF;
+border-radius: calc((42/1920)*100vh);
+    }
+        .꾸미기카테고리선택{
+/* Rectangle 57 */
+position: absolute;
+width: calc((153/1920)*100vh);
+height: calc((92/1920)*100vh);
+box-shadow: 0.2vh 0vh 0vh rgba(0, 0, 0, 0.25);
+font-family: 'Gugi';
+font-style: normal;
+font-weight: 400;
+font-size: 3vh;
+display: flex;
+justify-content: center; /* 가로 가운데 정렬 */
+align-items: center;     /* 세로 가운데 정렬 */
+    }
+    #꾸미기카테고리선택1{
+top: calc((1118/1920)*100vh);
+background: #D1916C;
+color:#FFFFFF;
+    }
+    #꾸미기카테고리선택2{
+left: calc((189/1920)*100vh);
+top: calc((1118/1920)*100vh);
+background: #FFFFFF;
+color:#D1916C;
+    }
+    #꾸미기카테고리선택3{
+left: calc((378/1920)*100vh);
+top: calc((1118/1920)*100vh);
+background: #FFFFFF;
+color:#D1916C;
+    }
+    #꾸미기카테고리선택4{
+left: calc((567/1920)*100vh);
+top: calc((1118/1920)*100vh);
+background: #FFFFFF;
+color:#D1916C;
+    }
+    #꾸미기카테고리선택5{
+left: calc((756/1920)*100vh);
+top: calc((1118/1920)*100vh);
+background: #FFFFFF;
+color:#D1916C;
+font-size: 2vh;
+    }
+    #친구0{
+position: absolute;
+left: calc((142/1920)*100vh);
+top: calc((504/1920)*100vh);
+width: calc((220/1920)*100vh);
+height: calc((202/1920)*100vh);
+    }
+    #친구1{
+position: absolute;
+left: calc((361/1920)*100vh);
+top: calc((472/1920)*100vh);
+width: calc((220/1920)*100vh);
+height: calc((146/1920)*100vh);
+    } 
+    #벽지{
+position: absolute;
+top: 0vh;
+left: 0vh;
+width: calc((1080/1920)*100vh);
+height: calc((713/1920)*100vh);
+/*background-image: url(./벽지0T.svg);*/
+z-index: 0;
+    }
+    #카펫{
+position: absolute;
+top: calc((903/1920)*100vh);
+left: calc((224/1920)*100vh);
+width: calc((631/1920)*100vh);
+height: calc((114/1920)*100vh);
+    }
+    #fox{
+position: absolute;
+top: calc((550/1920)*100vh);
+left: calc((369/1920)*100vh);
+width: calc((368/1920)*100vh);
+height: calc((439/1920)*100vh);
+z-index: 101;
+    }
+    </style>
+</head>
+<body>
+    <div id="mainBackground">
+        <img src="친구0.svg" id="친구0" class="button">
+        <img src="친구1.svg" id="친구1" class="button">
+        <img src="button.svg" id="button" class="button">
+        <div id="마이페이지" class="button">마이페이지</div>
+        <img src="warehouse.svg" id="store" class="button">
+        <img src="foxhouse.svg" id="home" class="button">
+        <img src="이용방법버튼.svg" id="이용방법버튼" class="button">
+        <!--상점 모달 창-->
+        <div id="storeModal" class="Modal">
+            <div id="modal-box">
+                <div id="열매상점">열매 상점</div>
+                <div id="상점배경"></div>
+                <div id="상점내부"></div>
+                <img src="button.svg" id="상점모달닫기" class="button">
+                <div class="상점카테고리선택" id="상점카테고리선택1">벽지</div>
+                <div class="상점카테고리선택" id="상점카테고리선택2">카펫</div>
+                <div class="상점카테고리선택" id="상점카테고리선택3">가구1</div>
+                <div class="상점카테고리선택" id="상점카테고리선택4">가구2</div>
+                <div class="상점카테고리선택" id="상점카테고리선택5">악세사리</div>
+                <div id="box"></div>
+            </div>
+        </div>
+        <!--여우집 모달 창-->
+        <div id="foxhouse" class="Modal">
+            <div id="foxmodal-box">
+                <img src="foxhousebackground1.svg" id="background0">
+                <img src="fox.svg" id="fox">
+                <div id="line"></div>
+                <img src="foxhousebutton.svg" id="여우집모달닫기" class="button">
+                <img id="벽지" data-itemName="undefined">
+                <img src="카펫T.svg" id="카펫" data-itemName="undefined">
+                <img id="가구11" data-itemName="undefined">
+                <img id="가구12" data-itemName="undefined">
+                <img id="가구13" data-itemName="undefined">
+                <img id="가구14" data-itemName="undefined">
+                <img id="가구21" data-itemName="undefined">
+                <img id="가구23" data-itemName="undefined">
+                <img id="가구24" data-itemName="undefined">
+                <img id="악세사리1" data-itemName="undefined">
+                <img id="악세사리2" data-itemName="undefined">
+                <img id="악세사리4" data-itemName="undefined">
+                <div class="꾸미기카테고리선택" id="꾸미기카테고리선택1">벽지</div>
+                <div class="꾸미기카테고리선택" id="꾸미기카테고리선택2">카펫</div>
+                <div class="꾸미기카테고리선택" id="꾸미기카테고리선택3">가구1</div>
+                <div class="꾸미기카테고리선택" id="꾸미기카테고리선택4">가구2</div>
+                <div class="꾸미기카테고리선택" id="꾸미기카테고리선택5">악세사리</div>
+                <div id="box1">
+                    <div id="box2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+const BACKEND_URL="http://localhost:3000"
+        //(화살표 클릭시)index.html로 이동
+document.getElementById("button").addEventListener("click", function() {
+  window.location.href = "./index.html";
+});
+//상점모달창 띄우고 닫기
+const img = document.getElementById('store');
+const modal = document.getElementById('storeModal');
+const closeBtn = document.querySelector('#상점모달닫기');
+img.onclick = function() {
+  modal.style.display = 'block';
+}
+closeBtn.onclick = function() {
+  modal.style.display = "none";
+}
+/*modal.onclick = function(e) {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+}외부클릭시모달닫힘*/
+
+//여우집 모달창 띄우고 닫기
+const home = document.getElementById('home');
+const foxhousemodal = document.getElementById('foxhouse');
+const closeBtn1 = document.querySelector('#여우집모달닫기');
+home.onclick = function() {
+  foxhousemodal.style.display = 'block';
+}
+closeBtn1.onclick = a
+async function a() {
+  foxhousemodal.style.display = "none";
+  try {
+    const foxhomeData = {
+        벽지 : document.getElementById("벽지").dataset.itemName,
+        카펫 : document.getElementById("카펫").dataset.itemName,
+        가구1 : document.getElementById("가구11").dataset.itemName+","+document.getElementById("가구12").dataset.itemName+","+document.getElementById("가구13").dataset.itemName+","+document.getElementById("가구14").dataset.itemName,
+        가구2 : document.getElementById("가구21").dataset.itemName+","+document.getElementById("가구23").dataset.itemName+","+document.getElementById("가구24").dataset.itemName,
+        악세사리 : document.getElementById("악세사리1").dataset.itemName+","+document.getElementById("악세사리2").dataset.itemName+","+document.getElementById("악세사리4").dataset.itemName
+    };
+    console.log(foxhomeData);
+    const res = await fetch(BACKEND_URL+"/foxhomeData/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(foxhomeData)
+    });
+    const data = await res.json(foxhomeData);
+    if (!res.ok) throw new Error(data.message || "저장 실패");
+
+    if (data.error) {
+        alert(data.error);
+    } else {
+        console.log(data.message);
+    }
+    } catch (err) {
+    console.error(err);
+    }
+}
+document.getElementById("이용방법버튼").addEventListener("click", function() {
+  window.location.href="./여우집이용방법.html";
+});
+document.getElementById("마이페이지").addEventListener("click", () => {
+    window.location.href="./mypage.html";
+});
+document.getElementById("친구0").addEventListener("click",() => {
+    window.location.href="./friend.html";
+});
+document.getElementById("친구1").addEventListener("click",() => {
+    window.location.href="./friend.html";
+});
+
+//button효과 설정
+const setButton=function(btn,brightness=1.2,scale=0.95){
+    
+    //초기설정
+    Object.assign(btn.style, {
+      cursor: "pointer",
+      transition: "all 0.2s ease"
+    });
+
+      //hover효과
+    btn.addEventListener("mouseenter",function(){
+        btn.style.filter=`brightness(${brightness})`;
+    });
+    btn.addEventListener("mouseleave",function(){
+        btn.style.filter="brightness(1)";
+    });
+
+    //active효과
+    btn.addEventListener("mousedown",function(){
+        btn.style.transform= `scale(${scale})`;
+    });
+    btn.addEventListener("mouseup",function(){
+        btn.style.transform= "scale(1)";
+    });
+}
+document.querySelectorAll(".button").forEach(btn => {
+    setButton(btn);
+});
+document.querySelectorAll(".상점카테고리선택").forEach(btn => {
+    setButton(btn,0.8,0.9);
+});
+document.querySelectorAll(".꾸미기카테고리선택").forEach(btn => {
+    setButton(btn,0.8,0.9);
+});
+/* imgsrc:이미지경로 #type:str
+imgleft:이미지x축위치 #type:str
+imgtop:이미지 y축 위치 #type:str
+
+*/
+const itemLoad=function(imgsrc,imgwidth,imgheight,imgleft,imgtop,imgparent,imgborder,price=10,classList="buyItem"){
+// 1. 이미지 요소 생성
+const img = document.createElement("img");
+// 2. 이미지 경로(src) 설정
+img.src = imgsrc; // 또는 "/images/sample.jpg"
+// 3. 크기 설정
+img.style.width = imgwidth; // 또는 img.style.width = "300px";
+img.style.height = imgheight; // 또는 img.style.height = "200px";
+// 4. 위치 설정 (CSS 스타일로 조절)
+img.style.position = "absolute";
+img.style.left = imgleft;
+img.style.top = imgtop;
+// 5. 페이지에 추가
+imgparent.appendChild(img);
+//버튼화
+setButton(img);
+//모서리둥글게
+img.style.borderRadius=imgborder;
+//클래스추가
+img.classList.add(classList);
+//dataset추가
+img.dataset.name=imgsrc.slice(0,imgsrc.lastIndexOf("."));
+img.dataset.type=imgsrc.slice(0,imgsrc.lastIndexOf(".")-1);
+img.dataset.price=price;
+//아이템클릭시 팍스홈 변경
+}
+//아이템 로딩
+const store=document.getElementById("상점내부");
+const box2=document.getElementById("box2");
+const clothList = {
+    여우옷0:['ex.png','15.8vh','12.8vh','4.8vh','4vh',10],
+    여우옷1:['ex.png','15.8vh','12.8vh','27vh','4vh',10]
+};
+const 벽지list={
+    벽지0:['벽지0.svg','15.8vh','12.8vh','4.8vh','4vh',20],
+    벽지1:['벽지1.svg','15.8vh','12.8vh','27vh','4vh',20],
+    벽지2:['벽지2.svg','15.8vh','12.8vh','4.8vh','21.7vh',20],
+    벽지3:['벽지3.svg','15.8vh','12.8vh','27vh','21.7vh',30],
+    벽지4:['벽지4.svg','15.8vh','12.8vh','4.8vh','39.4vh',30],
+    벽지5:['벽지5.svg','15.8vh','12.8vh','27vh','39.4vh',30]
+};
+const 카펫list={
+    카펫0:['카펫0.svg','15.8vh','12.8vh','4.8vh','4vh',30],
+    카펫1:['카펫1.svg','15.8vh','12.8vh','27vh','4vh',30],
+    카펫2:['카펫2.svg','15.8vh','12.8vh','4.8vh','21.7vh',30],
+    카펫3:['카펫3.svg','15.8vh','12.8vh','27vh','21.7vh',40],
+    카펫4:['카펫4.svg','15.8vh','12.8vh','4.8vh','39.4vh',40],
+    카펫5:['카펫5.svg','15.8vh','12.8vh','27vh','39.4vh',40]
+};
+const 가구1list={
+    가구10:['가구10.svg','15.8vh','12.8vh','4.8vh','4vh',50],
+    가구11:['가구11.svg','15.8vh','12.8vh','27vh','4vh',50],
+    가구12:['가구12.svg','15.8vh','12.8vh','4.8vh','21.7vh',50],
+    가구13:['가구13.svg','15.8vh','12.8vh','27vh','21.7vh',50],
+    가구14:['가구14.svg','15.8vh','12.8vh','4.8vh','39.4vh',80],
+    가구15:['가구15.svg','15.8vh','12.8vh','27vh','39.4vh',80]
+};
+const 가구2list={
+    가구20:['가구20.svg','15.8vh','12.8vh','4.8vh','4vh',30],
+    가구21:['가구21.svg','15.8vh','12.8vh','27vh','4vh',30],
+    가구22:['가구22.svg','15.8vh','12.8vh','4.8vh','21.7vh',30],
+    가구23:['가구23.svg','15.8vh','12.8vh','27vh','21.7vh',30],
+    가구24:['가구24.svg','15.8vh','12.8vh','4.8vh','39.4vh',60],
+    가구25:['가구25.svg','15.8vh','12.8vh','27vh','39.4vh',60]
+};
+const 악세사리list={
+    악세사리0:['악세사리0.svg','15.8vh','12.8vh','4.8vh','4vh',30],
+    악세사리1:['악세사리1.svg','15.8vh','12.8vh','27vh','4vh',30],
+    악세사리2:['악세사리2.svg','15.8vh','12.8vh','4.8vh','21.7vh',40],
+    악세사리3:['악세사리3.svg','15.8vh','12.8vh','27vh','21.7vh',50],
+    악세사리4:['악세사리4.svg','15.8vh','12.8vh','4.8vh','39.4vh',70],
+    악세사리5:['악세사리5.svg','15.8vh','12.8vh','27vh','39.4vh',70]
+};
+const storelist = [벽지list,카펫list,가구1list,가구2list,악세사리list];
+let userhave = {
+    여우옷0:['ex.png'],
+    여우옷1:['ex.png']
+};
+//상점아이템위치
+//여우집아이템위치
+const fposition=[
+["4vh","4vh"],["20vh","4vh"],["36.1vh","4vh"],
+["4vh","18.3vh"],["20vh","18.3vh"],["36.1vh","18.3vh"]
+];
+const foxHomeItemLoding = function(list){
+    box2.innerHTML="";
+    let i=0;
+    //console.log(list);
+    //여우집아이템로딩
+    for(let k of list){
+        itemLoad(k,'10.7vh','10.3vh',fposition[i][0],fposition[i][1],box2,'1.6vh',10,"myItem");
+        i+=1;
+    }
+    document.querySelectorAll(".myItem").forEach(item => {
+        item.addEventListener("click", async ()=>{
+            const keyName = item.dataset.name
+            switch(item.dataset.type){
+                case "벽지":
+                    if (document.getElementById("벽지").dataset.itemName== keyName){
+                        document.getElementById("벽지").style.opacity = 0;
+                        document.getElementById("벽지").dataset.itemName = "undefined";
+                    }
+                    else{
+                    document.getElementById("벽지").style.opacity = 1;
+                    document.getElementById("벽지").src = `./${keyName}T.svg`;
+                    document.getElementById("벽지").dataset.itemName = keyName;
+                    console.log(document.getElementById("벽지").dataset.itemName);}
+                    break;
+                case "카펫":
+                    if (document.getElementById("카펫").dataset.itemName== keyName){
+                        document.getElementById("카펫").src = `./카펫T.svg`;
+                        document.getElementById("카펫").dataset.itemName = "카펫";
+                    }
+                    else{
+                    document.getElementById("카펫").src = `./${keyName}T.svg`;
+                    document.getElementById("카펫").dataset.itemName = keyName;
+                    console.log(document.getElementById("카펫").dataset.itemName);}
+                    break;
+                case "가구1":
+                    if (keyName == "가구10" || keyName =="가구11"){
+                        if(document.getElementById("가구11").dataset.itemName == keyName){
+                            document.getElementById("가구11").style.opacity ="0";
+                            document.getElementById("가구11").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구11").src = `./${keyName}T.svg`;
+                        document.getElementById("가구11").dataset.itemName = keyName;
+                        document.getElementById("가구11").style.cssText = `
+                        position: absolute;
+                        width: ${가구1Data[keyName][0]};
+                        height: ${가구1Data[keyName][1]};
+                        left: ${가구1Data[keyName][2]};
+                        top: ${가구1Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    else if (keyName == "가구12" || keyName =="가구13"){
+                        if(document.getElementById("가구12").dataset.itemName == keyName){
+                            document.getElementById("가구12").style.opacity ="0";
+                            document.getElementById("가구12").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구12").src = `./${keyName}T.svg`;
+                        document.getElementById("가구12").dataset.itemName = keyName;
+                        document.getElementById("가구12").style.cssText = `
+                        position: absolute;
+                        width: ${가구1Data[keyName][0]};
+                        height: ${가구1Data[keyName][1]};
+                        left: ${가구1Data[keyName][2]};
+                        top: ${가구1Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    else if (keyName == "가구14"){
+                        if(document.getElementById("가구13").dataset.itemName == keyName){
+                            document.getElementById("가구13").src = `./가구14-2T.svg`;
+                            document.getElementById("가구13").dataset.itemName = "가구14-2";
+                        }else if (document.getElementById("가구13").dataset.itemName == "undefined") {
+                        document.getElementById("가구13").src = `./${keyName}T.svg`;
+                        document.getElementById("가구13").dataset.itemName = keyName;
+                        document.getElementById("가구13").style.cssText = `
+                        position: absolute;
+                        width: ${가구1Data[keyName][0]};
+                        height: ${가구1Data[keyName][1]};
+                        left: ${가구1Data[keyName][2]};
+                        top: ${가구1Data[keyName][3]};
+                        z-index:99;
+                        `;}else{
+                            document.getElementById("가구13").style.opacity="0";
+                            document.getElementById("가구13").dataset.itemName = "undefined";
+                        }
+                    }
+                    else if (keyName == "가구15"){
+                        if(document.getElementById("가구14").dataset.itemName == keyName){
+                            document.getElementById("가구14").style.opacity ="0";
+                            document.getElementById("가구14").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구14").src = `./${keyName}T.svg`;
+                        document.getElementById("가구14").dataset.itemName = keyName;
+                        document.getElementById("가구14").style.cssText = `
+                        position: absolute;
+                        width: ${가구1Data[keyName][0]};
+                        height: ${가구1Data[keyName][1]};
+                        left: ${가구1Data[keyName][2]};
+                        top: ${가구1Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    break;
+                case "가구2":
+                        if (keyName == "가구20" || keyName =="가구21"||keyName=="가구22"){
+                        if(document.getElementById("가구21").dataset.itemName == keyName){
+                            document.getElementById("가구21").style.opacity ="0";
+                            document.getElementById("가구21").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구21").src = `./${keyName}T.svg`;
+                        document.getElementById("가구21").dataset.itemName = keyName;
+                        document.getElementById("가구21").style.cssText = `
+                        position: absolute;
+                        width: ${가구2Data[keyName][0]};
+                        height: ${가구2Data[keyName][1]};
+                        left: ${가구2Data[keyName][2]};
+                        top: ${가구2Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    else if (keyName == "가구24"){
+                        if(document.getElementById("가구23").dataset.itemName == keyName){
+                            document.getElementById("가구23").style.opacity ="0";
+                            document.getElementById("가구23").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구23").src = `./${keyName}T.svg`;
+                        document.getElementById("가구23").dataset.itemName = keyName;
+                        document.getElementById("가구23").style.cssText = `
+                        position: absolute;
+                        width: ${가구2Data[keyName][0]};
+                        height: ${가구2Data[keyName][1]};
+                        left: ${가구2Data[keyName][2]};
+                        top: ${가구2Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    else if (keyName == "가구25"||keyName=="가구23"){
+                        if(document.getElementById("가구24").dataset.itemName == keyName){
+                            document.getElementById("가구24").style.opacity ="0";
+                            document.getElementById("가구24").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구24").src = `./${keyName}T.svg`;
+                        document.getElementById("가구24").dataset.itemName = keyName;
+                        document.getElementById("가구24").style.cssText = `
+                        position: absolute;
+                        width: ${가구2Data[keyName][0]};
+                        height: ${가구2Data[keyName][1]};
+                        left: ${가구2Data[keyName][2]};
+                        top: ${가구2Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    break;
+                case "악세사리":
+                    if (keyName == "악세사리0" || keyName =="악세사리2"||keyName =="악세사리3"){
+                        if(document.getElementById("악세사리1").dataset.itemName == keyName){
+                            document.getElementById("악세사리1").style.opacity ="0";
+                            document.getElementById("악세사리1").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("악세사리1").src = `./${keyName}T.svg`;
+                        document.getElementById("악세사리1").dataset.itemName = keyName;
+                        document.getElementById("악세사리1").style.cssText = `
+                        position: absolute;
+                        width: ${악세사리Data[keyName][0]};
+                        height: ${악세사리Data[keyName][1]};
+                        left: ${악세사리Data[keyName][2]};
+                        top: ${악세사리Data[keyName][3]};
+                        transform: rotate(${악세사리Data[keyName][4]});
+                        z-index:102;
+                        `;}
+                    }
+                    else if (keyName == "악세사리1" || keyName =="악세사리5"){
+                        if(document.getElementById("악세사리2").dataset.itemName == keyName){
+                            document.getElementById("악세사리2").style.opacity ="0";
+                            document.getElementById("악세사리2").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("악세사리2").src = `./${keyName}T.svg`;
+                        document.getElementById("악세사리2").dataset.itemName = keyName;
+                        document.getElementById("악세사리2").style.cssText = `
+                        position: absolute;
+                        width: ${악세사리Data[keyName][0]};
+                        height: ${악세사리Data[keyName][1]};
+                        left: ${악세사리Data[keyName][2]};
+                        top: ${악세사리Data[keyName][3]};
+                        z-index:102;
+                        `;}
+                    }
+                    else if (keyName == "악세사리4"){
+                        if(document.getElementById("악세사리4").dataset.itemName == keyName){
+                            document.getElementById("악세사리4").style.opacity ="0";
+                            document.getElementById("악세사리4").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("악세사리4").src = `./${keyName}T.svg`;
+                        document.getElementById("악세사리4").dataset.itemName = keyName;
+                        document.getElementById("악세사리4").style.cssText = `
+                        position: absolute;
+                        width: ${악세사리Data[keyName][0]};
+                        height: ${악세사리Data[keyName][1]};
+                        left: ${악세사리Data[keyName][2]};
+                        top: ${악세사리Data[keyName][3]};
+                        z-index:102;
+                        `;}
+                    }
+                    break;
+            }
+        });
+    });
+}
+//상점아이템로딩
+const storeItemLoding =function(list){
+    store.innerHTML="";
+    Object.keys(list).forEach(item=>{
+        itemLoad(list[item][0],list[item][1],list[item][2],list[item][3],list[item][4],store,'1.6vh',list[item][5],"buyItem");
+    });
+}
+storeItemLoding(벽지list);
+setupPurchaseHandler();
+const 상점카테고리선택 = document.querySelectorAll(".상점카테고리선택");
+
+for(let k=0;k<상점카테고리선택.length;k+=1){
+    상점카테고리선택[k].addEventListener("click",()=>{
+        상점카테고리선택.forEach(btn => {
+            btn.style.backgroundColor = "#FFFFFF";
+            btn.style.color = "#D1916C";
+        });
+        상점카테고리선택[k].style.backgroundColor = "#D1916C";
+        상점카테고리선택[k].style.color = "#FFFFFF";
+        if(storelist[k]) {             // list가 존재하는지 체크
+        storeItemLoding(storelist[k]);
+        setupPurchaseHandler();
+    } else {
+        console.warn("해당 인덱스에 storelist가 없습니다:", k);
+    }
+    });
+}
+
+function setupPurchaseHandler(selector = ".buyItem", apiUrl = BACKEND_URL+"/api/purchase") {
+    const buyItems = document.querySelectorAll(selector);
+
+    buyItems.forEach(item => {
+        item.addEventListener("click", async () => {  // async 추가
+            const itemName = item.dataset.name;
+            const itemType = item.dataset.type;
+            const price = item.dataset.price;
+
+            if (confirm(`${itemName}를 구매하시겠습니까?`)) {
+                try {
+                    const res = await fetch(apiUrl, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                        body: JSON.stringify({ itemName, itemType, price })
+                    });
+
+                    const data = await res.json();
+
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        alert(data.message);
+                    }
+
+                    // fetch 완료 후 호출
+                    loadUserData();
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+        });
+    });
+}
+
+const 가구1Data = {
+    가구10:['11.4vh','11.4vh','6.4vh','10.9vh'],
+    가구11:['9.6vh','9.6vh','8.2vh','12.5vh'],
+    가구12:['8.3vh','6.4vh','32.3vh','17.8vh'],
+    가구13:['5.1vh','6.5vh','32.3vh','17.8vh'],
+    가구14:['17.2vh','15.9vh','37.6vh','26.2vh'],
+    가구15:['5.5vh','14.3vh','25.6vh','10.1vh']
+};
+const 가구2Data = {
+    가구20:['4vh','6.8vh','40.5vh','20.1vh'],
+    가구21:['4.6vh','6.4vh','41vh','20.5vh'],
+    가구22:['4.4vh','6.3vh','41vh','20.5vh'],
+    가구23:['4.1vh','5.5vh','47vh','21vh'],
+    가구24:['21.1vh','12.2vh','0vh','30.4vh'],
+    가구25:['3.7vh','9.5vh','46vh','17.18vh']
+};
+const 악세사리Data ={
+    악세사리0:['4.3vh','3.2vh','21vh','33.6vh','-62.32deg'],
+    악세사리1:['2.3vh','2.3vh','25vh','29vh','0deg'],
+    악세사리2:['3.4vh','1.8vh','21.6vh','35.3vh','0deg'],
+    악세사리3:['10.1vh','8.2vh','20.1vh','33.3vh','-4.84deg'],
+    악세사리4:['9.8vh','9vh','19vh','33.3vh','0deg'],
+    악세사리5:['5.2vh','2.2vh','21.5vh','28.8vh','0deg']
+}
+async function loadUserData() {
+    try {
+        const res = await fetch(BACKEND_URL+"/api/user/me",{credentials:"include"});
+        const data = await res.json();
+
+        if(data.error) {
+            alert(data.error);
+            return;
+        }
+
+        // 코인 표시
+        document.getElementById("box").textContent = "열매 "+data.user.coin+"개";
+      //console.log(data.userItems);
+
+        // foxhome아이템로드
+        console.log(data.userItems);
+        const userHave = data.userItems
+            .filter(item => item.itemType === '벽지')
+            .map(item => item.itemName + ".svg");
+        console.log(userHave);
+        foxHomeItemLoding(userHave);
+        console.log(data.user.foxhomeData);
+        //foxhomeData로드
+        if (data.user.foxhomeData["벽지"] !== "undefined"){
+        document.getElementById("벽지").src = `./${data.user.foxhomeData["벽지"]}T.svg`;
+        document.getElementById("벽지").dataset.itemName = data.user.foxhomeData["벽지"];
+        }
+        //console.log(document.getElementById("벽지").dataset.itemName);
+        document.getElementById("카펫").src = `./${data.user.foxhomeData["카펫"]}T.svg`;
+        document.getElementById("카펫").dataset.itemName = data.user.foxhomeData["카펫"];
+        //console.log(document.getElementById("카펫").dataset.itemName);
+        if(data.user.foxhomeData["가구1"].split(",")[0] !== 'undefined'){
+        document.getElementById("가구11").src = `./${data.user.foxhomeData["가구1"].split(",")[0]}T.svg`;
+        document.getElementById("가구11").dataset.itemName = data.user.foxhomeData["가구1"].split(",")[0];
+        document.getElementById("가구11").style.cssText = `
+        position: absolute;
+        width: ${가구1Data[data.user.foxhomeData["가구1"].split(",")[0]][0]};
+        height: ${가구1Data[data.user.foxhomeData["가구1"].split(",")[0]][1]};
+        left: ${가구1Data[data.user.foxhomeData["가구1"].split(",")[0]][2]};
+        top: ${가구1Data[data.user.foxhomeData["가구1"].split(",")[0]][3]};
+        z-index:100;
+        `;};
+        if (data.user.foxhomeData["가구1"].split(",")[1] !== 'undefined'){
+        document.getElementById("가구12").src = `./${data.user.foxhomeData["가구1"].split(",")[1]}T.svg`;
+        document.getElementById("가구12").dataset.itemName = data.user.foxhomeData["가구1"].split(",")[1];
+        document.getElementById("가구12").style.cssText = `
+        position: absolute;
+        width: ${가구1Data[data.user.foxhomeData["가구1"].split(",")[1]][0]};
+        height: ${가구1Data[data.user.foxhomeData["가구1"].split(",")[1]][1]};
+        left: ${가구1Data[data.user.foxhomeData["가구1"].split(",")[1]][2]};
+        top: ${가구1Data[data.user.foxhomeData["가구1"].split(",")[1]][3]};
+        z-index:100;
+        `;};
+        if (data.user.foxhomeData["가구1"].split(",")[2] !== 'undefined'){
+        document.getElementById("가구13").src = `./${data.user.foxhomeData["가구1"].split(",")[2]}T.svg`;
+        document.getElementById("가구13").dataset.itemName = data.user.foxhomeData["가구1"].split(",")[2];
+        document.getElementById("가구13").style.cssText = `
+        position: absolute;
+        width: ${가구1Data["가구14"][0]};
+        height: ${가구1Data["가구14"][1]};
+        left: ${가구1Data["가구14"][2]};
+        top: ${가구1Data["가구14"][3]};
+        z-index:99;
+        `;};
+        if (data.user.foxhomeData["가구1"].split(",")[3] == '가구15'){
+        document.getElementById("가구14").src = `./${"가구15"}T.svg`;
+        document.getElementById("가구14").dataset.itemName = "가구15";
+        document.getElementById("가구14").style.cssText = `
+        position: absolute;
+        width: ${가구1Data["가구15"][0]};
+        height: ${가구1Data["가구15"][1]};
+        left: ${가구1Data["가구15"][2]};
+        top: ${가구1Data["가구15"][3]};
+        z-index:100;
+        `;};
+        if(data.user.foxhomeData["가구2"].split(",")[0] !== 'undefined'){
+        document.getElementById("가구21").src = `./${data.user.foxhomeData["가구2"].split(",")[0]}T.svg`;
+        document.getElementById("가구21").dataset.itemName = data.user.foxhomeData["가구2"].split(",")[0];
+        document.getElementById("가구21").style.cssText = `
+        position: absolute;
+        width: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[0]][0]};
+        height: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[0]][1]};
+        left: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[0]][2]};
+        top: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[0]][3]};
+        z-index:100;
+        `;};
+        if (data.user.foxhomeData["가구2"].split(",")[1] !== 'undefined'){
+        document.getElementById("가구23").src = `./${data.user.foxhomeData["가구2"].split(",")[1]}T.svg`;
+        document.getElementById("가구23").dataset.itemName = data.user.foxhomeData["가구2"].split(",")[1];
+        document.getElementById("가구23").style.cssText = `
+        position: absolute;
+        width: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[1]][0]};
+        height: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[1]][1]};
+        left: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[1]][2]};
+        top: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[1]][3]};
+        z-index:100;
+        `;};
+        if (data.user.foxhomeData["가구2"].split(",")[2] !== 'undefined'){
+        document.getElementById("가구24").src = `./${data.user.foxhomeData["가구2"].split(",")[2]}T.svg`;
+        document.getElementById("가구24").dataset.itemName = data.user.foxhomeData["가구2"].split(",")[2];
+        document.getElementById("가구24").style.cssText = `
+        position: absolute;
+        width: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[2]][0]};
+        height: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[2]][1]};
+        left: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[2]][2]};
+        top: ${가구2Data[data.user.foxhomeData["가구2"].split(",")[2]][3]};
+        z-index:100;
+        `;};
+        if(data.user.foxhomeData["악세사리"].split(",")[0] !== 'undefined'){
+        document.getElementById("악세사리1").src = `./${data.user.foxhomeData["악세사리"].split(",")[0]}T.svg`;
+        document.getElementById("악세사리1").dataset.itemName = data.user.foxhomeData["악세사리"].split(",")[0];
+        document.getElementById("악세사리1").style.cssText = `
+        position: absolute;
+        width: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[0]][0]};
+        height: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[0]][1]};
+        left: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[0]][2]};
+        top: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[0]][3]};
+        transform:rotate(${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[0]][4]});
+        z-index:102;
+        `;};
+        if (data.user.foxhomeData["악세사리"].split(",")[1] !== 'undefined'){
+        document.getElementById("악세사리2").src = `./${data.user.foxhomeData["악세사리"].split(",")[1]}T.svg`;
+        document.getElementById("악세사리2").dataset.itemName = data.user.foxhomeData["악세사리"].split(",")[1];
+        document.getElementById("악세사리2").style.cssText = `
+        position: absolute;
+        width: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[1]][0]};
+        height: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[1]][1]};
+        left: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[1]][2]};
+        top: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[1]][3]};
+        z-index:102;
+        `;};
+        if (data.user.foxhomeData["악세사리"].split(",")[2] !== 'undefined'){
+        document.getElementById("악세사리4").src = `./${data.user.foxhomeData["악세사리"].split(",")[2]}T.svg`;
+        document.getElementById("악세사리4").dataset.itemName = data.user.foxhomeData["악세사리"].split(",")[2];
+        document.getElementById("악세사리4").style.cssText = `
+        position: absolute;
+        width: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[2]][0]};
+        height: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[2]][1]};
+        left: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[2]][2]};
+        top: ${악세사리Data[data.user.foxhomeData["악세사리"].split(",")[2]][3]};
+        z-index:102;
+        `;};
+        const 꾸미기카테고리선택 = document.querySelectorAll(".꾸미기카테고리선택");
+        꾸미기카테고리선택.forEach(btn=>{
+            btn.style.backgroundColor="#FFFFFF";
+            btn.style.color="#D1916C";
+        });
+        꾸미기카테고리선택[0].style.backgroundColor="#D1916C";
+        꾸미기카테고리선택[0].style.color="#FFFFFF";
+
+        꾸미기카테고리선택.forEach(btn =>{
+            btn.addEventListener("click",()=>{
+                꾸미기카테고리선택.forEach(btn=>{
+                    btn.style.backgroundColor="#FFFFFF";
+                    btn.style.color="#D1916C";
+                });
+                btn.style.backgroundColor="#D1916C";
+                btn.style.color="#FFFFFF";
+                itemType='';
+                data.userItems.forEach(item => {
+                    if(btn.textContent==item.itemType){
+                        itemType=item.itemType;
+                    }
+                });
+                const userHave = data.userItems
+                    .filter(item => item.itemType === itemType)
+                    .map(item => item.itemName + ".svg");
+                //console.log(userHave);
+                foxHomeItemLoding(userHave);
+            });
+        });
+
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+// 페이지 로딩 시 호출
+loadUserData();
+</script>
+
+</html>

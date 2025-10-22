@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>숲으로 가는 길</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+  <style>
+    
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+#background {
+      height: 100vh;
+      aspect-ratio: 9 / 16; /* 1080x1920 비율 유지 */
+      background-image:url('fw.png'); 
+      margin: 0 auto;
+      position: relative;
+      font-size: 2vh;
+       
+  background-size:cover; 
+  background-position:center; 
+  background-repeat:no-repeat;
+  overflow:hidden;
+    }
+
+#region {
+  position: absolute;
+  width: 20%;
+  height: 80%;
+  left: 1.5%;
+  top: 50%;
+  background: #4F6D5D;
+  transform: translateY(-50%);
+  border-radius: 0.5vh;
+
+}
+
+#ff {
+      position: absolute;
+      width: auto;
+      height: 6vh;
+      left: 81%;
+      top: 89%;
+      
+    }
+
+
+.region-select {
+  position: absolute;
+  width: 81.48%;
+  height: 6.04%;
+  left: 50%;
+  top: 12.76%;
+  transform: translateX(-50%);
+  
+}
+
+#not{
+  position: absolute;
+width: auto;
+height: 11.8vh;
+left: 50%;
+top: 10.5vh;
+transform: translateX(-50%);
+}
+
+#jjjd {
+  position: absolute;
+  width: 31.11%;
+  height: 4.58%;
+  left: 8.7%;
+  top: 2.79%;
+  background: #4F6D5D;
+  box-shadow: 0px 0.3vh 4px rgba(0, 0, 0, 0.25);
+  border-radius: 1vh;
+}
+
+#fonh {
+  font-family: 'Gugi', sans-serif;
+  font-size: 3.33vh;
+  text-align: center;
+  transform: translateY(0.05vh);
+  color: white;
+  font-weight: 400;
+}
+
+#program-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 65vh;
+  padding: 1%;
+  margin-top: 20.83%;
+  overflow-y: scroll; /* 수직 스크롤 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+}
+#program-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.card {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 1vh;
+  padding: 5%;
+  width: 100%;
+  height: 25%;
+  box-shadow: 0 0.18% 0.46% rgba(0, 0, 0, 0.2);
+  text-align: left;
+  line-height: 1;
+  font-family: sans-serif;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  line-height: 1 !important;
+}
+
+.card-text .line {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  display: block;
+  font-size: 1.8vh;
+ 
+
+}
+
+.label {
+  font-weight: bold;
+}
+
+
+  </style>
+</head>
+<body>
+  
+  
+
+  <div id="background">
+  <div id="jjjd">
+    <h1 id="fonh">지원 제도</h1>
+  </div>
+  <img src="not.png" id="not">
+  <div class="region-select">
+    
+    <div id="program-list"></div>
+    
+  </div>
+
+  <a href="./jisisal.html">
+    <img id="ff" src="./movmain.png">
+    </a>
+
+  <script>
+    const programData = {
+      JK:[
+        {
+          name:"디딤씨앗통장",
+          category: "경제적 지원",
+          summary:
+           "아동이 매월 최대 50만 원 저축 시 국가(지자체)가 월 10만 원 한도 내에서 2:1 비율로 매칭 지원\
+            만 0세부터 18세 미만까지 가입 가능하며, 저축금은 만 18세 이후 자립 목적에 따라 사용 가능",
+          contact:"출처:https://www.mohw.go.kr/menu.es?mid=a10711040800"},
+         {
+          name:"자립수당",
+          category: "경제적 지원",
+          summary:"자립준비청년에게 월 50만 원의 자립수당을 지급해 경제적 부담을 줄이고, \
+          안정적 사회 정착과 복지 향상을 지원함.\ ",
+          contact:"출처:https://www.mohw.go.kr/menu.es?mid=a10711040900"
+        },
+        {
+          name:"자립정착금",
+          category: "경제적 지원",
+          summary:"만 18세 이후 보호종료된 자립준비청년 대상 전국 17개 시.도에서 자립정착금 1000만원 이상 지급 \
+          (서울:2000만원,대전.경기.제주.경남:1500만원,부산:1200만원,그 외:1000만원)",
+          contact:"출처:https://www.mohw.go.kr/menu.es?mid=a10711041000"
+        },
+        {
+          name:"국민기초생활보장",
+          category: "경제적 지원",
+          summary:"자립준비청년 대상 생계급여 수습 자격완화, 시설 외 거주 보호연장아동 대상 개별급여 전환 지원\
+         * 보호종료 5년 간 소득조사시 사업근로소득 공제(60만원+나머지 소득의 30% 공제)",
+          contact:"출처:https://www.mohw.go.kr/menu.es?mid=a10711041000"
+        },
+         // 심리·정서 지원
+        {
+         name: "자조모임",
+         category: "심리·정서 지원",
+         summary: "자립준비청년으로 구성된 모임을 통해 보호아동 방문교육, 멘토링 등을 실시하여 관계형성 및 상호지지, 심리적 지지와 사회성 발달을 지원.",
+         contact: "출처: https://www.mohw.go.kr"
+        },
+        {
+          name: "심리상담",
+          category: "심리·정서 지원",
+          summary: "자립준비청년 대상 심리상담 및 정신건강 관리 서비스 제공. 필요시 치료비 지원.",
+          contact: "출처: https://www.mohw.go.kr"
+        },
+
+        // 주거 지원
+        {
+          name: "공공임대주택",
+          category: "주거 지원",
+          summary: "자립준비청년 대상 공공임대주택 우선공급. 입주 시 임대료 감면, 임대보증금 융자 지원.",
+          contact: "출처: https://www.mohw.go.kr"
+        },
+        {
+          name: "LH 유스타트 상담센터",
+          category: "주거 지원",
+          summary: "LH 유스타트 상담센터를 통해 자립준비청년 대상 맞춤형 주거상담 서비스 제공.",
+          contact: "출처: https://www.mohw.go.kr"
+        },
+
+        // 진학·취업 지원
+        {
+          name: "국가장학금",
+          category: "진학·취업 지원",
+          summary: "보호종료아동에게 국가장학금 지원.",
+          contact: "출처: https://www.mohw.go.kr"
+        },
+        {
+          name: "대학특례",
+          category: "진학·취업 지원",
+          summary: "보호종료아동 대상 대학 특별전형 지원. 2022년 기준 전국 78개교에서 운영.",
+          contact: "출처: https://www.mohw.go.kr"
+        },
+        {
+          name: "고용연계 확대",
+          category: "진학·취업 지원",
+          summary: "공공기관 및 민간기업과 협력하여 취업지원 확대. 청년고용정책, 청년내일채움공제 등을 활용하여 지원.",
+          contact: "출처: https://www.mohw.go.kr"
+        },
+
+        // 건강·법적 보호 강화
+        {
+          name: "전국 17개 시도 전담 공무원",
+          category: "건강·법적 보호강화",
+          summary: "자립준비청년 대상 맞춤형 상담 및 지원을 제공하는 전담 공무원 운영.",
+          contact: "출처: https://www.mohw.go.kr"
+        },
+        {
+          name: "보호기간 연장",
+          category: "건강·법적 보호강화",
+          summary: "보호종료아동의 보호기간을 최대 만 24세까지 연장 가능 (2022.6.22 시행).",
+          contact: "출처: https://www.mohw.go.kr"
+        },
+        {
+          name:"대중교통비 환급 지원(K-패스)",
+          category:"경제적 지원",
+          summary:"대중교통 절감 및 대중교통 이용 활성화를 위해 \
+          대중교통 이용 요금의 일정 비율을 환급해주는 사업 ",
+          contact:"추가 정보:https://blog.naver.com/gjbukgu/223556470774"
+        }
+      ],
+      seoul: [
+        {
+name: "어르신등 교통비 지원사업",
+summary: "강남구에 주민등록된 어르신 어린이 청소년 대상 교통비 지원, 분기별로 현금 지급",
+contact: "서울시 강남구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006014",
+},
+
+{
+name: "강남구 미취업 청년 어학 자격증 응시료 지원 사업",
+summary: "신청일 기준 강남구에 주민등록을 두고 거중중인 만 19세~39세 대상, 신청일 기준 미취업상태 또는 사업자등록 사실이 없는 자, 당해연도에 응시한 어학시험, 국가(공인)자격증 시험, 한국사능력검정시험, 본인 명의 계좌 지급(1인 최대 20만원)",
+contact: "서울시 강남구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006109&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "자활 사업 활성화 지원",
+summary: "자활 사업 참여자들의 자활 의지 및 자립 역량 강화, 년 단위 현금지급",
+contact: "서울시 도봉구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005752",
+},
+
+{
+name: "도봉구 청년 어학 및 자격증 시험 응시료 지원사업",
+summary: "도봉구 거주 19~45세 미취업 청년 응시료 지원, 년단위 현금 지급",
+contact: "서울시 도봉구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005612",
+},
+
+
+{
+name: "관악구 청년 어학 자격시험 응시료 지원",
+summary: "관악구 거주 만 19~39세 미취업청년에게 어학 자격시험 응시료 지원을 통해 취업준비비용 부담을 완화하고 취업역향을 강화하여 취업률 향상을 도모함, 1인당 연 1회 최대 10만원 응시료 실비 지원(응시시험 통합 1회 신청) ",
+contact: "서울시 관악구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006125&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "미취업 청년 자격증 응시료 지원 사업",
+summary: "강서구 거주 만 19~39세 미취업 청년이 해당 연도 어학시험 및 자격중 시험을 응시한 경우 응시료 최대 10만원 지급",
+contact: "서울시 강서구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006093&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "양천구 청년 국가자격시험 응시료 지원사업",
+summary: "19새~39세 양천구에 거주하는 청년, 당해 연도에 응시한 어학시험, 한국사시험, 국가자격시험 응시료 지원, 1인 최대 20만원 실비 지원, 신청횟수 제한 없음",
+contact: "서울시 양천구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006085&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "청년 자격증등 응시료 지원",
+summary: "중구 미취업 청년 대상 어학 자격 시험 응시료 지원, 연 10만원 이내 현금 지급",
+contact: "서울시 중구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006069&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "용산구 청년 국가자격증 및 어학시험 응시료 지원",
+summary: "자격증 취득을 통해 청년의 취업 경쟁력을 높이고 경제적 부담을 덜어주기 위해 월단위 현금지급",
+contact: "서울시 용산구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006008",
+},
+{
+  name: "희망두배 청년통장",
+  summary: "청년 대상 자산형성지원, 서울시 거주 만18세~만34세 청년중 부모소득 연 1억 미만 재산9억미만, 매월15만원을 2년 또는 3년간 저축하면 본인 저축액과 동일한 금액을 적립지원",
+  contact: "서울특별시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005247",
+},
+{
+  name: "성동구 청년 등 탈모 치료 지원",
+  summary: "성동구 거주 탈모증을 앓고 있는 만 39세 이하 구민, 1인당 연간 20만원 한도 지원",
+  contact: "서울시 성동구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005234",
+},
+{
+  name: "청년 취업 자격취득 활동 지원사업",
+  summary: "자격시험 응시비용 지원",
+  contact: "서울시 동대문구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005172",
+},
+{
+  name: "4차산업칼리지 청년인턴 지원사업",
+  summary: "서초구 미취업청년 대상 4차산업 관련 기업에 인턴연계(3개월)하여 인건비 지원",
+  contact: "서울시 서초구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004791",
+},
+{
+  name: "1인가구 생활불편해소 서비스",
+  summary: "1인 가구, 수선비, 이사 및 청소비 지원",
+  contact: "서울시 서초구, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004602",
+},
+
+      
+        
+
+        ],
+      gyeonggi: [
+      {
+  name: "오산시 미취업청년과 중소기업상생 사업",
+  summary: "오산시 청년을 정규직으로 채용한 경기도 소재 50인 미만 중소기업에게 청년 1인당 300만원 지원",
+  contact: "경기도 오산시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004759",
+},
+{
+  name: "군포시 청년 전월세 보증금 대출이자 지원사업",
+  summary: "대출잔액의 1%, 연 100만원 지원",
+  contact: "경기도 군포시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004706",
+},
+{
+  name: "청년 면접합격 응원세트",
+  summary: "면접정장대여(최대 5회), 이력서 사진촬영(최대 3만원), 헤어메이크업(최대 3만원), 교재비 지원(최대 3만원)",
+  contact: "경기도 오산시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004700",
+},
+{
+  name: "평택시 청년 전월세보증금 대출이자 지원",
+  summary: "청년 주거비 부담 완화 및 사회진입을 지원, 연 최대 200만원 지원",
+  contact: "경기도 평택시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004712",
+},
+{
+  name: "청년 주거금융지원(고양 청년둥지론)",
+  summary: "국민기초생활수급 대상자 대상",
+  contact: "경기도 고양시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004692",
+},
+{
+  name: "화성시 무상교통 사업",
+  summary: "6~23세 및 65세 이상 화성시민, 시내 마을버스 요금지원",
+  contact: "경기도 화성시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004057",
+},
+{
+  name: "대학생 학자금 대출이자 지원(경기도)",
+  summary: "대학졸업 후 10년까지, 대출이자 지원, 경기민원24에서 신청기간 내 신청",
+  contact: "경기도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00003574",
+},
+
+        {
+          name: "청년기본소득",
+          summary: "정착금, 취업지원, 주거지원 등 종합 자립 지원",
+          contact: "경기도청 아동청소년과"
+        },
+        {
+        name: "안산시 청년 부동산 중개보수 및 이사비 지원사업",
+        summary: "청년 가구의 주거비 부담 완화를 위해 1회 현금 지급",
+        contact: "경기도 안산시",
+        },
+        {
+          name: "청년노동자 지원사업",
+          summary: "정착금, 취업지원, 주거지원 등 종합 자립 지원",
+          contact: "경기도청 아동청소년과"
+        },
+        {
+          name: "경기도 대학생 학자금 대출이자 지원",
+          summary: "정착금, 취업지원, 주거지원 등 종합 자립 지원",
+          contact: "경기도청 아동청소년과"
+        },
+        {
+          name: "군복무 경기청년 상해보험",
+          summary: "정착금, 취업지원, 주거지원 등 종합 자립 지원",
+          contact: "경기도청 아동청소년과"
+        },
+        {
+          name: "경기도 청년면접수당",
+          summary: "정착금, 취업지원, 주거지원 등 종합 자립 지원",
+          contact: "경기도청 아동청소년과"
+        },
+        {
+          name: "경기도 고립.은둔 청년 지원사업",
+          summary: "정착금, 취업지원, 주거지원 등 종합 자립 지원",
+          contact: "경기도청 아동청소년과"
+        },
+        {
+          name: "경기청년 결혼 지원사업",
+          summary: "정착금, 취업지원, 주거지원 등 종합 자립 지원",
+          contact: "경기도청 아동청소년과"
+        },
+        {
+  name: "경기도 청년노동자 통장",
+  summary: "경기도 거주 만19세~39세 청년중 기준중위소득 120% 이하 가구 청년노동자, 매월10만원을 2년간 저축하면 만기시 이자포함 최대 580만원 목돈 제공",
+  contact: "경기도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004207",
+},
+{
+  name: "신혼부부 주택 전월세자금 대출이자 지원 사업",
+  summary: "세대원 합산 연소득 8,000만원 이하인 무주택 신혼부부에게 전월세자금 대출 이자의 2%, 가구당 최대 200만원 지원",
+  contact: "경기도 이천시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005188",
+},
+{
+  name: "의왕시 청년취업활동지원금 지급사업",
+  summary: "청년에게 취업준비금을 지급, 생애 1인 최대 100만원 한도",
+  contact: "경기도 의왕시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005292",
+},
+{
+  name: "청년 취업사진 촬영비 지원",
+  summary: "1인당 연 5만원 이내에서 개인별 계좌로 실비 지급",
+  contact: "경기도 의왕시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005295",
+},
+{
+  name: "자활민관합동연찬회",
+  summary: "직접지원",
+  contact: "경기도 성남시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005002",
+},
+{
+  name: "청년 학자금대출 장기연체자 학자금 상환 지원사업",
+  summary: "50% 이상 상환한 장기연체자, 기준중위소득 150% 이하, 1인당 최대 100만원 지원",
+  contact: "경기도 군포시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004831",
+},
+{
+  name: "안산시 대학생 본인부담 등록금 반값 지원",
+  summary: "기초생활수급자, 본인부담 등록금의 50% 지원, 최대8회, 학기당 100만원 한도",
+  contact: "경기도 안산시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004858",
+},
+{
+  name: "경기청년 갭이어 프로그램 운영",
+  summary: "1인 최대 500만원 지원",
+  contact: "경기도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005170",
+},
+
+        {
+name: "전세보증금 반환보증 보증료 지원",
+summary: "전세보증금반환보증에 가입한 임차보증금 3억원 이하 무주택 임차인 전세 보증금 지원, 최대 30만원 현금 지급",
+contact: "경기도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005426",
+},
+
+{
+name: "청소년 자립 두배 통장",
+summary: "만 15세 ~24세 가정 밖 청소년, 청소년 복지시설에서 1년 이상 거주 또는 지원 받은 청소년, 기본 2년(최대 6년) 매월 저축액의 2배(월 최대 20만원) 지원",
+contact: "경기도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005405",
+},
+
+{
+name: "경기 청년 역량강화 기회지원 사업",
+summary: "경기도내 거주 청년, 어학 자격시험 응시료 지원, 수시로 현금 지급",
+contact: "경기도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005974",
+},
+
+{
+name: "경기북부 특화형 일자리 매칭 패키지 사업",
+summary: "경기북부 특성화고 전문대학교 학생 60명 대상, 청년 청년 매칭 기업에 참여자 인건비 지원",
+contact: "경기도일자리재단 북부광역사업팀, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006126&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "청년주거안심서비스",
+summary: "만 15~39세 이하, 안산시 거주(예정) 청년 누구나 소득·재산 조건 없이 1회 지원 가능, 전문가의 주거 상담 및 컨설팅(입지·현황 분석, 정책 안내, 주거지 방문 등) 생활용품 3종(도어매트, 신발장, 쓰레기통) 제공",
+contact: "경기도 안산시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006139&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "안산시 청년 부동산 중개보수 및 이사비 지원사업",
+summary: "청년 가구의 주거비 부담 완화를 위해 1회 현금 지급",
+contact: "경기도 안산시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006041",
+},
+
+{
+name: "취업준비청년 정장대여 사업",
+summary: "취업 준비 청년의 경제적 부담을 완화하고 구직활동 및 사회 진출을 촉진하고자 취업면접 예정인 19~30세 수원시 청년, 신청일 기준 수원시 주민등록자에게 정장(상.하의), 셔츠 블라우스 넥타이 무료 대여(4일/연3회)",
+contact: "경기도 수원시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006136&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "청년 월세 지원",
+summary: "경제적 어려움을 겪고 있는 청년들에게 월 임차료를 지원하여 주거비 부담을 완화하고 생활 안정 도모에 기여, 신청일 기준 수원시 거주 19~39세 1인 가구 미혼 청년, 기준 중위소득 120% 이하 임차보증금 1억원 이하이면서 월세 60만원 이하 민간 건물 거주 무주택자, 청년 본인에게 계좌이체",
+contact: "경기도 수원시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006135&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "수원 청년 주거지원 매니저 운영",
+summary: "청년 대상 주거 관련 상시 상담 및 정보 제공, 월단위 프로그램/서비스 지원",
+contact: "경기도 수원시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005421",
+},
+
+{
+name: "역세권 새빛 청년존",
+summary: "청년 대상 역세권 LH매입 임대주택을 시중 40~50% 수준으로 제공",
+contact: "경기도 수원시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005413",
+},
+
+{
+name: "화성시 청년 부동산 중개보수 및 이사비 지원",
+summary: "2024년 1월1일 이후부터 공고일 사이 화성시로 전입 및 화성시 내에서 이사 후 전입신고 완료한 19세~39세 무주택 청년 대상(세대원이 있는 경우 세대원 모두 무주택이어야 함) 기준 중위소득 180% 이하, 중개보수 및 이사비 포함하여 가구당 최대 50만원 한도 내 실비 지원(생애 1회)",
+contact: "경기도 화성시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006115&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "화성시 청년 전월세 보증금 대출이자 지원사업",
+summary: "청년주거비 지원을 통한 주거 안정, 대출액의 2%내 최대 200만원 현금지급",
+contact: "경기도 화성시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005439",
+},
+
+{
+name: "가평군 청년 1인 가구 월세 지원 사업",
+summary: "청년들의 지역 정착을 유도하고 순유출을 방지하고자 관내 청년들에게 월세 자금을 지원, 분기별로 현금 지급",
+contact: "경기도 가평군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005981",
+},
+
+{
+name: "청년 면접 지원 사업",
+summary: "청년들의 면접 응시시에 비용 지원, 1인당 최대 연 3회(회당 10만원 이내) 현금지급",
+contact: "경기도 가평군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005976",
+},
+
+{
+name: "여주시 청년 창업자 임차료 지원",
+summary: "청년 장업자의 임차료를 지원, 월별로 현금 지급",
+contact: "경기도 여주시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005751",
+},
+
+{
+name: "전세사기 피해자 주거 안정 지원",
+summary: "전세사기 피해자에게 전세보증금 월세 소송수행경비 각각 1회성 현금지급",
+contact: "경기도 파주시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005929",
+},
+
+{
+name: "안성시 저소득층 무상 교통 지원 사업",
+summary: "안성시에 거주하는 6세~64세 저소득층 안성 시민 대상 교통비 지원, 월단위 현금(지역화폐) 지급",
+contact: "경기도 안성시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005491",
+},
+
+{
+name: "청년 면접 정장 무료 대여 사업",
+summary: "면접 정장을 무료로 대여, 년 단위 현물대여",
+contact: "경기도 과천시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005376",
+}],
+
+
+        
+      gsnd: [
+      {
+  name: "청년주택 임차보증금 이자 지원사업",
+  summary: "대출이자 지원",
+  contact: "경상남도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004724",
+},
+{
+  name: "청년 누비자 이용요금 지원사업",
+  summary: "창원시에 거주하는 청년들의 문화복지 증진 및 누비자 이용 활성화",
+  contact: "경상남도 창원시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004808",
+},
+{
+  name: "청년 신혼부부 전세보증금 반환보증 보증료 지원사업",
+  summary: "전세보증금 반환보증 보증료 전액 지원",
+  contact: "경상남도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004725",
+},
+{
+  name: "공공근로사업",
+  summary: "기준중위소득 60% 이하, 취업취약계층 실업자에게 구직기간 동안 한시적으로 공공부문의 일자리를 제공하여 생계보조를 통한 사회 안전망 역할 및 근로 기회 부여",
+  contact: "경상남도 밀양시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004165",
+},
+{
+  name: "자활 및 생활안정기금사업",
+  summary: "기초생활수급자, 자활기업 등 신청에 따라 저금리의 융자금을 지원하여 자활 사업 안정화에 기여",
+  contact: "경상남도 산청군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00000004",
+},
+{
+  name: "저소득틈새지원사업",
+  summary: "복지사각지대에 놓인 저소득 대상자의 생계 의료 지원",
+  contact: "경상남도 거제시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00003342",
+},
+{
+  name: "사천시 기초생활보장수급자 장학금 및 장학보조금 지급",
+  summary: "관내에 거주하는 수급자 또는 긴급구호가 필요한 위기가정의 자녀로서 초중고등학교와 대학교에 재학 중인 학생에 대한 장학금과 장학보조금(수학여행비 등) 지급",
+  contact: "경상남도 사천시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00002885",
+},
+{
+  name: "근로능력평가용 진단서 발급비용 지원",
+  summary: "생계급여만으로 생활하는 기초수급자에게 근호능력평가용 진단서 발급 비용 지원",
+  contact: "경상남도 하동군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00001625",
+},
+{
+  name: "저소득층 위문",
+  summary: "기준중위소득 100% 이하, 가구당 5만원 지원, 사회복지 생활시설 입소자 위문품 구입 전달",
+  contact: "경상남도 산청군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00000573",
+},
+{
+  name: "진주시 대학생 학자금 대출이자 지원사업",
+  summary: "대학생 학자금 대출이자 지원",
+  contact: "경상남도 진주시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004309",
+},
+{
+  name: "함안 정착 청년통장사업",
+  summary: "5년간 매월 50만원(보닝10만원+기업10만원+군지원금30만원) 저축시 만기 저축액 3천만원+이자",
+  contact: "경상남도 함안군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00003937",
+},
+{
+  name: "경상남도 청년구직활동 지원사업",
+  summary: "구직활동 수당 지급(월50만원씩 4개월간)",
+  contact: "경상남도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00003915",
+},
+
+      {
+  name: "청년 이사비용 지원사업",
+  summary: "만 18~49세 이하, 가구당 중위소득 180% 이하 이사비용 지원",
+  contact: "경상남도 의령군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005238",
+},
+{
+  name: "모다드림 청년통장 지원사업",
+  summary: "도내 18~39세 월소득 289만원 이하 가구 소득 130% 이하인 청년, 도시군이 매월 20만원 적립 후 2년 만기시 청년 지원금 480만원 지급",
+  contact: "경상남도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005192",
+},
+{
+  name: "저소득층 입사 채용검진비 지원",
+  summary: "19~39세 기초생활수급자, 입사채용검진 후 신청할 경우 1회 최대 7만원 지원",
+  contact: "경상남도 함안군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005264",
+},
+{
+  name: "경상남도 청년 월세 지원사업",
+  summary: "10개월간 월 최대 15만원 임차료 지원",
+  contact: "경상남도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005112",
+},
+{
+  name: "학자금 대출 신용회복 지원사업",
+  summary: "한국장학재단을 통한 일괄지원",
+  contact: "경상남도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004871",
+},
+{
+  name: "청년 주거자금 대출이자 지원사업",
+  summary: "1회성 현금지급",
+  contact: "경상남도 산청군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004902",
+},
+
+        {
+name: "청년 구직 활동 수당 지원사업",
+summary: "취업 준비에 수반되는 실질적인 비용 지원, 월 50만원씩 4개월 지급 ",
+contact: "경상남도 사천시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005760",
+},
+
+{
+name: "거창형 청년수당",
+summary: "19~45세 이하 미혼 청년 결혼 장려 및 지역 정착 도모를 위해 1인 200만원 현금지급",
+contact: "경상남도 거창군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005532",
+},
+
+{
+name: "창원 새내기 지원금",
+summary: "창원시 관내 고교를 졸업한 대학 신입생들에게 1인 최대 100만원 현금 지급",
+contact: "경상남도 창원시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005599",
+},
+
+{
+name: "청년 자격증 응시료 지원 사업",
+summary: "자격증 응시료 지원, 1인 연 2회, 최대 10만원 지급",
+contact: "경상남도 진주시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005731",
+},
+
+      ],
+      gsbd: [
+      {
+  name: "청년취업날개 코디네이터",
+  summary: "취업면접정장대여(연3회)",
+  contact: "경상북도 경산시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00000436",
+},
+{
+  name: "저소득주민 주거안정 지원사업",
+  summary: "영구임대아파트 입주보증금 세대당 최대 200만원까지 융자",
+  contact: "경상북도 안동시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00002429",
+},
+{
+  name: "저소득주민 생활안정기금",
+  summary: "저소득주민의 생활안정을 위해 전세 및 영구임대아파트 입주보증금을 지원",
+  contact: "경상북도 문경시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00002439",
+},
+{
+  name: "(자체사업)저소득 주민생활안정자금 지원",
+  summary: "저소득주민 생활 안정 및 주거안정 도모, 가구당 1200만원 한도 융자",
+  contact: "경상북도 경산시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00001770",
+},
+{
+  name: "저소득층 기초생활보장 지원",
+  summary: "영구임대아파트 공동전기료 지원",
+  contact: "경상북도 포항시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00001700",
+},
+     
+        {
+name: "구미시 청년일자리 근속장려금 지원 사업",
+summary: "구미시에 주소지를 둔 만 19~45세 청년 중 구미시 소재 중소기업에 2년 이상 근속한 경우 반기별로 인센티브 지역화폐 제공,",
+contact: "경상북도 구미시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006067",
+},
+
+{
+name: "청년 전월세 보증금 대출이자 지원사업",
+summary: "임차보증금 대출이자를 지원, 분기별 최대 연3.0% 이자 지원",
+contact: "경상북도 구미시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005696",
+},
+
+{
+name: "청년월세 지원사업",
+summary: "19~39세 무주택 미혼 청년 근로자 월세 지원, 월 최대 10만원 최대 24개월 현금 지급",
+contact: "경상북도 구미시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005691",
+},
+
+{
+name: "영천시 미취업 청년 역량강화 지원 사업",
+summary: "영천시 미취업 청년에게 어학 및 자격증 취득 비용 지원, 응시료 실비 지원 수시로 최대 30만원 현금 지급",
+contact: "경상북도 영천시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005869",
+},
+
+{
+name: "영천시 청년 이사 비용 지원사업",
+summary: "청년 이사비용 지원, 최대 50만원까지 1회성 현금지급",
+contact: "경상북도 영천시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005865",
+},
+
+{
+name: "영천시 청년근로자 월세 지원",
+summary: "청년 주거비 부담 경감을 위해 월세지원금 20만원 최대 12회 매원 25일 현금 지급",
+contact: "경상북도 영천시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005860",
+},
+
+{
+name: "자격증 취득 교육 지원사업",
+summary: "울진군에 거주하느느 19세~65세 국민내일배움카드를 소지한 구직자를 대상으로 자격증 취득 비용 지원, 40만원 한도 지원",
+contact: ";경상북도 울진군, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005745",
+},
+
+],
+      jjd: [
+      {
+  name: "제주 더 큰 인재 맞춤 훈련수당",
+  summary: "만 15세~34세 청년, 중위소득 180% 미만, 월100만~150만원 지원",
+  contact: "제주특별자치도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00004908",
+},
+
+      {
+name: "제주 청년 이사비 지원",
+summary: "청년 가구에 이사비를 지원, 이사비용 40만원 이내 1회성 현금지급",
+contact: "제주특별자치도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005474",
+},
+
+{
+name: "제주 청년 희망충전 월세 지원",
+summary: "제주도 거주 35~39세 무주택 청년 세대주에게 월 20만원씩 현금지급",
+contact: "제주특별자치도, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00006076&wlfareInfoReldBztpCd=02",
+},
+
+{
+name: "제주시 취업준비 청년 자격등 등 응시료 지원사업",
+summary: "자격증 등 응시료 지원, 1회 응시료 현금지급",
+contact: "제주도 제주시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005965",
+},
+
+
+{
+name: "서귀포시 취업준비 청년 자격증 등 응시료 지원사업",
+summary: "취업에 필요한 어학 자격시험등의 응시료를 지원, 월단위 10만원 한도 내에서 응시료 실비 현금지급",
+contact: "제주도 서귀포시, https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00005964",
+},
+
+      ]
+    };
+
+    async function loadUserRegionPrograms() {
+        try {
+          // 1️⃣ 로그인된 사용자 주소 가져오기
+          const res = await fetch("http://localhost:3000/api/user/address", {
+            credentials: "include" // 세션 쿠키 포함
+          });
+          const data = await res.json();
+          if (!data.address) {
+            alert("주소 정보를 불러올 수 없습니다.");
+            return loadPrograms("JK"); // 기본 전국
+          }
+
+          // 2️⃣ 주소에서 도만 추출
+          const regionText = data.address.split("/")[0]; // "경기도/성남시" → "경기도"
+
+          // 3️⃣ 지역 매핑
+          const regionMap = {
+            "서울특별시": "seoul",
+            "경기도": "gyeonggi",
+            "경상남도": "gsnd",
+            "경상북도": "gsbd",
+            "제주특별자치도": "jjd"
+          };
+          const regionKey = regionMap[regionText] || "JK";
+
+          // 4️⃣ 프로그램 표시
+          
+          loadPrograms(regionKey);
+          
+        } catch (err) {
+          console.error("주소 불러오기 오류:", err);
+          loadPrograms("JK");
+        }
+      }
+
+      function loadPrograms(region) {
+  const list = document.getElementById("program-list");
+  list.innerHTML = "";
+
+  // 전국 + 선택 지역 배열 만들기
+  const regionsToShow = ["JK"];
+  if (region !== "JK") regionsToShow.push(region);
+
+  regionsToShow.forEach(r => {
+    if (!programData[r]) return;
+
+    programData[r].forEach(program => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="card-text">
+          <div class="line"><strong>${program.name}</strong></div>
+          <div class="line">요약: ${program.summary}</div>
+          <div class="line">문의: ${program.contact}</div>
+        </div>
+      `;
+      list.appendChild(card);
+    });
+  });
+}
+
+      window.onload = loadUserRegionPrograms;
+    </script>
+</body>
+</html>

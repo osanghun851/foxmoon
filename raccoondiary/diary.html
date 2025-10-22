@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>너구리 일기장</title>
+    <link rel="stylesheet" type="text/css" href="./diary.css">
+    <link href="https://fonts.googleapis.com/css2?family=Harmattan&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="box">
+    <form name = "frmd" onsubmit="event.preventDefault(); location.href='./racdiary.html';">
+    <a href="ra.html"><img src="raccoon.png" id = "raccoonp"></a>
+    <div id="question">
+    <img src="light.png" id = "light">
+    <span id="pquestion">&nbsp;&nbsp;&nbsp;오늘 하루 중 가장 편안했던 시간은 언제인가요</span><span id="q">?</span>
+    </div>
+    <div id="past">너구리 일기장</div>
+    <fieldset id = "fdiary">
+    <input type="text" name ="tdiary" id="tdiary" maxlength="16">
+    <br><br>
+    <textarea name = "cdiary" id="cdiary" maxlength="500"></textarea>
+    <img src="submit.png" id = "submit">
+    <a href="../mainmypage/index.html"><img src="movmain.png" id = "movmain"></a>
+    </fieldset>
+    </form>
+    </div>
+    <script src="./diary.js"></script>
+    <script>
+      document.getElementById("submit").addEventListener("click", async () => {
+        
+        const title = document.getElementById("tdiary").value;
+        const content = document.getElementById("cdiary").value;
+      
+        // localStorage에 저장
+        localStorage.setItem("tdiary", title);
+        localStorage.setItem("cdiary", content);
+      
+        try {
+          // 서버로 POST 요청 → 코인 지급
+          const res = await fetch("http://localhost:3000/api/scoreup", {
+            method: "POST",
+            credentials: "include", // 세션 쿠키 전송
+          });
+          const data = await res.json();
+          if (res.ok) {
+            console.log("✅ 코인 지급됨:", data.coin);
+          } else {
+            console.warn("⚠️ 코인 지급 실패:", data.error);
+          }
+        } catch (err) {
+          console.error("❌ 서버 요청 실패:", err);
+        }
+        alert("열매 10개가 지급되었습니다.")
+        // 페이지 이동
+        location.href = "./racdiary.html";
+      });
+      </script>
+      
+</body>
+</html>

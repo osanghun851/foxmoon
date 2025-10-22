@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영상 시청</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      height: 100vh; width: 100vw;
+      display: flex; justify-content: center; align-items: center;
+      background: #ffffffcf;
+      font-family: 'Gugi', sans-serif;
+    }
+
+    .video-page {
+      position: relative;
+      width: 100%;
+      max-width: calc(100vh * 9 / 16);
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(
+        to bottom,
+        #ECECEC 0,
+        #ECECEC 20%,
+        #a7b8d1 20%,
+        #a7b8d1 85.7143%,
+        #ECECEC 85.7143%,
+        #ECECEC 100%
+      );
+    }
+
+    /* 상단 제목 */
+    .video-top {
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      height: 20%;
+      display: flex; align-items: center; justify-content: flex-start;
+      padding: 2.2vh 2vh 0 1.5vh;
+      box-sizing: border-box;
+    }
+
+    .video-header {
+      background: #2c3e50;
+      color: #fff;
+      border-radius: 1vh;
+      padding: 0.8vh 2vh;
+      font-size: 2.3vh;
+      box-shadow: 0 0.8vh 1.4vh rgba(0,0,0,.2);
+    }
+
+    /* 하늘색 영역 */
+    .blue-zone {
+      position: absolute;
+      left: 0; right: 0; top: 20%;
+      height: 65.7143%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      align-items: center;
+    }
+
+    /* 말풍선 + 부엉이 */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 15.5vh;
+      padding: 0;
+      overflow: visible;
+    }
+
+    .owl-img {
+      position: absolute;
+      right: 0;
+      top: -6.5vh;
+      height: 15vh;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .speech {
+      position: absolute;
+      left: 3.6vh;
+      top: 1.6vh;
+      width: auto;
+      height: 7vh;
+      background: url('assets/talk.png') no-repeat left center / 100% 100%;
+      display: flex; align-items: center;
+      padding: 0 2vh;
+      color: #333;
+      font-size: 1.8vh;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+
+    /* 영상 */
+    .video-wrap {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(-3.2vh);
+    }
+
+    .video-card {
+      position: relative;
+      width: 88%;
+      background: #fff;
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: 0 0.6vh 1.4vh rgba(0,0,0,.2);
+    }
+
+    .video-card::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%;
+    }
+
+    #youtube-player, .video-card iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* 하단 버튼 */
+    .actions {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0 2.4vh 0;
+    }
+
+    .complete-btn {
+      background: #eceff3;
+      color: #25313c;
+      border: none;
+      border-radius: 0.8vh;
+      padding: 0.8vh 1.6vh;
+      font-size: 1.7vh;
+      cursor: pointer;
+      font-family: 'Gugi', sans-serif;
+      box-shadow: 0 0.4vh 1vh rgba(0,0,0,.18);
+    }
+
+    .back-btn {
+      position: absolute;
+      right: 5vh;
+      bottom: 2.4vh;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .back-btn img {
+      width: 4vh;
+      height: 4vh;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="video-page">
+    <!-- 상단 제목 -->
+    <div class="video-top">
+      <div class="video-header">영상 시청</div>
+    </div>
+
+    <!-- 하늘색 영역 -->
+    <div class="blue-zone">
+      <!-- 부엉이 & 말풍선 -->
+      <div class="hero">
+        <div class="speech" id="quote"></div>
+        <img class="owl-img" src="assets/owl.png" alt="부엉이">
+      </div>
+
+      <!-- 영상 -->
+      <div class="video-wrap">
+        <div class="video-card">
+          <!-- API가 제어할 대상 (div 또는 iframe 가능) -->
+          <div id="youtube-player"></div>
+        </div>
+      </div>
+
+      <!-- 버튼 -->
+      <div class="actions">
+        <button id="complete-btn" class="complete-btn" style="display:none;">
+          수강완료
+        </button>
+        <button class="back-btn" onclick="location.href='index.html'">
+          <img src="assets/back-btn.png" alt="뒤로가기">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- YouTube IFrame Player API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    // 말풍선 랜덤 메시지
+    const messages = [
+      "지금도 충분히 잘하고 있습니다.",
+      "조금 느려도 괜찮습니다",
+      "당장 빛나지 않아도 괜찮아요.",
+      "깊이 뿌리내리는 시간일 뿐이야.",
+      "지금 흘리는 땀이 네 미래를 바꿀거야."
+    ];
+    document.getElementById('quote').innerText =
+      messages[Math.floor(Math.random() * messages.length)];
+
+    // URL 파라미터에서 video ID 읽기
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get('video');
+
+    // 완료 버튼: 끝난 뒤에만 보임, 클릭 시 index.html 이동
+    const completeBtn = document.getElementById('complete-btn');
+    completeBtn.addEventListener('click', () => {
+      try {
+          // 서버로 POST 요청 → 코인 지급
+          const res =fetch("http://localhost:3000/api/scoreup", {
+            method: "POST",
+            credentials: "include", // 세션 쿠키 전송
+          });
+          const data =res.json();
+          if (res.ok) {
+            console.log("✅ 코인 지급됨:", data.coin);
+          } else {
+            console.warn("⚠️ 코인 지급 실패:", data.error);
+          }
+        } catch (err) {
+          console.error("❌ 서버 요청 실패:", err);
+        }alert("열매 10개가 지급되었습니다.")
+      location.href = 'index.html';
+    });
+
+    let player;
+
+    // API 준비되면 실행되는 전역 콜백 (이 함수 이름은 고정)
+    function onYouTubeIframeAPIReady() {
+      // videoId가 없으면 버튼이 안나오므로 기본값 방지용 (옵션)
+      const idToPlay = videoId || 'dQw4w9WgXcQ';
+
+      player = new YT.Player('youtube-player', {
+        videoId: idToPlay,
+        playerVars: {
+          autoplay: 1,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1
+        },
+        events: {
+          onStateChange: onPlayerStateChange
+        }
+      });
+    }
+
+    // 플레이어 상태 변화 감지
+    function onPlayerStateChange(event) {
+      // 0 = ENDED (영상이 끝남)
+      if (event.data === YT.PlayerState.ENDED) {
+        completeBtn.style.display = 'inline-block';
+      }
+    }
+  </script>
+</body>
+</html>
