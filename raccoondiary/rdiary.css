@@ -5,7 +5,7 @@
 }
 
 #box {
-  height: 100vh;
+  height: 100dvh;
   aspect-ratio: 9 / 16;
   background-color: black;
   margin: 0 auto;
