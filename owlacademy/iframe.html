@@ -224,7 +224,7 @@ html, body {
     completeBtn.addEventListener('click', () => {
       try {
           // 서버로 POST 요청 → 코인 지급
-          const res =fetch("http://localhost:3000/api/scoreup", {
+          const res =fetch("https://foxmoonbackend.onrender.com/api/scoreup", {
             method: "POST",
             credentials: "include", // 세션 쿠키 전송
           });

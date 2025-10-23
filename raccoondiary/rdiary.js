@@ -122,7 +122,7 @@ clone.style.color = "#000";
 
 async function getGPT35Comment(title, content) {
   try {
-    const res = await fetch("http://localhost:3000/api/gpt-comment", {
+    const res = await fetch("https://foxmoonbackend.onrender.com/api/gpt-comment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, content }),

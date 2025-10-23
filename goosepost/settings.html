@@ -306,7 +306,7 @@ newsCheckbox.addEventListener("change", () => {
     
 
     try {
-      const res = await fetch("http://localhost:3000/api/goosettings", {
+      const res = await fetch("https://foxmoonbackend.onrender.com/api/goosettings", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({

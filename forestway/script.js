@@ -127,7 +127,7 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
   const query = `${region} ${district} ${keyword}`;
 
   try {
-    const res = await fetch(`http://localhost:3000/api/search/local?query=${encodeURIComponent(query)}`);
+    const res = await fetch(`https://foxmoonbackend.onrender.com/api/search/local?query=${encodeURIComponent(query)}`,{ credentials: 'include' });
     const data = await res.json();
 
     if (!data.items || data.items.length === 0) {

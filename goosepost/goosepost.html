@@ -172,7 +172,7 @@ select {
     let workItems = []; 
     async function loadUserData() {
       try {
-        const res = await fetch('http://localhost:3000/api/user-data', { credentials: 'include' });
+        const res = await fetch('https://foxmoonbackend.onrender.com/api/user-data', { credentials: 'include' });
         if (!res.ok) throw new Error('데이터 로드 실패');
         const data = await res.json();
         leaseItems = data.leaseItems || [];
