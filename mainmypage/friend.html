@@ -430,48 +430,61 @@ try {
 } catch (err) {
   const text = await res.text(); // JSON 아니면 텍스트로 출력
   console.log("응답 본문(텍스트):", text);
+  return; // JSON이 아니면 더 진행 안 함
 }
 
-  console.log(data);
-  const friendsUl = document.getElementById("내친구목록box");
-  friendsUl.innerHTML = "";
+// ✅ 안전하게 friends 또는 requests 중 있는 데이터로 설정
+const friends = data?.friends || data?.requests || [];
 
-  data.friends.forEach(friend => {
-    const div = document.createElement("div");
-    div.className = "request-item";
-    div.innerHTML = `
-      <img src="./profile.svg" style="
-        position: relative;
-        top: 1.5dvh;
-        left: 0.5dvh;
-        width: calc((100/1920)*100dvh);
-        height: calc((100/1920)*100dvh);
-      ">
-      ${friend}
-      <img src="./gift.svg" onclick="giftFriends('${friend}')" style="
-        position: relative;
-        top: 1.5dvh;
-        left: 0.5dvh;
-        width: calc((100/1920)*100dvh);
-        height: calc((100/1920)*100dvh);
-      ">
-      <img src="./visit.svg" onclick="visitFriends('${friend}')" style="
-        position: relative;
-        top: 1.5dvh;
-        left: 0.5dvh;
-        width: calc((100/1920)*100dvh);
-        height: calc((100/1920)*100dvh);
-      ">
-      <img src="./delete.svg" onclick="deleteFriend('${friend}')" style="
-        position: relative;
-        top: 1.5dvh;
-        left: 0.5dvh;
-        width: calc((100/1920)*100dvh);
-        height: calc((100/1920)*100dvh);
-      ">
-    `;
-    friendsUl.appendChild(div);
-  });
+console.log("📋 렌더링할 친구 목록:", friends);
+
+const friendsUl = document.getElementById("내친구목록box");
+friendsUl.innerHTML = "";
+
+// ✅ 빈 배열일 경우 안내 문구 출력
+if (friends.length === 0) {
+  friendsUl.innerHTML = "<p style='color:gray;'>친구 목록이 없습니다.</p>";
+  return;
+}
+
+// ✅ 정상 목록일 때만 렌더링
+friends.forEach(friend => {
+  const div = document.createElement("div");
+  div.className = "request-item";
+  div.innerHTML = `
+    <img src="./profile.svg" style="
+      position: relative;
+      top: 1.5dvh;
+      left: 0.5dvh;
+      width: calc((100/1920)*100dvh);
+      height: calc((100/1920)*100dvh);
+    ">
+    ${friend}
+    <img src="./gift.svg" onclick="giftFriends('${friend}')" style="
+      position: relative;
+      top: 1.5dvh;
+      left: 0.5dvh;
+      width: calc((100/1920)*100dvh);
+      height: calc((100/1920)*100dvh);
+    ">
+    <img src="./visit.svg" onclick="visitFriends('${friend}')" style="
+      position: relative;
+      top: 1.5dvh;
+      left: 0.5dvh;
+      width: calc((100/1920)*100dvh);
+      height: calc((100/1920)*100dvh);
+    ">
+    <img src="./delete.svg" onclick="deleteFriend('${friend}')" style="
+      position: relative;
+      top: 1.5dvh;
+      left: 0.5dvh;
+      width: calc((100/1920)*100dvh);
+      height: calc((100/1920)*100dvh);
+    ">
+  `;
+  friendsUl.appendChild(div);
+});
+
 }
 
     //선물하기 함수
