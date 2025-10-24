@@ -298,8 +298,15 @@ function herfTofix() {
 }
 async function myPageLoad() {
     try {
-            const res = await fetch(BACKEND_URL+"/api/user/mypage-load",{credentials:"include"});
-            const data = await res.json();
+        const token = localStorage.getItem("token"); // 로그인 시 저장해둔 JWT
+
+const res = await fetch(BACKEND_URL + "/api/user/mypage-load", {
+  headers: {
+    "Authorization": `Bearer ${token}` // ✅ JWT 포함
+  }
+});
+const data = await res.json();
+
             if(data.error) {
                 alert(data.error);
                 return;

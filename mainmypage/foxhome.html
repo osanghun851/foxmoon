@@ -363,12 +363,17 @@ async function a() {
         악세사리 : document.getElementById("악세사리1").dataset.itemName+","+document.getElementById("악세사리2").dataset.itemName+","+document.getElementById("악세사리4").dataset.itemName
     };
     console.log(foxhomeData);
-    const res = await fetch(BACKEND_URL+"/foxhomeData/save", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(foxhomeData)
-    });
+    const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/foxhomeData/save", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ 토큰 전달
+  },
+  body: JSON.stringify(foxhomeData)
+});
+
     const data = await res.json(foxhomeData);
     if (!res.ok) throw new Error(data.message || "저장 실패");
 
@@ -765,12 +770,17 @@ function setupPurchaseHandler(selector = ".buyItem", apiUrl = BACKEND_URL+"/api/
 
             if (confirm(`${itemName}를 구매하시겠습니까?`)) {
                 try {
-                    const res = await fetch(apiUrl, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        credentials: "include",
-                        body: JSON.stringify({ itemName, itemType, price })
-                    });
+                    const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT 불러오기
+
+const res = await fetch(apiUrl, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ 토큰 전달
+  },
+  body: JSON.stringify({ itemName, itemType, price })
+});
+
 
                     const data = await res.json();
 
@@ -819,7 +829,15 @@ const 악세사리Data = {
 
 async function loadUserData() {
     try {
-        const res = await fetch(BACKEND_URL+"/api/user/me",{credentials:"include"});
+        const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/api/user/me", {
+  method: "GET",
+  headers: {
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+  }
+});
+
         const data = await res.json();
 
         if(data.error) {

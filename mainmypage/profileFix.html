@@ -244,12 +244,19 @@ select{
 
 async function myPageLoad() {
     try {
-            const res = await fetch(BACKEND_URL+"/api/user/mypage-load",{credentials:"include"});
-            const data = await res.json();
-            if(data.error) {
-                alert(data.error);
-                return;
-            }
+      const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/api/user/mypage-load", {
+  headers: {
+    "Authorization": `Bearer ${token}`, // ✅ JWT 전송
+  },
+});
+const data = await res.json();
+
+if (data.error) {
+  alert(data.error);
+  return;
+}
             document.getElementById("name").placeholder = data.user.Rname;
             document.getElementById("birth").placeholder = data.user.birth;
             document.getElementById('sido').innerHTML = `<option value="${data.user.address.split("/")[0]}">${data.user.address.split("/")[0]}</option>
@@ -364,12 +371,16 @@ myPageLoad();
     const profile = document.getElementById("userProfile").dataset.name;
     //const profile = document.getElementById("userProfile").src
     try{
-      const response = await fetch(BACKEND_URL+"/api/user/fix", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ Rname, birth, address, email, profile }),
-      credentials: "include" // 세션 쿠키 포함
-    });
+      const token = localStorage.getItem("token"); // 로그인할 때 저장해둔 JWT
+
+const response = await fetch(BACKEND_URL + "/api/user/fix", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 포함
+  },
+  body: JSON.stringify({ Rname, birth, address, email, profile })
+});
     const data = await response.json();
 
     if (!response.ok) {
