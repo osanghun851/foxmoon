@@ -492,7 +492,7 @@ const 가구1list={
     가구11:['가구11.svg','15.8dvh','12.8dvh','27dvh','4dvh',50],
     가구12:['가구12.svg','15.8dvh','12.8dvh','4.8dvh','21.7dvh',50],
     가구13:['가구13.svg','15.8dvh','12.8dvh','27dvh','21.7dvh',50],
-    가구14:['가구14.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',80],
+    가구14:['가구14.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',80],//
     가구15:['가구15.svg','15.8dvh','12.8dvh','27dvh','39.4dvh',80]
 };
 const 가구2list={
@@ -500,7 +500,7 @@ const 가구2list={
     가구21:['가구21.svg','15.8dvh','12.8dvh','27dvh','4dvh',30],
     가구22:['가구22.svg','15.8dvh','12.8dvh','4.8dvh','21.7dvh',30],
     가구23:['가구23.svg','15.8dvh','12.8dvh','27dvh','21.7dvh',30],
-    가구24:['가구24.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',60],
+    가구24:['가구24.svg','15.8dvh','12.8dvh','4.8dvh','39.4dvh',60],//
     가구25:['가구25.svg','15.8dvh','12.8dvh','27dvh','39.4dvh',60]
 };
 const 악세사리list={
@@ -557,125 +557,149 @@ const foxHomeItemLoding = function(list){
                     document.getElementById("카펫").dataset.itemName = keyName;
                     console.log(document.getElementById("카펫").dataset.itemName);}
                     break;
-                case "가구1":
-                    if (keyName == "가구10" || keyName =="가구11"){
-                        if(document.getElementById("가구11").dataset.itemName == keyName){
-                            document.getElementById("가구11").style.opacity ="0";
-                            document.getElementById("가구11").dataset.itemName = "undefined";
-                        }else{
-                        document.getElementById("가구11").src = `./${keyName}T.svg`;
-                        document.getElementById("가구11").dataset.itemName = keyName;
-                        document.getElementById("가구11").style.cssText = `
-                        position: absolute;
-                        width: ${가구1Data[keyName][0]};
-                        height: ${가구1Data[keyName][1]};
-                        left: ${가구1Data[keyName][2]};
-                        top: ${가구1Data[keyName][3]};
-                        z-index:100;
-                        `;}
-                    }
-                    else if (keyName == "가구12" || keyName =="가구13"){
-                        if(document.getElementById("가구12").dataset.itemName == keyName){
-                            document.getElementById("가구12").style.opacity ="0";
-                            document.getElementById("가구12").dataset.itemName = "undefined";
-                        }else{
-                        document.getElementById("가구12").src = `./${keyName}T.svg`;
-                        document.getElementById("가구12").dataset.itemName = keyName;
-                        document.getElementById("가구12").style.cssText = `
-                        position: absolute;
-                        width: ${가구1Data[keyName][0]};
-                        height: ${가구1Data[keyName][1]};
-                        left: ${가구1Data[keyName][2]};
-                        top: ${가구1Data[keyName][3]};
-                        z-index:100;
-                        `;}
-                    }
-                    else if (keyName == "가구14"){
-                        if(document.getElementById("가구13").dataset.itemName == keyName){
-                            document.getElementById("가구13").src = `./가구14-2T.svg`;
-                            document.getElementById("가구13").dataset.itemName = "가구14-2";
-                        }else if (document.getElementById("가구13").dataset.itemName == "undefined") {
-                        document.getElementById("가구13").src = `./${keyName}T.svg`;
-                        document.getElementById("가구13").dataset.itemName = keyName;
-                        document.getElementById("가구13").style.cssText = `
-                        position: absolute;
-                        width: ${가구1Data[keyName][0]};
-                        height: ${가구1Data[keyName][1]};
-                        left: ${가구1Data[keyName][2]};
-                        top: ${가구1Data[keyName][3]};
-                        z-index:99;
-                        `;}else{
-                            document.getElementById("가구13").style.opacity="0";
-                            document.getElementById("가구13").dataset.itemName = "undefined";
-                        }
-                    }
-                    else if (keyName == "가구15"){
-                        if(document.getElementById("가구14").dataset.itemName == keyName){
-                            document.getElementById("가구14").style.opacity ="0";
-                            document.getElementById("가구14").dataset.itemName = "undefined";
-                        }else{
-                        document.getElementById("가구14").src = `./${keyName}T.svg`;
-                        document.getElementById("가구14").dataset.itemName = keyName;
-                        document.getElementById("가구14").style.cssText = `
-                        position: absolute;
-                        width: ${가구1Data[keyName][0]};
-                        height: ${가구1Data[keyName][1]};
-                        left: ${가구1Data[keyName][2]};
-                        top: ${가구1Data[keyName][3]};
-                        z-index:100;
-                        `;}
-                    }
-                    break;
-                case "가구2":
-                        if (keyName == "가구20" || keyName =="가구21"||keyName=="가구22"){
-                        if(document.getElementById("가구21").dataset.itemName == keyName){
-                            document.getElementById("가구21").style.opacity ="0";
-                            document.getElementById("가구21").dataset.itemName = "undefined";
-                        }else{
-                        document.getElementById("가구21").src = `./${keyName}T.svg`;
-                        document.getElementById("가구21").dataset.itemName = keyName;
-                        document.getElementById("가구21").style.cssText = `
-                        position: absolute;
-                        width: ${가구2Data[keyName][0]};
-                        height: ${가구2Data[keyName][1]};
-                        left: ${가구2Data[keyName][2]};
-                        top: ${가구2Data[keyName][3]};
-                        z-index:100;
-                        `;}
-                    }
-                    else if (keyName == "가구24"){
-                        if(document.getElementById("가구23").dataset.itemName == keyName){
-                            document.getElementById("가구23").style.opacity ="0";
-                            document.getElementById("가구23").dataset.itemName = "undefined";
-                        }else{
-                        document.getElementById("가구23").src = `./${keyName}T.svg`;
-                        document.getElementById("가구23").dataset.itemName = keyName;
-                        document.getElementById("가구23").style.cssText = `
-                        position: absolute;
-                        width: ${가구2Data[keyName][0]};
-                        height: ${가구2Data[keyName][1]};
-                        left: ${가구2Data[keyName][2]};
-                        top: ${가구2Data[keyName][3]};
-                        z-index:100;
-                        `;}
-                    }
-                    else if (keyName == "가구25"||keyName=="가구23"){
-                        if(document.getElementById("가구24").dataset.itemName == keyName){
-                            document.getElementById("가구24").style.opacity ="0";
-                            document.getElementById("가구24").dataset.itemName = "undefined";
-                        }else{
-                        document.getElementById("가구24").src = `./${keyName}T.svg`;
-                        document.getElementById("가구24").dataset.itemName = keyName;
-                        document.getElementById("가구24").style.cssText = `
-                        position: absolute;
-                        width: ${가구2Data[keyName][0]};
-                        height: ${가구2Data[keyName][1]};
-                        left: ${가구2Data[keyName][2]};
-                        top: ${가구2Data[keyName][3]};
-                        z-index:100;
-                        `;}
-                    }
-                    break;
+                    case "가구1":
+    if (keyName == "가구10" || keyName =="가구11"){
+        if(document.getElementById("가구11").dataset.itemName == keyName){
+            document.getElementById("가구11").style.opacity ="0";
+            document.getElementById("가구11").dataset.itemName = "undefined";
+        }else{
+            document.getElementById("가구11").src = `./${keyName}T.svg`;
+            document.getElementById("가구11").dataset.itemName = keyName;
+            document.getElementById("가구11").style.cssText = `
+            position: absolute;
+            width: ${가구1Data[keyName][0]};
+            height: ${가구1Data[keyName][1]};
+            left: ${가구1Data[keyName][2]};
+            top: ${가구1Data[keyName][3]};
+            z-index:100;
+            `;
+        }
+    }
+    else if (keyName == "가구12" || keyName =="가구13"){
+        if(document.getElementById("가구12").dataset.itemName == keyName){
+            document.getElementById("가구12").style.opacity ="0";
+            document.getElementById("가구12").dataset.itemName = "undefined";
+        }else{
+            document.getElementById("가구12").src = `./${keyName}T.svg`;
+            document.getElementById("가구12").dataset.itemName = keyName;
+            document.getElementById("가구12").style.cssText = `
+            position: absolute;
+            width: ${가구1Data[keyName][0]};
+            height: ${가구1Data[keyName][1]};
+            left: ${가구1Data[keyName][2]};
+            top: ${가구1Data[keyName][3]};
+            z-index:100;
+            `;
+        }
+    }
+    else if (keyName == "가구14"){
+        // ✅ 가구14 토글
+        const el = document.getElementById("가구14");
+        if (el.dataset.itemName == keyName) {
+            el.style.opacity ="0";
+            el.dataset.itemName = "undefined";
+            // 🧩 가구14 제거 시, 가구20~25 자동 제거
+            const removeList = ["가구21","가구23","가구24"];
+            removeList.forEach(id => {
+                const target = document.getElementById(id);
+                target.style.opacity = "0";
+                target.dataset.itemName = "undefined";
+            });
+        } else {
+            el.src = `./${keyName}T.svg`;
+            el.dataset.itemName = keyName;
+            el.style.cssText = `
+            position: absolute;
+            width: ${가구1Data[keyName][0]};
+            height: ${가구1Data[keyName][1]};
+            left: ${가구1Data[keyName][2]};
+            top: ${가구1Data[keyName][3]};
+            z-index:100;
+            `;
+        }
+    }
+    else if (keyName == "가구15"){
+        if(document.getElementById("가구14").dataset.itemName == keyName){
+            document.getElementById("가구14").style.opacity ="0";
+            document.getElementById("가구14").dataset.itemName = "undefined";
+        }else{
+            document.getElementById("가구14").src = `./${keyName}T.svg`;
+            document.getElementById("가구14").dataset.itemName = keyName;
+            document.getElementById("가구14").style.cssText = `
+            position: absolute;
+            width: ${가구1Data[keyName][0]};
+            height: ${가구1Data[keyName][1]};
+            left: ${가구1Data[keyName][2]};
+            top: ${가구1Data[keyName][3]};
+            z-index:100;
+            `;
+        }
+    }
+    break;
+
+
+case "가구2":
+    // 🧩 가구14가 배치되어 있어야만 허용
+    const isFurniture14Placed = document.getElementById("가구14").dataset.itemName !== "undefined";
+    const restricted = ["가구20", "가구21", "가구22", "가구23", "가구25"];
+    if (restricted.includes(keyName) && !isFurniture14Placed) {
+        alert("가구14가 배치되어야 이 가구를 설치할 수 있습니다!");
+        return;
+    }
+
+    if (keyName == "가구20" || keyName =="가구21"||keyName=="가구22"){
+        if(document.getElementById("가구21").dataset.itemName == keyName){
+            document.getElementById("가구21").style.opacity ="0";
+            document.getElementById("가구21").dataset.itemName = "undefined";
+        } else {
+            document.getElementById("가구21").src = `./${keyName}T.svg`;
+            document.getElementById("가구21").dataset.itemName = keyName;
+            document.getElementById("가구21").style.cssText = `
+            position: absolute;
+            width: ${가구2Data[keyName][0]};
+            height: ${가구2Data[keyName][1]};
+            left: ${가구2Data[keyName][2]};
+            top: ${가구2Data[keyName][3]};
+            z-index:100;
+            `;
+        }
+    }
+    else if (keyName == "가구24"){
+        if(document.getElementById("가구23").dataset.itemName == keyName){
+            document.getElementById("가구23").style.opacity ="0";
+            document.getElementById("가구23").dataset.itemName = "undefined";
+        } else {
+            document.getElementById("가구23").src = `./${keyName}T.svg`;
+            document.getElementById("가구23").dataset.itemName = keyName;
+            document.getElementById("가구23").style.cssText = `
+            position: absolute;
+            width: ${가구2Data[keyName][0]};
+            height: ${가구2Data[keyName][1]};
+            left: ${가구2Data[keyName][2]};
+            top: ${가구2Data[keyName][3]};
+            z-index:100;
+            `;
+        }
+    }
+    else if (keyName == "가구25"||keyName=="가구23"){
+        if(document.getElementById("가구24").dataset.itemName == keyName){
+            document.getElementById("가구24").style.opacity ="0";
+            document.getElementById("가구24").dataset.itemName = "undefined";
+        } else {
+            document.getElementById("가구24").src = `./${keyName}T.svg`;
+            document.getElementById("가구24").dataset.itemName = keyName;
+            document.getElementById("가구24").style.cssText = `
+            position: absolute;
+            width: ${가구2Data[keyName][0]};
+            height: ${가구2Data[keyName][1]};
+            left: ${가구2Data[keyName][2]};
+            top: ${가구2Data[keyName][3]};
+            z-index:100;
+            `;
+        }
+    }
+    break;
+
                 case "악세사리":
                     if (keyName == "악세사리0" || keyName =="악세사리2"||keyName =="악세사리3"){
                         if(document.getElementById("악세사리1").dataset.itemName == keyName){

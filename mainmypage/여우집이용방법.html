@@ -1,288 +1,133 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>여우집 이용방법</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-    <style>
-body{
-    background-color: antiquewhite;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>여우의 집 이용 방법</title>
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+#background { height:100dvh; 
+    aspect-ratio:9/16; 
+    background: #ECECEC;
+    margin:0 auto; 
+    position:relative; 
+    font-size:2dvh; }
+
+#t { 
+  position:absolute;
+  width:34.635dvh; 
+  height:7.135dvh; 
+  left:10.781dvh; 
+  top:5.031dvh; 
+  background: #A05A2C;
+  box-shadow:0dvh 0.521dvh 0.208dvh rgba(0,0,0,0.25); 
+  border-radius:1.042dvh; 
 }
-#background{
-height: 100vh;
-aspect-ratio: 9/16;
-background-color: #FFFFFF;
-position: relative;
-margin: 0 auto;
+#tw { 
+  transform: translateY(20%); 
+  font-family:'Gugi'; 
+  font-style:normal; 
+  font-weight:400; 
+  font-size:4dvh; 
+  line-height:5.208dvh; 
+  text-align:center; 
+  color:white; 
 }
-#이용방법{
-position: absolute;
-width: calc((665/1920)*100vh);
-height: calc((137/1920)*100vh);
-left: calc((207/1920)*100vh);
-top: calc((135/1920)*100vh);
-background-color: #A05A2C;
-border-radius: calc((20/1920)*100vh);
-font-size: calc((70/1920)*100vh);
-font-family: 'Gugi';
-font-style: normal;
-font-weight: 400;
-display: flex;
-justify-content: center; /* 가로 가운데 정렬 */
-align-items: center;     /* 세로 가운데 정렬 */
-color: #FFFFFF;
+
+#p { 
+  position:absolute; 
+  width:49dvh; 
+  height:70dvh; 
+  left:50%; 
+  top:16dvh; 
+  transform:translateX(-50%);
+
+  box-shadow:0dvh 0.521dvh 0.208dvh rgba(0,0,0,0.25); 
+  border-radius:1.563dvh; 
+  background-image:url('p1.png'); 
+  background-size:cover; 
+  background-position:center; 
+  background-repeat:no-repeat;
+  overflow:hidden;
 }
-#box{
-position: absolute;
-background-color: #A05A2C;
-/* Rectangle 24 */
-width: calc((821/1920)*100vh);
-height: calc((1139/1920)*100vh);
-left: calc((130/1920)*100vh);
-top: calc((390/1920)*100vh);
-box-shadow: 0px 0.5vh 0.2vh rgba(0, 0, 0, 0.25);
-border-radius: calc((30/1920)*100vh);
-}
-.ball{
-/* Ellipse 7 */
-position: absolute;
-width: calc((38/1920)*100vh);
-height: calc((38/1920)*100vh);
-background: #F4E8C1;
-border-radius: 50%;
-}
-#ball1{
-top: calc((24/1920)*100vh);
-left: calc((24/1920)*100vh);
-}
-#ball2{
-bottom: calc((24/1920)*100vh);
-right: calc((24/1920)*100vh);
-}
-#ball3{
-top: calc((24/1920)*100vh);
-right: calc((24/1920)*100vh);
-}
-#ball4{
-bottom: calc((24/1920)*100vh);
-left: calc((24/1920)*100vh);
-}
-#이용방법설명창{
+
+#wp { 
 /* Rectangle 71 */
 position: absolute;
-width: calc((699/1920)*100vh);
-height: calc((943/1920)*100vh);
-left: calc((61/1920)*100vh);
-top: calc((98/1920)*100vh);
+width: 45dvh;       /* 699 ÷ 1920 × 100 */
+height: 60dvh;      /* 943 ÷ 1920 × 100 */
+left : 50%;
+top : 49%;
+transform: translate(-50%,-50%);       /* 488 ÷ 1920 × 100 */
 
 background: #FFFFFF;
-border-radius: calc((30/1920)*100vh);
+border-radius: 1.563dvh; /* 30 ÷ 1920 × 100 */
 }
-#앞으로넘기기{
-position: absolute;
-width: calc((93/1920)*100vh);
-height: auto;
-left: calc((618/1920)*100vh);
-top: calc((1636/1920)*100vh);
+.slide {
+  position:absolute; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%;
+  display:none; 
+}
+.slide.active { display:flex; }
 
-}
-#뒤로넘기기{
-position: absolute;
-width: calc((93/1920)*100vh);
-height: auto;
-left: calc((391/1920)*100vh);
-top: calc((1636/1920)*100vh);
-}
-#돌아가기{
-position: absolute;
-width: calc((75/1920)*100vh);
-height: auto;
-left:  calc((876/1920)*100vh);
-top: calc((1636/1920)*100vh);
-}
-.container {
-	display: grid;
-    grid-template-columns: 1fr 2fr;
-    place-items: center;
-}
-#창고{
-width: calc((120/1920)*100vh);
-height: auto;
-}
-#여우집{
-width: calc((150/1920)*100vh);
-height: auto;
-}
-.item{
-font-size: calc((45/1920)*100vh);
-font-family: 'Gugi';
-font-style: normal;
-font-weight: 400;
-color: black;
-}
-#친구{
-width: calc((120/1920)*100vh);
-height: auto;
-}
-#친구1{
-width: calc((120/1920)*100vh);
-height: auto;
-right: 1vh;
-}
-#마이페이지{
-width: calc((231 / 1920) * 100vh);
-height: calc((66 / 1920) * 100vh);
-background: #A05A2C;
-box-shadow: 0vh 0.5vh 0.2vh rgba(0, 0, 0, 0.25);
-border-radius: calc((20 / 1920) * 100vh);
-font-family: 'Gugi';
-font-style: normal;
-font-weight: 400;
-font-size: calc((36 / 1920) * 100vh);
-display: flex;
-justify-content: center;
-align-items: center;
-color: #FFFFFF;
-}
-    </style>
+#right, #left, #movmain { position:absolute; cursor:pointer; }
+#right { width:4.844dvh; 
+    height:4.271dvh; 
+    left:33dvh; 
+    top:88dvh; }
+#left { width:4.896dvh; 
+    height:4.271dvh; 
+    left:19dvh; 
+    top:88dvh; }
+#movmain { width:auto; 
+    height:6.5dvh; 
+    left:46.5dvh; 
+    top:87dvh; }
+
+
+</style>
 </head>
 <body>
-    <div id="background">
-        <div id="이용방법">이용방법</div>
-        <div id="box">
-            <div id="ball1" class="ball"></div>
-            <div id="ball2" class="ball"></div>
-            <div id="ball3" class="ball"></div>
-            <div id="ball4" class="ball"></div>
-            <div id="이용방법설명창" class="container">
-                <div class="item">
-                    <img src="warehouse.svg" id="창고">
-                </div>
-                <div class="item">상점 : 여우집을 꾸밀 수 있는 아이템을 열매로 구매할 수 있다.</div>
-                <div class="item">
-                    <img src="foxhouse.svg" id="여우집">
-                </div>
-                <div class="item">야우집 : 상점에서 구매한 아이템으로 꾸밀 수 있다.</div>
-                <div class="item">
-                    <img src="친구1.svg" id="친구">
-                </div>
-                <div class="item">친구 : 친구 추가를 해보자!</div>
-                <div class="item">
-                    <div id="마이페이지">마이페이지</div>
-                </div>
-                <div class="item">마이페이지로 이동<br> 회원 정보 수정도 가능</div>
-                <!--<img id="store" src="./warehouse.svg">
-                <img id="foxhome" src="./foxhouse.svg">
-                <img id="친구1" src="./친구1.svg">
-                <img id="친구0" src="./친구0.svg">
-                <div id="mypage"></div>
-                <img id="button" src="./button.svg">-->
-            </div>
-        </div>
-        <img src="앞으로넘기기.svg" onclick="before()" id="앞으로넘기기">
-        <img src="뒤로넘기기.svg" onclick="next()" id="뒤로넘기기">
-        <img src="button.svg" id="돌아가기">
+<div id="background">
+    <div id="t">
+        <h1 id="tw">이용 방법</h1>
     </div>
-</body>
+    <div id="p">
+        <div id="wp">
+            <img class="slide active" src="./fhexpage1.png">
+            <img class="slide" src="./fhexpage2.png">
+            <img class="slide" src="./fhexpage3.png">
+            
+        </div>
+    </div>
+    <img id="right" src="./right.png" alt="다음">
+    <img id="left" src="./left.png" alt="이전">
+    <img id="movmain" src="./movmain1.png" alt="메인">
+</div>
+
 <script>
-document.getElementById("돌아가기").addEventListener("click", function() {
-  window.location.href = "./foxhome.html";
-});
-//button효과 설정
-const setButton=function(btn,brightness=1.2,scale=0.95){
-    
-    //초기설정
-    Object.assign(btn.style, {
-      cursor: "pointer",
-      transition: "all 0.2s ease"
-    });
+const slides = document.querySelectorAll('#wp .slide');
+let current = 0;
 
-      //hover효과
-    btn.addEventListener("mouseenter",function(){
-        btn.style.filter=`brightness(${brightness})`;
-    });
-    btn.addEventListener("mouseleave",function(){
-        btn.style.filter="brightness(1)";
-    });
+document.getElementById('right').onclick = () => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+}
 
-    //active효과
-    btn.addEventListener("mousedown",function(){
-        btn.style.transform= `scale(${scale})`;
-    });
-    btn.addEventListener("mouseup",function(){
-        btn.style.transform= "scale(1)";
-    });
+document.getElementById('left').onclick = () => {
+    slides[current].classList.remove('active');
+    current = (current - 1 + slides.length) % slides.length;
+    slides[current].classList.add('active');
 }
-setButton(document.querySelector("#돌아가기"),1.2,0.9);
-setButton(document.querySelector("#뒤로넘기기"),1.1,0.9);
-setButton(document.querySelector("#앞으로넘기기"),1.1,0.9);
-let nnn=0;
-function next(){
-        nnn+=1;
-    if(nnn==0){
-        document.getElementById("이용방법설명창").innerHTML=`
-        <div class="item">
-                    <img src="warehouse.svg" id="창고">
-                </div>
-                <div class="item">상점 : 여우집을 꾸밀 수 있는 아이템을 열매로 구매할 수 있다.</div>
-                <div class="item">
-                    <img src="foxhouse.svg" id="여우집">
-                </div>
-                <div class="item">야우집 : 상점에서 구매한 아이템으로 꾸밀 수 있다.</div>
-                <div class="item">
-                    <img src="친구1.svg" id="친구">
-                </div>
-                <div class="item">친구 : 친구 추가를 해보자!</div>
-                <div class="item">
-                    <div id="마이페이지">마이페이지</div>
-                </div>
-                <div class="item">마이페이지로 이동<br> 회원 정보 수정도 가능</div>
-    `;
-    }
-    else if(nnn==100){
-    document.getElementById("이용방법설명창").innerHTML=`
-    열매+1
-    `;
-    }
-    else{
-    document.getElementById("이용방법설명창").innerHTML=`
-    ${nnn}
-    `;
-    }
-}
-function before(){
-    nnn-=1;
-    if(nnn==0){
-        document.getElementById("이용방법설명창").innerHTML=`
-        <div class="item">
-                    <img src="warehouse.svg" id="창고">
-                </div>
-                <div class="item">상점 : 여우집을 꾸밀 수 있는 아이템을 열매로 구매할 수 있다.</div>
-                <div class="item">
-                    <img src="foxhouse.svg" id="여우집">
-                </div>
-                <div class="item">야우집 : 상점에서 구매한 아이템으로 꾸밀 수 있다.</div>
-                <div class="item">
-                    <img src="친구1.svg" id="친구">
-                </div>
-                <div class="item">친구 : 친구 추가를 해보자!</div>
-                <div class="item">
-                    <div id="마이페이지">마이페이지</div>
-                </div>
-                <div class="item">마이페이지로 이동<br> 회원 정보 수정도 가능</div>
-    `;
-    }
-    else if(nnn==100){
-    document.getElementById("이용방법설명창").innerHTML=`
-    열매+1
-    `;
-    }
-    else{
-        document.getElementById("이용방법설명창").innerHTML=`
-    ${nnn}
-    `;
-    }
-}
+document.getElementById('movmain').onclick = () => {
+    window.location.href = 'foxhome.html';
+};
 </script>
+</body>
 </html>
+
