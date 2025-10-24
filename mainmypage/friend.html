@@ -425,30 +425,29 @@ console.log("응답 상태:", res.status);
 
 let data;
 try {
-  data = await res.json(); // JSON으로 파싱 시도
+  data = await res.json();
   console.log("응답 JSON:", data);
 } catch (err) {
-  const text = await res.text(); // JSON 아니면 텍스트로 출력
+  const text = await res.text();
   console.log("응답 본문(텍스트):", text);
-  return; // JSON이 아니면 더 진행 안 함
+  return;
 }
 
-// ✅ 안전하게 friends 또는 requests 중 있는 데이터로 설정
 const friends = data?.friends || data?.requests || [];
-
-console.log("📋 렌더링할 친구 목록:", friends);
+console.log("📋 불러온 친구 목록:", friends);
 
 const friendsUl = document.getElementById("내친구목록box");
 friendsUl.innerHTML = "";
 
-// ✅ 빈 배열일 경우 안내 문구 출력
 if (friends.length === 0) {
   friendsUl.innerHTML = "<p style='color:gray;'>친구 목록이 없습니다.</p>";
   return;
 }
 
-// ✅ 정상 목록일 때만 렌더링
+// ✅ username 출력으로 수정
 friends.forEach(friend => {
+  const name = typeof friend === "string" ? friend : friend.username;
+
   const div = document.createElement("div");
   div.className = "request-item";
   div.innerHTML = `
@@ -459,22 +458,22 @@ friends.forEach(friend => {
       width: calc((100/1920)*100dvh);
       height: calc((100/1920)*100dvh);
     ">
-    ${friend}
-    <img src="./gift.svg" onclick="giftFriends('${friend}')" style="
+    ${name}
+    <img src="./gift.svg" onclick="giftFriends('${name}')" style="
       position: relative;
       top: 1.5dvh;
       left: 0.5dvh;
       width: calc((100/1920)*100dvh);
       height: calc((100/1920)*100dvh);
     ">
-    <img src="./visit.svg" onclick="visitFriends('${friend}')" style="
+    <img src="./visit.svg" onclick="visitFriends('${name}')" style="
       position: relative;
       top: 1.5dvh;
       left: 0.5dvh;
       width: calc((100/1920)*100dvh);
       height: calc((100/1920)*100dvh);
     ">
-    <img src="./delete.svg" onclick="deleteFriend('${friend}')" style="
+    <img src="./delete.svg" onclick="deleteFriend('${name}')" style="
       position: relative;
       top: 1.5dvh;
       left: 0.5dvh;
