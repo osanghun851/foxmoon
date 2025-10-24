@@ -412,78 +412,52 @@ const res = await fetch(BACKEND_URL + "/friends/reject", {
 
     // 내 친구 목록 불러오기
     async function loadFriends() {
-      const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+  const token = localStorage.getItem("token");
+  const res = await fetch(BACKEND_URL + "/friends/list", {  // ✅ 수정됨
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
+    }
+  });
 
-const res = await fetch(BACKEND_URL + "/friends/requests", {
-  method: "GET",
-  headers: {
-    "Authorization": `Bearer ${token}`, // ✅ JWT 전달
-    "Content-Type": "application/json"
+  console.log("응답 상태:", res.status);
+
+  let data;
+  try {
+    data = await res.json();
+    console.log("응답 JSON:", data);
+  } catch (err) {
+    const text = await res.text();
+    console.log("응답 본문(텍스트):", text);
+    return;
   }
-});
-console.log("응답 상태:", res.status);
 
-let data;
-try {
-  data = await res.json();
-  console.log("응답 JSON:", data);
-} catch (err) {
-  const text = await res.text();
-  console.log("응답 본문(텍스트):", text);
-  return;
-}
+  const friends = data?.friends || [];
+  console.log("📋 불러온 친구 목록:", friends);
 
-const friends = data?.friends || data?.requests || [];
-console.log("📋 불러온 친구 목록:", friends);
+  const friendsUl = document.getElementById("내친구목록box");
+  friendsUl.innerHTML = "";
 
-const friendsUl = document.getElementById("내친구목록box");
-friendsUl.innerHTML = "";
+  if (friends.length === 0) {
+    friendsUl.innerHTML = "<p style='color:gray;'>친구 목록이 없습니다.</p>";
+    return;
+  }
 
-if (friends.length === 0) {
-  friendsUl.innerHTML = "<p style='color:gray;'>친구 목록이 없습니다.</p>";
-  return;
-}
+  friends.forEach(friend => {
+    const name = typeof friend === "string" ? friend : friend.username;
 
-// ✅ username 출력으로 수정
-friends.forEach(friend => {
-  const name = typeof friend === "string" ? friend : friend.username;
-
-  const div = document.createElement("div");
-  div.className = "request-item";
-  div.innerHTML = `
-    <img src="./profile.svg" style="
-      position: relative;
-      top: 1.5dvh;
-      left: 0.5dvh;
-      width: calc((100/1920)*100dvh);
-      height: calc((100/1920)*100dvh);
-    ">
-    ${name}
-    <img src="./gift.svg" onclick="giftFriends('${name}')" style="
-      position: relative;
-      top: 1.5dvh;
-      left: 0.5dvh;
-      width: calc((100/1920)*100dvh);
-      height: calc((100/1920)*100dvh);
-    ">
-    <img src="./visit.svg" onclick="visitFriends('${name}')" style="
-      position: relative;
-      top: 1.5dvh;
-      left: 0.5dvh;
-      width: calc((100/1920)*100dvh);
-      height: calc((100/1920)*100dvh);
-    ">
-    <img src="./delete.svg" onclick="deleteFriend('${name}')" style="
-      position: relative;
-      top: 1.5dvh;
-      left: 0.5dvh;
-      width: calc((100/1920)*100dvh);
-      height: calc((100/1920)*100dvh);
-    ">
-  `;
-  friendsUl.appendChild(div);
-});
-
+    const div = document.createElement("div");
+    div.className = "request-item";
+    div.innerHTML = `
+      <img src="./profile.svg" style="width:4dvh;height:4dvh;position:relative;top:1.5dvh;left:0.5dvh;">
+      ${name}
+      <img src="./gift.svg" onclick="giftFriends('${name}')">
+      <img src="./visit.svg" onclick="visitFriends('${name}')">
+      <img src="./delete.svg" onclick="deleteFriend('${name}')">
+    `;
+    friendsUl.appendChild(div);
+  });
 }
 
     //선물하기 함수
