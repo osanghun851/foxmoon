@@ -626,6 +626,75 @@ const foxHomeItemLoding = function(list){
                         `;}
                     }
                     break;
+                    case "가구1":
+                    if (keyName == "가구10" || keyName =="가구11"){
+                        if(document.getElementById("가구11").dataset.itemName == keyName){
+                            document.getElementById("가구11").style.opacity ="0";
+                            document.getElementById("가구11").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구11").src = `./${keyName}T.svg`;
+                        document.getElementById("가구11").dataset.itemName = keyName;
+                        document.getElementById("가구11").style.cssText = `
+                        position: absolute;
+                        width: ${가구1Data[keyName][0]};
+                        height: ${가구1Data[keyName][1]};
+                        left: ${가구1Data[keyName][2]};
+                        top: ${가구1Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    else if (keyName == "가구12" || keyName =="가구13"){
+                        if(document.getElementById("가구12").dataset.itemName == keyName){
+                            document.getElementById("가구12").style.opacity ="0";
+                            document.getElementById("가구12").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구12").src = `./${keyName}T.svg`;
+                        document.getElementById("가구12").dataset.itemName = keyName;
+                        document.getElementById("가구12").style.cssText = `
+                        position: absolute;
+                        width: ${가구1Data[keyName][0]};
+                        height: ${가구1Data[keyName][1]};
+                        left: ${가구1Data[keyName][2]};
+                        top: ${가구1Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    else if (keyName == "가구14"){
+                        if(document.getElementById("가구13").dataset.itemName == keyName){
+                            document.getElementById("가구13").src = `./가구14-2T.svg`;
+                            document.getElementById("가구13").dataset.itemName = "가구14-2";
+                        }else if (document.getElementById("가구13").dataset.itemName == "undefined") {
+                        document.getElementById("가구13").src = `./${keyName}T.svg`;
+                        document.getElementById("가구13").dataset.itemName = keyName;
+                        document.getElementById("가구13").style.cssText = `
+                        position: absolute;
+                        width: ${가구1Data[keyName][0]};
+                        height: ${가구1Data[keyName][1]};
+                        left: ${가구1Data[keyName][2]};
+                        top: ${가구1Data[keyName][3]};
+                        z-index:99;
+                        `;}else{
+                            document.getElementById("가구13").style.opacity="0";
+                            document.getElementById("가구13").dataset.itemName = "undefined";
+                        }
+                    }
+                    else if (keyName == "가구15"){
+                        if(document.getElementById("가구14").dataset.itemName == keyName){
+                            document.getElementById("가구14").style.opacity ="0";
+                            document.getElementById("가구14").dataset.itemName = "undefined";
+                        }else{
+                        document.getElementById("가구14").src = `./${keyName}T.svg`;
+                        document.getElementById("가구14").dataset.itemName = keyName;
+                        document.getElementById("가구14").style.cssText = `
+                        position: absolute;
+                        width: ${가구1Data[keyName][0]};
+                        height: ${가구1Data[keyName][1]};
+                        left: ${가구1Data[keyName][2]};
+                        top: ${가구1Data[keyName][3]};
+                        z-index:100;
+                        `;}
+                    }
+                    break;
                     case "가구2":
     // 🧩 가구14 (=가구13 위치)가 배치되어 있어야만 허용
     const isFurniture14Placed = document.getElementById("가구13").dataset.itemName === "가구14";
