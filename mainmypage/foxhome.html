@@ -592,32 +592,38 @@ const foxHomeItemLoding = function(list){
             `;
         }
     }
-    else if (keyName == "가구14"){
-        // ✅ 가구14 토글
-        const el = document.getElementById("가구14");
-        if (el.dataset.itemName == keyName) {
-            el.style.opacity ="0";
-            el.dataset.itemName = "undefined";
-            // 🧩 가구14 제거 시, 가구20~25 자동 제거
-            const removeList = ["가구21","가구23","가구24"];
-            removeList.forEach(id => {
-                const target = document.getElementById(id);
-                target.style.opacity = "0";
-                target.dataset.itemName = "undefined";
-            });
-        } else {
-            el.src = `./${keyName}T.svg`;
-            el.dataset.itemName = keyName;
-            el.style.cssText = `
+    else if (keyName == "가구14") {
+    const el = document.getElementById("가구14");
+
+    // ✅ dataset.itemName에 "가구14" 문자열이 포함되어 있는지만 확인
+    if (el.dataset.itemName.includes("가구14")) {
+        el.style.opacity = "0";
+        el.dataset.itemName = "undefined";
+
+        // 🧩 가구14 제거 시, 하위 가구 자동 제거
+        const removeList = ["가구21", "가구23", "가구24"];
+        removeList.forEach(id => {
+            const target = document.getElementById(id);
+            target.style.opacity = "0";
+            target.dataset.itemName = "undefined";
+        });
+
+        console.log("🧹 가구14 제거 및 하위 가구 초기화 완료");
+    } else {
+        // ✅ 배치
+        el.src = `./${keyName}T.svg`;
+        el.dataset.itemName = keyName; // "가구14"로 정확히 저장
+        el.style.cssText = `
             position: absolute;
             width: ${가구1Data[keyName][0]};
             height: ${가구1Data[keyName][1]};
             left: ${가구1Data[keyName][2]};
             top: ${가구1Data[keyName][3]};
-            z-index:100;
-            `;
-        }
+            z-index: 100;
+        `;
+        console.log("✅ 가구14 배치 완료");
     }
+}
     else if (keyName == "가구15"){
         if(document.getElementById("가구14").dataset.itemName == keyName){
             document.getElementById("가구14").style.opacity ="0";

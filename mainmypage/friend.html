@@ -421,7 +421,17 @@ const res = await fetch(BACKEND_URL + "/friends/requests", {
     "Content-Type": "application/json"
   }
 });
-  const data = await res.json();
+console.log("응답 상태:", res.status);
+
+let data;
+try {
+  data = await res.json(); // JSON으로 파싱 시도
+  console.log("응답 JSON:", data);
+} catch (err) {
+  const text = await res.text(); // JSON 아니면 텍스트로 출력
+  console.log("응답 본문(텍스트):", text);
+}
+
   console.log(data);
   const friendsUl = document.getElementById("내친구목록box");
   friendsUl.innerHTML = "";
