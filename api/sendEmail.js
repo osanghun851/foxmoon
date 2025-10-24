@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   });
 
   const mailOptions = {
-    from: `"FoxMoon 알림센터" <${process.env.EMAIL_USER}>`,
+    from: `"기러기 알림" <${process.env.EMAIL_USER}>`,
     to,
     subject,
     html,
