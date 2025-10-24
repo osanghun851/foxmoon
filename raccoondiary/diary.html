@@ -39,10 +39,15 @@
       
         try {
           // 서버로 POST 요청 → 코인 지급
-          const res = await fetch("https://foxmoonbackend.onrender.com/api/scoreup", {
-            method: "POST",
-            credentials: "include", // 세션 쿠키 전송
-          });
+          const token = localStorage.getItem("token"); // 로그인 시 저장한 JWT 가져오기
+
+const res = await fetch("https://foxmoonbackend.onrender.com/api/scoreup", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+  }
+});
           const data = await res.json();
           if (res.ok) {
             console.log("✅ 코인 지급됨:", data.coin);
