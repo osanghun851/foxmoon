@@ -122,12 +122,20 @@ clone.style.color = "#000";
 
 async function getGPT35Comment(title, content) {
   try {
+    const token = localStorage.getItem("token"); // ✅ JWT 가져오기
+    if (!token) {
+      console.warn("⚠️ 로그인 토큰이 없습니다. 게스트 모드로 GPT 요청을 보냅니다.");
+    }
+
     const res = await fetch("https://foxmoonbackend.onrender.com/api/gpt-comment", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title, content }),
-      credentials: "include"
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { "Authorization": `Bearer ${token}` } : {}) // ✅ 토큰이 있으면 Authorization 추가
+      },
+      body: JSON.stringify({ title, content })
     });
+
     const data = await res.json();
     return data.message || "오늘 하루 수고했어요. 당신의 이야기를 들을 수 있어 기뻐요.";
   } catch (err) {
@@ -135,6 +143,7 @@ async function getGPT35Comment(title, content) {
     return "오늘 하루 수고했어요. 당신의 이야기를 들을 수 있어 기뻐요.";
   }
 }
+
 
 function trimCanvas(canvas) {
   const ctx = canvas.getContext("2d");

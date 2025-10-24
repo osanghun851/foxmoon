@@ -364,31 +364,26 @@ background-color: #152F56;
   </div>
 </body>
 <script>
-  const BACKEND_URL = "https://foxmoonbackend.onrender.com"; // 백엔드 URL
-  document.getElementById("여우").addEventListener("click", () => { window.location.href="mainmypage/foxhome.html"; });
-        document.getElementById("달").addEventListener("click", () => { window.location.href="mainmypage/mex.html"; });
-        document.getElementById("box1").addEventListener("click", () => { window.location.href="forestway/jisisal.html"; });
-        document.getElementById("box2").addEventListener("click", () => { window.location.href="owlacademy/index.html"; });
-        document.getElementById("box3").addEventListener("click", () => { window.location.href="raccoondiary/diary.html"; });
-        document.getElementById("box4").addEventListener("click", () => { window.location.href="goosepost/goosepost.html"; });
-  // (여우 클릭 시) 여우집으로 이동
-  document.getElementById("여우").addEventListener("click", function() {
-    window.location.href = "mainmypage/foxhome.html";
-  });
-  document.getElementById("달").addEventListener("click", function() {
-    window.location.href = "mainmypage/mex.html";
-  });
+  const BACKEND_URL = "https://foxmoonbackend.onrender.com";
   
-  // 로그인 버튼 클릭 -> 모달 열기
+  // ✅ 페이지 이동 버튼 (그대로 유지)
+  document.getElementById("여우").addEventListener("click", () => { window.location.href="mainmypage/foxhome.html"; });
+  document.getElementById("달").addEventListener("click", () => { window.location.href="mainmypage/mex.html"; });
+  document.getElementById("box1").addEventListener("click", () => { window.location.href="forestway/jisisal.html"; });
+  document.getElementById("box2").addEventListener("click", () => { window.location.href="owlacademy/index.html"; });
+  document.getElementById("box3").addEventListener("click", () => { window.location.href="raccoondiary/diary.html"; });
+  document.getElementById("box4").addEventListener("click", () => { window.location.href="goosepost/goosepost.html"; });
+  
+  // ✅ 로그인 버튼 클릭 시
   document.getElementById("loginBtn").addEventListener("click", () => {
-    if (document.getElementById("loginBtn").innerText != "로그아웃") {
+    if (document.getElementById("loginBtn").innerText !== "로그아웃") {
       document.getElementById("loginModal").style.display = "block";
     } else {
       logout();
     }
   });
   
-  // 회원가입 페이지 이동
+  // 회원가입 이동
   document.querySelector("#signup").addEventListener("click", () => {
     window.location.href = "mainmypage/start.html";
   });
@@ -400,66 +395,71 @@ background-color: #152F56;
     }
   });
   
+  // 폼 제출 (로그인 실행)
   const form = document.getElementById("registerForm");
   form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // 페이지 새로고침 방지
+    e.preventDefault();
     document.getElementById("loginModal").style.display = "none";
     login();
   });
   
-  // --- 로그인 상태 확인 ---
-  async function checkProfile() {
-    try {
-      const response = await fetch(`${BACKEND_URL}/profile`, {
-        method: "GET",
-        credentials: "include" // 세션 쿠키 포함
-      });
-      const data = await response.json();
-      alert(response.ok ? `현재 로그인 사용자: ${data.username}` : `로그인 필요`);
-    } catch (err) {
-      alert("서버 요청 실패: " + err.message);
-    }
-  }
-  
-  // --- 로그인 ---
+  // ✅ 로그인 함수 (JWT 버전)
   async function login() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+  
+    if (!username || !password) return alert("아이디와 비밀번호를 입력하세요.");
   
     try {
       const response = await fetch(`${BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-        credentials: "include" // 세션 쿠키 포함
+        body: JSON.stringify({ username, password })
       });
   
       const data = await response.json();
-      if (response.ok) {
-        
-        alert(`로그인 성공! ${data.username}`);
+      if (response.ok && data.token) {
+        // ✅ 토큰 저장
+        localStorage.setItem("token", data.token);
+        alert(`로그인 성공! ${username}`);
+        document.getElementById("loginBtn").innerText = "로그아웃";
       } else {
-        alert(`로그인 실패: ${data.error}`);
+        alert(`로그인 실패: ${data.error || "서버 오류"}`);
       }
     } catch (err) {
       alert("서버 요청 실패: " + err.message);
     }
   }
   
-  // --- 로그아웃 ---
-  async function logout() {
+  // ✅ 로그인 상태 확인 (JWT 검증용)
+  async function checkProfile() {
+    const token = localStorage.getItem("token");
+    if (!token) return alert("로그인 필요");
+  
     try {
-      const response = await fetch(`${BACKEND_URL}/logout`, {
-        method: "POST",
-        credentials: "include"
+      const response = await fetch(`${BACKEND_URL}/profile`, {
+        method: "GET",
+        headers: { "Authorization": `Bearer ${token}` }
       });
+  
       const data = await response.json();
-      alert(data.message);
-      
+      if (response.ok) {
+        alert(`현재 로그인 사용자: ${data.username}`);
+      } else {
+        alert(`로그인 필요 (${data.error})`);
+      }
     } catch (err) {
       alert("서버 요청 실패: " + err.message);
     }
   }
+  
+  // ✅ 로그아웃 (토큰 제거)
+  function logout() {
+    localStorage.removeItem("token");
+    document.getElementById("loginBtn").innerText = "로그인";
+    alert("로그아웃 되었습니다.");
+  }
   </script>
+  
   
 </html>

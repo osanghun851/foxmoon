@@ -221,24 +221,40 @@ html, body {
 
     // 완료 버튼: 끝난 뒤에만 보임, 클릭 시 index.html 이동
     const completeBtn = document.getElementById('complete-btn');
-    completeBtn.addEventListener('click', () => {
-      try {
-          // 서버로 POST 요청 → 코인 지급
-          const res =fetch("https://foxmoonbackend.onrender.com/api/scoreup", {
-            method: "POST",
-            credentials: "include", // 세션 쿠키 전송
-          });
-          const data =res.json();
-          if (res.ok) {
-            console.log("✅ 코인 지급됨:", data.coin);
-          } else {
-            console.warn("⚠️ 코인 지급 실패:", data.error);
-          }
-        } catch (err) {
-          console.error("❌ 서버 요청 실패:", err);
-        }alert("열매 10개가 지급되었습니다.")
-      location.href = 'index.html';
+    completeBtn.addEventListener('click', async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("로그인이 필요합니다!");
+      return;
+    }
+
+    const res = await fetch("https://foxmoonbackend.onrender.com/api/scoreup", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`, // ✅ JWT 전달
+        "Content-Type": "application/json"
+      }
     });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      console.log("✅ 코인 지급 성공:", data.coin);
+      alert("열매 10개가 지급되었습니다!");
+    } else {
+      console.warn("⚠️ 코인 지급 실패:", data.error);
+      alert(`코인 지급 실패: ${data.error}`);
+    }
+
+    // 완료 후 페이지 이동
+    location.href = "index.html";
+  } catch (err) {
+    console.error("❌ 서버 요청 실패:", err);
+    alert("서버 요청 실패: " + err.message);
+  }
+});
+
 
     let player;
 

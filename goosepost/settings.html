@@ -291,45 +291,57 @@ newsCheckbox.addEventListener("change", () => {
   
     // ✅ 저장 버튼 클릭 시 동작
     saveBtn.addEventListener("click", async () => {
-    
-    const region = document.getElementById("region").value;
-    const district = document.getElementById("district")?.value || "";
-    
-    const work = document.getElementById("job")?.checked || false;
-    const home = document.getElementById("home")?.checked || false;
-    const news = document.getElementById("news")?.checked || false;
-    const newskeyword = document.getElementById("newskeyword")?.value.trim() || "";
-    const emailrecive = document.getElementById("emailrecive")?.checked ?? true;
-    const workEdu = document.getElementById("eduSelect")?.value || "";
-    const workCo  = document.getElementById("coSelect")?.value || "";
-    
-    
+  const region = document.getElementById("region").value;
+  const district = document.getElementById("district")?.value || "";
+  const work = document.getElementById("job")?.checked || false;
+  const home = document.getElementById("home")?.checked || false;
+  const news = document.getElementById("news")?.checked || false;
+  const newskeyword = document.getElementById("newskeyword")?.value.trim() || "";
+  const emailrecive = document.getElementById("emailrecive")?.checked ?? true;
+  const workEdu = document.getElementById("eduSelect")?.value || "";
+  const workCo = document.getElementById("coSelect")?.value || "";
 
-    try {
-      const res = await fetch("https://foxmoonbackend.onrender.com/api/goosettings", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    region,
-    district,
-    
-    work,
-    home,
-    news,
-    newskeyword,
-    emailrecive,
-    workEdu,
-    workCo
-  }),
-  credentials: "include" // ← 반드시 추가
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("로그인이 필요합니다!");
+    return;
+  }
+
+  try {
+    const res = await fetch("https://foxmoonbackend.onrender.com/api/goosettings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+      },
+      body: JSON.stringify({
+        region,
+        district,
+        work,
+        home,
+        news,
+        newskeyword,
+        emailrecive,
+        workEdu,
+        workCo
+      })
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      console.error("❌ 설정 저장 실패:", error);
+      alert(`설정 저장 실패: ${error.error || "서버 오류"}`);
+    } else {
+      console.log("✅ 설정 저장 성공");
+      alert("기러기 알림 설정이 저장되었습니다!");
+      location.href = "./goosepost.html"; // ✅ 성공 시 이동
+    }
+  } catch (err) {
+    console.error("❌ 서버 요청 실패:", err);
+    alert("서버와 통신 중 오류가 발생했습니다.");
+  }
 });
 
-      
-    } catch (err) {
-      console.error(err);
-    }
-    location.href="./goosepost.html"
-  });
   </script>
   
 </body>

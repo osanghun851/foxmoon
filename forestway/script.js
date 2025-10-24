@@ -127,48 +127,64 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
   const query = `${region} ${district} ${keyword}`;
 
   try {
-    const res = await fetch(`https://foxmoonbackend.onrender.com/api/search/local?query=${encodeURIComponent(query)}`,{ credentials: 'include' });
-    const data = await res.json();
-
-    if (!data.items || data.items.length === 0) {
-      alert('검색 결과가 없습니다.');
-      return;
-    }
-
-    clearMarkers();
-    const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = '';
-
-    data.items.forEach(item => {
-      const title = item.title.replace(/<[^>]*>?/g, '');
-      const address = item.address || item.roadAddress;
-
-      if (!item.mapx || !item.mapy) return;
-
-      const lng = parseFloat(item.mapx) / 10000000;
-      const lat = parseFloat(item.mapy) / 10000000;
-
-      const marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(lat, lng),
-        map: map,
-        title: title,
-      });
-      markers.push(marker);
-
-      const div = document.createElement('div');
-      div.textContent = `${title} — ${address}`;
-      resultsDiv.appendChild(div);
-    });
-
-    const first = data.items[0];
-    if (first.mapx && first.mapy) {
-      const centerLng = parseFloat(first.mapx) / 10000000;
-      const centerLat = parseFloat(first.mapy) / 10000000;
-      map.setCenter(new naver.maps.LatLng(centerLat, centerLng));
-      map.setZoom(13);
-    }
+	const token = localStorage.getItem("token");
+	if (!token) {
+	  alert("로그인이 필요합니다!");
+	  return;
+	}
+  
+	const res = await fetch(
+	  `https://foxmoonbackend.onrender.com/api/search/local?query=${encodeURIComponent(query)}`,
+	  {
+		method: "GET",
+		headers: {
+		  "Authorization": `Bearer ${token}`, // ✅ JWT 토큰 전달
+		  "Content-Type": "application/json"
+		}
+	  }
+	);
+  
+	const data = await res.json();
+  
+	if (!res.ok || !data.items || data.items.length === 0) {
+	  alert("검색 결과가 없습니다.");
+	  return;
+	}
+  
+	clearMarkers();
+	const resultsDiv = document.getElementById("results");
+	resultsDiv.innerHTML = "";
+  
+	data.items.forEach(item => {
+	  const title = item.title.replace(/<[^>]*>?/g, "");
+	  const address = item.address || item.roadAddress;
+	  if (!item.mapx || !item.mapy) return;
+  
+	  const lng = parseFloat(item.mapx) / 10000000;
+	  const lat = parseFloat(item.mapy) / 10000000;
+  
+	  const marker = new naver.maps.Marker({
+		position: new naver.maps.LatLng(lat, lng),
+		map: map,
+		title: title,
+	  });
+	  markers.push(marker);
+  
+	  const div = document.createElement("div");
+	  div.textContent = `${title} — ${address}`;
+	  resultsDiv.appendChild(div);
+	});
+  
+	const first = data.items[0];
+	if (first.mapx && first.mapy) {
+	  const centerLng = parseFloat(first.mapx) / 10000000;
+	  const centerLat = parseFloat(first.mapy) / 10000000;
+	  map.setCenter(new naver.maps.LatLng(centerLat, centerLng));
+	  map.setZoom(13);
+	}
   } catch (e) {
-    alert('검색 중 오류가 발생했습니다.');
-    console.error(e);
+	alert("검색 중 오류가 발생했습니다.");
+	console.error(e);
   }
+  
 });
