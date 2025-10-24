@@ -594,13 +594,19 @@ const foxHomeItemLoding = function(list){
     }
     else if (keyName == "가구14") {
   const el = document.getElementById("가구14");
+  const ghost = document.getElementById("가구13"); // 겹치는 그림 제거용
 
-  // ✅ 안전한 체크: undefined일 때 오류 방지
+  // 👻 혹시 가구13이 이전에 가구14 이미지로 남아 있으면 지움
+  if (ghost.src.includes("가구14T.svg")) {
+      ghost.style.opacity = "0";
+      ghost.dataset.itemName = "undefined";
+      ghost.src = "";
+  }
+
   if (el.dataset.itemName && el.dataset.itemName.includes("가구14")) {
       el.style.opacity = "0";
       el.dataset.itemName = "undefined";
 
-      // 🧩 가구14 제거 시, 하위 가구 자동 제거
       const removeList = ["가구21", "가구23", "가구24"];
       removeList.forEach(id => {
           const target = document.getElementById(id);
@@ -610,7 +616,6 @@ const foxHomeItemLoding = function(list){
 
       console.log("🧹 가구14 제거 및 하위 가구 초기화 완료");
   } else {
-      // ✅ 배치
       el.src = `./${keyName}T.svg`;
       el.dataset.itemName = keyName;
       el.style.cssText = `
@@ -624,6 +629,7 @@ const foxHomeItemLoding = function(list){
       console.log("✅ 가구14 배치 완료");
   }
 }
+
     else if (keyName == "가구15"){
         if(document.getElementById("가구14").dataset.itemName == keyName){
             document.getElementById("가구14").style.opacity ="0";
