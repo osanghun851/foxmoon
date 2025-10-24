@@ -292,12 +292,16 @@ setButton(document.getElementById("검색버튼"),1.2,0.9);
   }
 
   try {
-    const res = await fetch(BACKEND_URL+"/friends/request", {
-      method: "POST",
-      credentials:"include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ friendName })
-    });
+    const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/friends/request", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ 토큰 포함
+  },
+  body: JSON.stringify({ friendName })
+});
 
     // 서버 응답 상태 확인
     if (!res.ok) {
@@ -315,7 +319,14 @@ setButton(document.getElementById("검색버튼"),1.2,0.9);
 
     // 받은 요청 가져오기
     async function loadFriendRequests() {
-  const res = await fetch(BACKEND_URL + "/friends/requests", { credentials: "include" });
+      const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/friends/requests", {
+  method: "GET",
+  headers: {
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+  }
+});
   const data = await res.json();
 
   const requestsDiv = document.getElementById("받은친구요청box");
@@ -365,12 +376,17 @@ setButton(document.getElementById("검색버튼"),1.2,0.9);
 
     // 요청 수락
     async function acceptRequest(friendName) {
-      const res = await fetch(BACKEND_URL+"/friends/accept", {
-        method: "POST",
-        credentials:"include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ friendName })
-      });
+      const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/friends/accept", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+  },
+  body: JSON.stringify({ friendName })
+});
+
       const data = await res.json();
       alert(data.message);
       loadFriendRequests();
@@ -379,12 +395,16 @@ setButton(document.getElementById("검색버튼"),1.2,0.9);
 
     // 요청 거절
     async function rejectRequest(friendName) {
-      const res = await fetch(BACKEND_URL+"/friends/reject", {
-        method: "POST",
-        credentials:"include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ friendName })
-      });
+      const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/friends/reject", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+  },
+  body: JSON.stringify({ friendName })
+});
       const data = await res.json();
       alert(data.message);
       loadFriendRequests();
@@ -392,7 +412,15 @@ setButton(document.getElementById("검색버튼"),1.2,0.9);
 
     // 내 친구 목록 불러오기
     async function loadFriends() {
-  const res = await fetch(BACKEND_URL + "/friends/list", { credentials: "include" });
+      const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/friends/requests", {
+  method: "GET",
+  headers: {
+    "Authorization": `Bearer ${token}`, // ✅ JWT 전달
+    "Content-Type": "application/json"
+  }
+});
   const data = await res.json();
 
   const friendsUl = document.getElementById("내친구목록box");
@@ -438,12 +466,16 @@ setButton(document.getElementById("검색버튼"),1.2,0.9);
 
     //선물하기 함수
     async function giftFriends(friendName) {
-      const res = await fetch(BACKEND_URL+"/friends/gift", {
-        method: "POST",
-        credentials:"include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ friendName })
-      });
+      const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/friends/gift", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+  },
+  body: JSON.stringify({ friendName })
+});
       const data = await res.json();
       alert(data.message);
     }
@@ -478,12 +510,17 @@ const 악세사리Data = {
     //놀러가기 함수
     async function visitFriends(friendName) {
       try {
-    const response = await fetch(BACKEND_URL+"/friends/foxhomeData", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include", // 세션 쿠키 유지
-      body: JSON.stringify({ friendName })
-    });
+        const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const response = await fetch(BACKEND_URL + "/friends/foxhomeData", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+  },
+  body: JSON.stringify({ friendName })
+});
+
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -650,12 +687,17 @@ closeBtn1.onclick = async function() {
     }
     //친구삭제 함수
     async function deleteFriend(friendName) {
-      const res = await fetch(BACKEND_URL+"/friends/delete", {
-        method: "DELETE",
-        credentials:"include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ friendName })
-      });
+      const token = localStorage.getItem("token"); // 로그인 시 저장된 JWT
+
+const res = await fetch(BACKEND_URL + "/friends/delete", {
+  method: "DELETE",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}` // ✅ JWT 토큰 전달
+  },
+  body: JSON.stringify({ friendName })
+});
+
       const data = await res.json();
       alert(data.message);
       loadFriends();
